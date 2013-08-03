@@ -18,12 +18,16 @@
 	      <td><%= form.text_field(:sex) %></td>
 	    </tr>
 	    <tr>
-	      <td><%= form.label(:constellation, "星座:")%></td>
-	      <td><%= form.text_field(:constellation) %></td>
+	      <td><%= form.label(:horoscope, "星座:")%></td>
+	      <td><%= form.text_field(:horoscope) %></td>
 	    </tr>
 	    <tr>
-	      <td><%= form.label(:bloodtype, "血型:")%></td>
-	      <td><%= form.text_field(:bloodtype) %></td>
+	      <td><%= form.label(:blood_type, "血型:")%></td>
+	      <td><%= form.text_field(:blood_type) %></td>
+	    </tr>
+	    <tr>
+	      <td><%= form.label(:occupation, "职业:")%></td>
+	      <td><%= form.text_field(:occupation) %></td>
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:height, "身高:")%></td>
@@ -34,16 +38,16 @@
 	      <td><%= form.text_field(:weight) %></td>
 	    </tr>
 	    <tr>
-	      <td><%= form.label(:birth1, "瞳色:")%></td>
-	      <td><%= form.text_field(:birth1) %></td>
+	      <td><%= form.label(:eye, "瞳色:")%></td>
+	      <td><%= form.text_field(:eye) %></td>
 	    </tr>
 	    <tr>
-	      <td><%= form.label(:birth1, "发色:")%></td>
-	      <td><%= form.text_field(:birth1) %></td>
+	      <td><%= form.label(:hair, "发色:")%></td>
+	      <td><%= form.text_field(:hair) %></td>
 	    </tr>
 	    <tr>
-	    	<td><%= form.label(:intro, "简介:")%></td>
-	      <td><%= form.text_area(:intro) %></td>
+	    	<td><%= form.label(:summary, "简介:")%></td>
+	      <td><%= form.text_area(:summary) %></td>
 	    </tr>
 	  <table>
 	  <%= submit_tag "提交" %>

@@ -11,7 +11,32 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130730215849) do
+ActiveRecord::Schema.define(:version => 20130803222145) do
+
+  create_table "characters", :force => true do |t|
+    t.string  "name"
+    t.boolean "sex"
+    t.integer "age_when_first_appear"
+    t.date    "birth_date"
+    t.string  "hair"
+    t.string  "eye"
+    t.string  "height"
+    t.string  "weight"
+    t.string  "occupation"
+    t.string  "summary"
+    t.integer "horoscope"
+    t.integer "blood_type"
+  end
+
+  create_table "cps", :force => true do |t|
+    t.integer  "creator",      :null => false
+    t.datetime "created_at"
+    t.integer  "character1",   :null => false
+    t.integer  "character2",   :null => false
+    t.integer  "category"
+    t.text     "summary"
+    t.text     "wiki_content"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
