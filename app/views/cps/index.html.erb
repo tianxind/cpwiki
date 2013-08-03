@@ -1,0 +1,53 @@
+<div>
+	<%= form_for(:cps, :url => {:action => :create}) do |form| %>
+	  <table class="character">
+	    <tr>
+	      <td><%= form.label(:name, "姓名:")%></td>
+	      <td><%= form.text_field(:name) %></td>
+	    </tr>
+	    <tr>
+	      <td><%= form.label(:nickname, "别名:")%></td>
+	      <td><%= form.text_field(:nickname) %></td>
+	    </tr>
+	    <tr>
+	    	<td><%= form.label(:birth_date, "生日:")%></td>
+	      <td><%= form.text_field(:birth_date) %></td>
+	    </tr>
+	    <tr>
+	      <td><%= form.label(:sex, "性别:")%></td>
+	      <td><%= form.text_field(:sex) %></td>
+	    </tr>
+	    <tr>
+	      <td><%= form.label(:constellation, "星座:")%></td>
+	      <td><%= form.text_field(:constellation) %></td>
+	    </tr>
+	    <tr>
+	      <td><%= form.label(:bloodtype, "血型:")%></td>
+	      <td><%= form.text_field(:bloodtype) %></td>
+	    </tr>
+	    <tr>
+	      <td><%= form.label(:height, "身高:")%></td>
+	      <td><%= form.text_field(:height) %></td>
+	    </tr>
+	    <tr>
+	      <td><%= form.label(:weight, "体重:")%></td>
+	      <td><%= form.text_field(:weight) %></td>
+	    </tr>
+	    <tr>
+	      <td><%= form.label(:birth1, "瞳色:")%></td>
+	      <td><%= form.text_field(:birth1) %></td>
+	    </tr>
+	    <tr>
+	      <td><%= form.label(:birth1, "发色:")%></td>
+	      <td><%= form.text_field(:birth1) %></td>
+	    </tr>
+	    <tr>
+	    	<td><%= form.label(:intro, "简介:")%></td>
+	      <td><%= form.text_area(:intro) %></td>
+	    </tr>
+	  <table>
+	  <%= submit_tag "提交" %>
+	<% end %>
+
+	
+</div>
