@@ -1,0 +1,33 @@
+.homepage_content {
+	margin: 5px 15px;
+}
+
+.content_crossbar {
+	background-color: #eeeeee;
+	text-align: center;
+	border: 1px solid #cccccc;
+	display: inline-block;
+	width: 100%;
+}
+
+.newest {
+	background-color: #eeeeee;
+	text-align: center;
+	border: 1px solid #cccccc;
+	width: 48%;
+	margin: 5px 0px;
+	height: 250px;
+	display: inline-block;
+	float: left;
+}
+
+.hottest {
+	background-color: #eeeeee;
+	text-align: center;
+	border: 1px solid #cccccc;
+	width: 48%;
+	margin: 5px 0px;
+	height: 250px;
+	display: inline-block;
+	float: right;
+}
