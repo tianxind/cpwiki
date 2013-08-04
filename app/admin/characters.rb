@@ -3,14 +3,7 @@ ActiveAdmin.register Character do
     column :name                  
     column :nickname       
     column :sex 
-    column :age_when_first_appear
     column :birth_date
-    column :hair
-    column :eye
-    column :height
-    column :weight
-    column :occupation
-    column :summary
     column :horoscope
     column :blood_type             
     default_actions                   
@@ -20,22 +13,39 @@ ActiveAdmin.register Character do
   filter :nickname                    
 
   form do |f|                         
-    f.inputs "Admin Details" do       
-      f.input :email                  
-      f.input :password               
-      f.input :password_confirmation  
+    f.inputs "Details" do       
+      f.input :name
+      f.input :nickname
+      f.input :sex
+      f.input :age_when_first_appear
+      f.input :birth_date
+      f.input :hair
+      f.input :eye
+      f.input :height
+      f.input :weight
+      f.input :occupation
+      f.input :summary
+      f.input :horoscope
+      f.input :blood_type
     end                               
     f.actions                         
   end
   
   show do
     attributes_table do
-      row :email
-      row :authentication_token
-      row :confirmed_at
-      row :current_sign_in_at
-      row :last_sign_in_at
-      row :sign_in_count
+      row :name
+      row :nickname
+      row :sex
+      row :age_when_first_appear
+      row :birth_date
+      row :hair
+      row :eye
+      row :height
+      row :weight
+      row :occupation
+      row :summary
+      row :horoscope
+      row :blood_type
     end
     active_admin_comments
   end          
