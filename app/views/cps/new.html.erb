@@ -1,0 +1,44 @@
+<div>
+	<%=  form_tag(new_cp_path, :method => :get) do %>
+		<div>
+		  <table class="cp">
+		  	<tr>
+		      <td><%= label_tag(:seme, "攻:")%></td>
+		      <td><%= text_field_tag(:seme) %></td>
+		    </tr>
+		    <tr>
+		    	<td><%= label_tag(:uke, "受:")%></td>
+		      <td><%= text_field_tag(:uke) %></td>
+		    </tr>
+		    <tr>
+		      <td><%= label_tag(:acronym, "简称:")%></td>
+		      <td><%= text_field_tag(:acronym) %></td>
+		    </tr>
+		    <tr>
+		      <td><%= label_tag(:seme_type, "攻方类型:")%></td>
+		      <td><%= text_field_tag(:seme_type) %></td>
+		    </tr>
+		    <tr>
+		      <td><%= label_tag(:uke_type, "受方类型:")%></td>
+		      <td><%= text_field_tag(:uke_type) %></td>
+		    </tr>
+		    <tr>
+		      <td><%= label_tag(:intro, "简介:")%></td>
+		      <td><%= text_area_tag(:intro) %></td>
+		    </tr>
+		  </table>
+		</div>
+		
+    <div>
+    	<table class="cp">
+		    <tr>
+		      <td><%= label_tag(:wiki_content, "JQ档案:")%></td>
+		      <td><%= text_area_tag(:wiki_content) %></td>
+		    </tr>
+    	</table>
+		</div>
+
+	  <%= submit_tag "提交" %>
+	<% end %>
+</div>
+	
