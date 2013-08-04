@@ -1,5 +1,6 @@
 ActiveAdmin.register Character do
-  index do                            
+  index do    
+    column :id                        
     column :name                  
     column :nickname       
     column :sex 
