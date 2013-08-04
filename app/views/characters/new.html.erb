@@ -1,5 +1,5 @@
 <div>
-	<%= form_for(:cps, :url => {:action => :create}) do |form| %>
+	<%= form_for(@character, :url => {:action => :create}) do |form| %>
 	  <table class="character">
 	    <tr>
 	      <td><%= form.label(:name, "姓名:")%></td>
@@ -19,7 +19,11 @@
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:horoscope, "星座:")%></td>
-	      <td><%= form.text_field(:horoscope) %></td>
+	      <td><%= form.select(:horoscope,
+			   [['白羊座', 0], ['金牛座', 1], ['双子座', 2], ['巨蟹座', 3],
+			   ['狮子座', 4], ['处女座', 5], ['天秤座', 6], ['天蝎座', 7], ['射手座', 8],
+			   ['摩羯座', 9], ['水瓶座', 10], ['双鱼座', 11]]) %>
+		  </td>
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:blood_type, "血型:")%></td>
