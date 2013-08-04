@@ -1,28 +1,19 @@
 <div>
-	<%=  form_tag(new_cp_path, :method => :get) do %>
+	<%=  form_tag("/cps", :method => :post) do %>
 		<div>
 		  <table class="cp">
 		  	<tr>
 		      <td><%= label_tag(:seme, "攻:")%></td>
-		      <td><%= text_field_tag(:seme) %></td>
+		      <td><%= select_tag(:seme, options_for_select([[@character1.name, @character1.id], [@character2.name, @character2.id]], @character1.id)) %></td>
 		    </tr>
 		    <tr>
-		    	<td><%= label_tag(:uke, "受:")%></td>
-		      <td><%= text_field_tag(:uke) %></td>
+		      <td><%= label_tag(:uke, "受:")%></td>
+		      <td><%= select_tag(:uke, options_for_select([[@character1.name, @character1.id], [@character2.name, @character2.id]], @character2.id)) %></td>
 		    </tr>
 		    <tr>
 		      <td><%= label_tag(:acronym, "简称:")%></td>
 		      <td><%= text_field_tag(:acronym) %></td>
 		    </tr>
-		    <tr>
-		      <td><%= label_tag(:seme_type, "攻方类型:")%></td>
-		      <td><%= text_field_tag(:seme_type) %></td>
-		    </tr>
-		    <tr>
-		      <td><%= label_tag(:uke_type, "受方类型:")%></td>
-		      <td><%= text_field_tag(:uke_type) %></td>
-		    </tr>
-		    <tr>
 		      <td><%= label_tag(:intro, "简介:")%></td>
 		      <td><%= text_area_tag(:intro) %></td>
 		    </tr>
@@ -36,9 +27,25 @@
 		      <td><%= text_area_tag(:wiki_content) %></td>
 		    </tr>
     	</table>
-		</div>
+	</div>
 
 	  <%= submit_tag "提交" %>
 	<% end %>
 </div>
-	
+<script type="text/javascript">
+$("#seme").change(function() {
+	if (this.value == <%= @character2.id %>) {
+		$("#uke").val(<%= @character1.id %>);
+	} else {
+		$("#uke").val(<%= @character2.id %>);
+	}
+})
+
+$("#uke").change(function() {
+	if (this.value == <%= @character2.id %>) {
+		$("#seme").val(<%= @character1.id %>);
+	} else {
+		$("#seme").val(<%= @character2.id %>);
+	}
+})
+</script>
