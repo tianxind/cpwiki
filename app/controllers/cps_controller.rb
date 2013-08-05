@@ -11,14 +11,14 @@ class CpsController < ApplicationController
   end
 
   def create
-
     @cp = Cp.new(:category => params[:category], 
                  :summary => params[:summary], 
                  :wiki_content => params[:wiki_content],
                  :character1_id => params[:seme],
                  :character2_id => params[:uke],
                  :creator_id => current_user.id,
-                 :created_at => Time.now)
+
+    p @cp
     @cp.save
 
     @relation = Relation.new(:cp_id => @cp.id,
