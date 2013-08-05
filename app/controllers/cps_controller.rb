@@ -6,8 +6,8 @@ class CpsController < ApplicationController
 
   def new
     @cp = Cp.new
-    @character1 = Character.find_by_id(5)
-    @character2 = Character.find_by_id(6)
+    @character1 = Character.find_by_id(1)
+    @character2 = Character.find_by_id(2)
   end
 
   def create
@@ -16,7 +16,7 @@ class CpsController < ApplicationController
                  :wiki_content => params[:wiki_content],
                  :character1_id => params[:seme],
                  :character2_id => params[:uke],
-                 :creator_id => current_user.id,
+                 :creator_id => current_user.id)
 
     p @cp
     @cp.save

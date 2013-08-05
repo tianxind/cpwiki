@@ -2,9 +2,12 @@ class CreateCharacters < ActiveRecord::Migration
   def change
     create_table :characters do |t|
       t.string :name
+      t.string :nickname
       t.boolean :sex
       t.integer :age_when_first_appear
       t.date :birth_date
+      t.integer :horoscope
+      t.integer :blood_type
       t.string :hair
       t.string :eye
       t.string :height

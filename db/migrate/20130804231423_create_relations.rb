@@ -4,7 +4,7 @@ class CreateRelations < ActiveRecord::Migration
     	t.integer :cp_id
       t.string :acronym
       t.text :intro
-      t.integer :type
+      t.integer :relation_type
     end
   end
 end

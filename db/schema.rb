@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130805004042) do
+ActiveRecord::Schema.define(:version => 20130804231423) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -48,18 +48,18 @@ ActiveRecord::Schema.define(:version => 20130805004042) do
 
   create_table "characters", :force => true do |t|
     t.string  "name"
+    t.string  "nickname"
     t.boolean "sex"
     t.integer "age_when_first_appear"
     t.date    "birth_date"
+    t.integer "horoscope"
+    t.integer "blood_type"
     t.string  "hair"
     t.string  "eye"
     t.string  "height"
     t.string  "weight"
     t.string  "occupation"
     t.string  "summary"
-    t.integer "horoscope"
-    t.integer "blood_type"
-    t.string  "nickname"
   end
 
   create_table "cps", :force => true do |t|
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(:version => 20130805004042) do
     t.integer "cp_id"
     t.string  "acronym"
     t.text    "intro"
-    t.integer "type"
+    t.integer "relation_type"
   end
 
   create_table "users", :force => true do |t|

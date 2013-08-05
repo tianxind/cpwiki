@@ -4,7 +4,7 @@ ActiveAdmin.register Relation do
     column :cp_id                     
     column :acronym
     column :intro
-    #column :type           
+    column :relation_type           
     default_actions                   
   end                                 
 
@@ -13,7 +13,7 @@ ActiveAdmin.register Relation do
       f.input :cp_id
       f.input :acronym
       f.input :intro
-      #f.input :type
+      f.input :relation_type
     end                               
     f.actions                         
   end
@@ -23,7 +23,7 @@ ActiveAdmin.register Relation do
       row :cp_id
       row :acronym
       row :intro
-      #row :type
+      row :relation_type
     end
     active_admin_comments
   end
