@@ -3,6 +3,7 @@
 		<div>
 		  <table class="cp">
 		  	<tr>
+
 		      <td><%= label_tag(:seme, "攻:")%></td>
 		      <td><%= select_tag(:seme, options_for_select([[@character1.name, @character1.id], [@character2.name, @character2.id]], @character1.id)) %></td>
 		    </tr>
@@ -14,12 +15,20 @@
 		      <td><%= label_tag(:acronym, "简称:")%></td>
 		      <td><%= text_field_tag(:acronym) %></td>
 		    </tr>
+		    <tr>
+		      <td><%= label_tag(:category, "作品类别:")%></td>
+	      	<td><%= select_tag(:category, options_for_select(
+			   [['动画', 0], ['漫画', 1], ['电视剧', 2], ['电影', 3],
+			   ['小说', 4], ['其他', 5]], 5)) %>
+		  </td>
+		    </tr>
+		    <tr>
 		      <td><%= label_tag(:intro, "简介:")%></td>
 		      <td><%= text_area_tag(:intro) %></td>
 		    </tr>
 		  </table>
 		</div>
-		
+
     <div>
     	<table class="cp">
 		    <tr>
