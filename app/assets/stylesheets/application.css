@@ -57,3 +57,10 @@ p.title {
 	font-size: 10px;
 	font-weight: bold;
 }
+
+.edit_area {
+	width: 100%;
+	height: 200px;
+	overflow-y: scroll;
+	border: solid 1px #CCCCCC;
+}

@@ -18,23 +18,26 @@ class CpsController < ApplicationController
                  :character2_id => params[:uke],
                  :creator_id => current_user.id)
 
-    p @cp
-    @cp.save
-
+    if !@cp.save then
+      render :action => :new
+    end
+    
+    # relation type is set to 0 if character1 x character2,
+    # 1 if character2 x character1
     @relation = Relation.new(:cp_id => @cp.id,
                              :acronym => params[:acronym], 
-                             :intro => params[:intro])
-    # check type, a x b or b x a
-    # now set to 1 first
-    @relation.type = 1
-
+                             :intro => params[:intro],
+                             :relation_type => params[:relation_type])
+  
     if @relation.save
-      p "everyting saved!"
-      redirect_to :controller => :cps, :action => :new
+      redirect_to :controller => :cps, :action => :show, :id => @cp.id
     else
-      p "something wrong"
-      render :action => new
+      render :action => :new
     end
+  end
+  
+  def show
+    @cp = Cp.find_by_id(params[:id])
   end
 
 end

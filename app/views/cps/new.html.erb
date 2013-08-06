@@ -1,5 +1,5 @@
 <div>
-	<%=  form_tag("/cps", :method => :post) do %>
+	<%=  form_tag("/cps", :id => "newcp", :method => :post) do %>
 		<div>
 		  <table class="cp">
 		  	<tr>
@@ -30,31 +30,42 @@
 		</div>
 
     <div>
-    	<table class="cp">
-		    <tr>
-		      <td><%= label_tag(:wiki_content, "JQ档案:")%></td>
-		      <td><%= text_area_tag(:wiki_content) %></td>
-		    </tr>
-    	</table>
+		<%= label_tag(:wiki_content, "JQ档案:")%>
+		<%= render "shared/editor" %>
 	</div>
-
-	  <%= submit_tag "提交" %>
+	<%= hidden_field_tag :wiki_content %>
+	<%= hidden_field_tag :relation_type, "0" %>
+	<%= submit_tag "提交" %>
 	<% end %>
 </div>
 <script type="text/javascript">
+var editor = $(".edit_area")[0];
+makeWYSIWYG(editor);
+
+// Put html source into hidden text area before submit
+$("#newcp").submit( function() {
+	$("#wiki_content").val(editor.innerHTML);
+});
+
+// Script to relate two dropdown select boxes: one changes, the other
+// should also change
 $("#seme").change(function() {
 	if (this.value == <%= @character2.id %>) {
 		$("#uke").val(<%= @character1.id %>);
+	    $("#relation_type").val(1);
 	} else {
 		$("#uke").val(<%= @character2.id %>);
+		$("#relation_type").val(0);
 	}
 })
 
 $("#uke").change(function() {
 	if (this.value == <%= @character2.id %>) {
 		$("#seme").val(<%= @character1.id %>);
+		$("#relation_type").val(0);
 	} else {
 		$("#seme").val(<%= @character2.id %>);
+		$("#relation_type").val(1);
 	}
 })
 </script>
