@@ -1,3 +1,36 @@
 <div class="wiki_title">
-	<%= @cp.character1.name %>和<%= @cp.character2.name %>的配对
+	<%= @character1.name %>和<%= @character2.name %>的配对
+</div>
+<div class="characters">
+	<div class="character_basic_info">
+		<img src="todo" alt="Placeholder"></img>
+		<%= render(:partial => "character_info", :locals => {:character => @character1}) %>
+		<%= render(:partial => "character_info", :locals => {:character => @character2}) %>	
+	</div>
+	<p><%= formatted(@cp.summary) %></p>
+	<div class="index">
+		<h4 style="text-align: center">目录</h4>
+		<ol class="toc">
+	    	<li>角色介绍
+				<ol>
+					<li><%= @character1.name %></li>
+					<li><%= @character2.name %></li>
+				</ol>
+			</li>
+			<li>配对介绍</li>
+			<li>JQ档案</li>
+		</ol>
+	</div>
+	<p class="subtitle">角色介绍</p>
+	<p class="subsubtitle"><%= @character1.name %></p>
+	<p><%= formatted(@character1.summary) %></p>
+	<p class="subsubtitle"><%= formatted(@character2.name) %></p>
+	<p><%= formatted(@character2.summary) %></p>
+	<p class="subtitle">配对介绍</p>
+	<% for relation in @cp.relations %>
+		<p class="subsubtitle"><%= relation.acronym %></p>
+		<p><%= formatted(relation.intro) %></p>
+	<% end %>
+	<p class="subtitle">JQ档案</p>
+	<p><%= formatted(@cp.wiki_content) %></p>
 </div>

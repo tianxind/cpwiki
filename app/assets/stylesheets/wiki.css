@@ -2,3 +2,37 @@
 	font-size: 12px;
 	border-bottom: solid 1px #0372f7;
 }
+
+.character_basic_info {
+	width: 30%;
+	float: right;	
+	margin: 5px;
+	padding: 2px;
+	border: solid 1px #aaaaaa;
+	background-color: white;
+}
+
+p.character_name {
+	background-color: #dfede0;
+}
+
+.index {
+	width: 30%;
+	margin: 5px;
+	padding: 2px;
+	border: solid 1px #aaaaaa;
+}
+
+.toc {
+	margin: 0px;
+}
+
+.subtitle {
+	font-size: 11px;
+	border-bottom: solid 1px #0372f7;
+}
+
+.subsubtitle {
+	font-size: 10px;
+	font-weight: bold;
+}

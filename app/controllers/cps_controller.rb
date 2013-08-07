@@ -38,6 +38,8 @@ class CpsController < ApplicationController
   
   def show
     @cp = Cp.find_by_id(params[:id])
+    @character1 = @cp.character1
+    @character2 = @cp.character2
   end
 
 end

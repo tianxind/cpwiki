@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(:version => 20130804231423) do
     t.string  "height"
     t.string  "weight"
     t.string  "occupation"
-    t.string  "summary"
+    t.text    "summary"
   end
 
   create_table "cps", :force => true do |t|

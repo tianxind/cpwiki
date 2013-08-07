@@ -13,7 +13,7 @@ class CreateCharacters < ActiveRecord::Migration
       t.string :height
       t.string :weight
       t.string :occupation
-      t.string :summary
+      t.text :summary
     end
   end
 end
