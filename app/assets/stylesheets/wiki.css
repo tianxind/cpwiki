@@ -1,3 +1,9 @@
+.horizontalline {
+	background-color: #aaaaaa;
+	width: 100%;
+	height: 1px;
+}
+
 .wiki_title {
 	font-size: 12px;
 	border-bottom: solid 1px #0372f7;
@@ -30,6 +36,7 @@ p.character_name {
 .subtitle {
 	font-size: 11px;
 	border-bottom: solid 1px #0372f7;
+	overflow: hidden;
 }
 
 .subsubtitle {
