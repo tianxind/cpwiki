@@ -1,0 +1,11 @@
+<table class="create_navbar" cellspacing="0">
+	<tr>
+		<% (1..step_names.length).each do |i| %>
+			<% if i == step then %> 
+				<td class="current_step"><%= i %>.&nbsp;<%= step_names[i - 1] %></td>
+			<% else %>
+				<td><%= i %>.&nbsp;<%= step_names[i - 1] %></td>
+			<% end %>
+		<% end %>
+	</tr>
+</table>

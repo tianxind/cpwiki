@@ -1,0 +1,23 @@
+<%= render(:partial => "create_navbar", :locals => {:step => 1, :step_names => ["输入角色姓名", "填写角色信息", "填写CP信息"]}) %>
+<p>请输入您要创建的CP的两人名字：</p>
+<%= form_tag("/cps/search", :method => "get") %>
+<table>
+	<tr>
+		<td><%= label_tag(:character1, "角色一：") %></td>
+		<td><%= text_field_tag(:name1) %></td>
+	</tr>
+	<tr>
+		<td><%= label_tag(:character2, "角色二：") %></td>
+		<td><%= text_field_tag(:name2) %></td>
+	</tr>
+	<tr>
+		<td><%= label_tag(:category, "类型：") %></td>
+		<td>
+			<%= select_tag(:category, options_for_select(
+			[['动漫', 0], ['影视', 1], ['游戏', 2], ['小说', 3], ['其他', 4]], 0)) %>
+		</td>
+	</tr>
+	<tr>
+		<td><%= submit_tag "提交" %></td>
+	</tr>
+</table>
