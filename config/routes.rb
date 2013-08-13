@@ -1,11 +1,13 @@
 Cpwiki::Application.routes.draw do
   root :to => 'home#index'
-  
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
+  resources :comments
+
+  devise_for :admin_users
+  #ActiveAdmin::Devise.config
+  #ActiveAdmin.routes(self)
 
   devise_for :users
-  ActiveAdmin.routes(self)
+  #ActiveAdmin.routes(self)
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -22,7 +24,7 @@ Cpwiki::Application.routes.draw do
   resources :home
   resources :cps
   resources :characters
-
+  resources :user_infos
 
   # Sample resource route with options:
   #   resources :products do

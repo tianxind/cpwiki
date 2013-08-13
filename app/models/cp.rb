@@ -5,6 +5,7 @@ class Cp < ActiveRecord::Base
   belongs_to :character2, :class_name => "Character"
   
   has_many :relations
+  has_many :comments
 
   attr_accessible :category, :summary, :wiki_content, :character1_id, :character2_id, :creator_id, :created_at
 end
