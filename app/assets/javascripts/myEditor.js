@@ -55,7 +55,7 @@ function makeWYSIWYG(editor) {
 		});
 	}
 	
-	editor.keypress(function(e) {
+	/*editor.keypress(function(e) {
 		if (e.keyCode == 13) {
 			var range = window.getSelection().getRangeAt(0);
 			if (range.collapsed && range.startContainer == editor) {
@@ -63,7 +63,7 @@ function makeWYSIWYG(editor) {
 			}
 			startTag = range.startContainer
 		}
-	});
+	});*/
 	/*var subtitle_button = $("a[data-tag]")[0];
 	subtitle_button.addEventListener('click', function(e) {
 		var range = window.getSelection().getRangeAt(0);

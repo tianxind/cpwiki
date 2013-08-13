@@ -24,6 +24,7 @@ Cpwiki::Application.routes.draw do
     collection do 
       get 'choose'
       get 'search'
+      get 'redirect_to_cp_or_character'
     end
   end
   resources :characters
