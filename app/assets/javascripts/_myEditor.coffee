@@ -42,16 +42,18 @@ makeWYSIWYG = (editor) ->
         #					range.endContainer.parentNode.appendChild(horizontalline);
         else
           document.execCommand tag, false, @getAttribute("data-value")
+
       e.preventDefault()
 
     i++
-  editor.keypress (e) ->
-    if e.keyCode is 13
-      range = window.getSelection().getRangeAt(0)
-      range.collapsed and range.startContainer is editor
+	
+  # editor.keypress (e) ->
+  #  if e.keyCode is 13
+  #    range = window.getSelection().getRangeAt(0)
+  #    range.collapsed and range.startContainer is editor
       
       # Insert a new <p></p>
-      startTag = range.startContainer
+  #    startTag = range.startContainer
 
   
   #var subtitle_button = $("a[data-tag]")[0];

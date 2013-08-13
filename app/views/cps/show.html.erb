@@ -83,6 +83,9 @@ $(document).ready(function(){
 		var id = url.substring(url.lastIndexOf('/') + 1);
     console.log("in js id is " + id);
 
+    var userId = <%= current_user.id %>
+    console.log("user id in js is " + id);
+
     $.ajax({
 	     type: "POST",
 	     url: "/comments",

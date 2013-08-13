@@ -6,8 +6,8 @@ class CpsController < ApplicationController
 
   def new
     @cp = Cp.new
-    @character1 = Character.find_by_id(1)
-    @character2 = Character.find_by_id(2)
+    @character1 = Character.find_by_id(session[:id1])
+    @character2 = Character.find_by_id(session[:id2])
   end
 
   def create
@@ -70,12 +70,24 @@ class CpsController < ApplicationController
     @character2 = Character.search(params[:name2])
   end
   
-  def redirect_to_new_cp_or_character
+  def redirect_to_cp_or_character
     session[:id1] = params[:character1]
     session[:id2] = params[:character2]
-    if params[:character1] && params[:character2]
-      redirect :controller => :cps, :action => :new 
+    puts "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+    puts "id1 = #{session[:id1]}"
+    puts "id2 = #{session[:id2]}"
+    if session[:id1] != "nil" && session[:id2] != "nil"
+      cp = Cp.find(:all, :conditions => {:character1_id => session[:id1], :character2_id => session[:id2]})
+      if cp == nil
+        cp = Cp.find(:all, :conditions => {:character1_id => session[:id2], :character2_id => session[:id1]})
+      end
+      if cp.length > 0
+        redirect_to :action => :show, :id => cp[0].id
+      else
+        redirect_to :action => :new
+      end
     else
+      redirect_to :controller => :characters, :action => :new
     end
   end
 end
