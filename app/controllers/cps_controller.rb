@@ -57,10 +57,26 @@ class CpsController < ApplicationController
   #   end
   # end
 
+
+  
+  def choose 
+  end
+  
+  def search
+    session[:category] = params[:category]
+    params[:name1].strip!
+    params[:name2].strip!
+    @character1 = Character.search(params[:name1])
+    @character2 = Character.search(params[:name2])
+  end
+  
+  def redirect_to_new_cp_or_character
+    session[:id1] = params[:character1]
+    session[:id2] = params[:character2]
+    if params[:character1] && params[:character2]
+      redirect :controller => :cps, :action => :new 
+    else
+    end
+  end
 end
-
-
-
-
-
 

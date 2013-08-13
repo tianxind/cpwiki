@@ -4,4 +4,8 @@ class Character < ActiveRecord::Base
   :hair, :eye, :height, :weight, :occupation, :summary, :horoscope, :blood_type
 
   validates :name, :presence => true
+  
+  def self.search(q)
+    find(:all, :conditions => ['name like ? or nickname like ?', "%#{q}%", "%#{q}%"])
+  end
 end

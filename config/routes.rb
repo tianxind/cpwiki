@@ -22,7 +22,12 @@ Cpwiki::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   resources :home
-  resources :cps
+  resources :cps do
+    collection do 
+      get 'choose'
+      get 'search'
+    end
+  end
   resources :characters
   resources :user_infos
 
