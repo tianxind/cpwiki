@@ -1,5 +1,5 @@
 class CpsController < ApplicationController
-  before_filter :authenticate_user!
+  #before_filter :authenticate_user!
 
   def index
   end
@@ -40,7 +40,24 @@ class CpsController < ApplicationController
     @cp = Cp.find_by_id(params[:id])
     @character1 = @cp.character1
     @character2 = @cp.character2
+    @comment_array = @cp.comments
+    p "comment array is ->>>>>>"
+    p @comment_array
   end
+
+  # def addComment
+  #   @cp = Cp.find_by_id(params[:id])
+  #   @comment = Comment.new(:cp_id => @cp.id,
+  #                          :user_id => current_user.id,
+  #                          :comment_text => params[:comment])
+  #   if !@comment.save
+  #     p ">>>>>>>>> comment saving failed"
+  #   else 
+  #     p ">>>>>>>>> save succeed!"
+  #   end
+  # end
+
+
   
   def choose 
   end
@@ -74,3 +91,4 @@ class CpsController < ApplicationController
     end
   end
 end
+

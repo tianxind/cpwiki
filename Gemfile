@@ -41,4 +41,4 @@ gem 'jquery-rails', '2.3.0'
 gem 'devise'
 
 # Admin Gem
-gem 'activeadmin'
+# gem 'activeadmin'
