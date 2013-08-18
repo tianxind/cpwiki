@@ -29,6 +29,8 @@ class CpsController < ApplicationController
     if @cp.save
       session[:seme] = nil
       session[:uke] = nil
+      session[:name1] = nil
+      session[:name2] = nil
       redirect_to :controller => :cps, :action => :show, :id => @cp.id
     else
       render :action => :new
@@ -92,6 +94,12 @@ class CpsController < ApplicationController
     session[:category] = params[:category]
     params[:name1].strip!
     params[:name2].strip!
+    session[:name1] = params[:name1]
+    session[:name2] = params[:name2]
+
+    p "in seach func session name1 and name 2 are"
+    p session[:name1]
+    p session[:name2]
     @character1 = Character.search(params[:name1])
     @character2 = Character.search(params[:name2])
   end

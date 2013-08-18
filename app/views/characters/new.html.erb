@@ -1,14 +1,16 @@
-<%= render(:partial => "create_navbar", :locals => {:step => 2, :step_names => ["输入角色姓名", "填写角色信息", "填写CP信息"]}) %>
+<% if !(session[:seme] == nil && session[:uke] == nil) %>
+	<%= render(:partial => "create_navbar", :locals => {:step => 2, :step_names => ["输入角色姓名", "填写角色信息", "填写CP信息"]}) %>
+<% end %>
 
 <div>
-<% if session[:seme] == "nil" && session[:uke] == "nil"%>
+<% if session[:seme] == "nil" && session[:uke] == "nil" %>
 Create Seme Character:
 <% elsif session[:uke] == "nil" && session[:seme] != "nil" %>
 Create Uke Character:
 <% elsif session[:seme] == "nil" && session[:uke] != "nil" %>
 Create Seme Character:
 <% else %>
-<% redirect_to :controller => :cps, :action => :new %>
+Create New Character:
 <% end %>
 </div>
 
@@ -17,7 +19,13 @@ Create Seme Character:
 	  <table class="character">
 	    <tr>
 	      <td><%= form.label(:name, "姓名:")%></td>
-	      <td><%= form.text_field(:name) %></td>
+	      <% if (session[:seme] == nil && session[:uke] == nil) %>
+	      	<td><%= form.text_field(:name) %></td>
+	      <% elsif (session[:seme] == "nil" && session[:uke] == "nil") %>
+	        <td><%= form.text_field(:name, :value => session[:name1]) %></td>
+	      <% else %>
+	      	<td><%= form.text_field(:name, :value => session[:name2]) %></td>
+	      <% end %>
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:nickname, "别名:")%></td>
@@ -91,6 +99,7 @@ Create Seme Character:
 	<%= submit_tag "提交" %>
 	<% end %>
 </div>
+
 <script type="text/javascript">
 	var editor = $(".edit_area")[0];
 	myEditor.makeEditor(editor);

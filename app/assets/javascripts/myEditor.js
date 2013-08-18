@@ -136,9 +136,8 @@ var myEditor = (function() {
 			"</fiedset>" +
 		    "</form>" + 
 			"</div>";
-		/*var dialogForm = "<div id=\"force\" class=\"tabdialog\">" +
-			"<div id=\"dialog-form\" title=\"Insert Image\" class=\"ui-helper-hidden tabdialog\">" +
-			"<div id=\"tabs-image\">" +
+			
+		/*var dialogForm = "<div id=\"dialog-form\" title=\"Insert Image\">" +
 			"<ul>" +
 			"<li><a href=\"#tab-web\">网络图片</a></li>" +
 			"<li><a href=\"#tab-local\">本地上传</a></li>" + 
@@ -159,7 +158,6 @@ var myEditor = (function() {
 			"</div>" +
 			"</div>" +
 			"</div>";*/
-			
 		var lastForm = $('form');
 		lastForm = lastForm[lastForm.length - 1];
 		$(dialogForm).insertAfter(lastForm);

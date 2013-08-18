@@ -8,8 +8,8 @@ class CharactersController < ApplicationController
   
   def create
     #@character = Character.new(params[:character])
-    p "chara sex is >>>>>>>>"
-    p params[:character][:sex]
+    p "chara params is >>>>>>>>"
+    p params[:character]
     @character = Character.new(:name => params[:character][:name],
                                :nickname => params[:character][:nickname],
                                :birth_date => params[:character][:birth_date],
@@ -58,10 +58,25 @@ class CharactersController < ApplicationController
         image.destroy
         File.delete(Rails.root.join('public', 'images', image.filename))
       end
-      if session[:uke] != "nil"
-        redirect_to :controller => :cps, :action => :new
+    
+      # If both seme and uke are nil, then the user intends to only create character
+      if session[:seme] == nil && session[:uke] == nil
+        # for only create a single character
+        redirect_to :controller => :characters, :action => :show, :id => @character.id
+      # Otherwise the user intends to create a cp 
       else
-        redirect_to :controller => :characters, :action => :new
+        if session[:seme] == "nil"
+          session[:seme] = @character.id 
+          p "in assigning session[:seme]"
+        elsif session[:uke] == "nil"
+          session[:uke] = @character.id
+          p "in assigning session[:uke]"
+        end
+        if session[:uke] != "nil"
+          redirect_to :controller => :cps, :action => :new
+        else
+          redirect_to :controller => :characters, :action => :new
+        end
       end
     else
       # Delete all files ???
