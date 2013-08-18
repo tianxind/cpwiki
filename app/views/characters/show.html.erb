@@ -1,2 +1,16 @@
-<p>Character Name is: <%= @character.name %></p>
-<p>Character Gender is: <%= @character.sex %></p>
+<p class="subtitle">角色信息</p>
+<%
+	 horoscope = ['白羊座', '金牛座', '双子座', '巨蟹座' , '狮子座', '处女座', '天秤座', '天蝎座', '射手座', '摩羯座', '水瓶座', '双鱼座']
+%>
+<p>姓名: <%= @character.name %></p>
+<p>别名: <%= @character.nickname %></p>
+<p>性别: <%= @character.sex %></p>
+<p>生日: <%= @character.birth_date %></p>
+<p>星座: <%= horoscope[@character.horoscope] %></p>
+<p>血型: <%= @character.blood_type %></p>
+<p>发色: <%= @character.hair %></p>
+<p>瞳色: <%= @character.eye %></p>
+<p>身高: <%= @character.height %></p>
+<p>体重: <%= @character.weight %></p>
+<p>职业: <%= @character.occupation %></p>
+<p>简介: <%= @character.summary %></p>

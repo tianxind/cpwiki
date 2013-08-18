@@ -126,7 +126,7 @@ var myEditor = (function() {
 	};
 	
 	function insertDialogForm() {
-		var dialogForm = "<div id=\"dialog-form\" title=\"Insert Image\">" +
+		/*var dialogForm = "<div id=\"dialog-form\" title=\"Insert Image\">" +
 			"<ul>" +
 			"<li><a href=\"#tab-web\">网络图片</a></li>" +
 			"<li><a href=\"#tab-local\">本地上传</a></li>" + 
@@ -140,8 +140,17 @@ var myEditor = (function() {
 			"<input name=\"commit\" id=\"commit\" type=\"submit\" value=\"Upload\">" +
 			"</fiedset>" +
 		    "</form>" + 
+			"</div>";*/
+			var dialogForm = "<div id=\"dialog-form\" title=\"Insert Image\">" +
+			"<form accept-charset=\"UTF-8\" action=\"/photos\" class=\"new_photo\" data-remote=\"true\"" +
+			" enctype=\"multipart/form-data\" id=\"new_photo\" method=\"post\">" +
+			"<div style=\"margin:0;padding:0;display:inline\">" +
+			"<fieldset>" +
+			"<input type=\"file\" name=\"file\" id=\"file\" value=\"\" class=\"text ui-widget-content ui-corner-all\" />" +
+			"<input name=\"commit\" id=\"commit\" type=\"submit\" value=\"Upload\">" +
+			"</fiedset>" +
+		    "</form>" + 
 			"</div>";
-			
 		var lastForm = $('form');
 		lastForm = lastForm[lastForm.length - 1];
 		$(dialogForm).insertAfter(lastForm);
