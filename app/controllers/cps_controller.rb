@@ -36,30 +36,9 @@ class CpsController < ApplicationController
       render :action => :new
     end
     
-    # See if there is any image we need to delete
-    pos = 0
-    wiki_content = params[:wiki_content]
-    files = Array.new
-    while pos < wiki_content.length do
-      # Get file name of the image
-      match_data = wiki_content.match(/<img(.+)src=\"\/images\/(.+)\">/, pos)
-      if match_data != nil
-        files.push(match_data[2])
-        pos += 4
-      else
-        break
-      end
-    end
-    # puts "<<<<<<<<<<<<<<<<<<<all images in wikisource<<<<<<<<<<<<<<"
-    # puts files
-    deleted_files = params[:images].reject {|i| files.include? i}
-    # puts "<<<<<<<<<<<<<<<<<<<<Deleted files<<<<<<<<<<<<<<<<<<<<<<<"
-    # puts deleted_files
-    # Delete all entries from database and the files on our server
-    deleted_files.each do |f|
-      image = Photo.find_by_filename(f)
-      image.destroy
-      File.delete(Rails.root.join('public', 'images', image.filename))
+    # see if there are any images we need to delete
+    if params[:images] != nil
+      Photo.deleteUnusedImages(params[:wiki_content], params[:images])
     end
   end
   
