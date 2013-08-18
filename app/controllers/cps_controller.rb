@@ -5,12 +5,15 @@ class CpsController < ApplicationController
   end
 
   def new
+    @photo = Photo.new
     @cp = Cp.new
     @character1 = Character.find_by_id(session[:id1])
     @character2 = Character.find_by_id(session[:id2])
   end
 
   def create
+    puts "<<<<<<<<<<<<<<<<What are the params?"
+    puts params
     @cp = Cp.new(:category => params[:category], 
                  :summary => params[:summary], 
                  :wiki_content => params[:wiki_content],
@@ -34,6 +37,30 @@ class CpsController < ApplicationController
     else
       render :action => :new
     end
+    
+    # See if there is any image we need to delete
+    pos = 0
+    wiki_content = params[:wiki_content]
+    files = Array.new
+    while pos < wiki_content.length do
+      # Get file name of the image
+      match_data = wiki_content.match(/<img(.+)src=\"(.+)\">/, pos)
+      if match_data != nil
+        files.push(match_data[2])
+        pos += 4
+      else
+        break
+      end
+    end
+    deleted_files = params[:images].reject(|i| files.include? i)
+    puts "<<<<<<<<<<<<<<<<<<<<Deleted files<<<<<<<<<<<<<<<<<<<<<<<"
+    puts deleted_files
+    # Delete all entries from database and the files on our server
+    deleted_files.each do |f|
+      image = Photo.find_by_filename(f)
+      image.destroy
+      File.delete(Rails.root.join('public', 'images', image.filename))
+    end
   end
   
   def show
@@ -41,8 +68,6 @@ class CpsController < ApplicationController
     @character1 = @cp.character1
     @character2 = @cp.character2
     @comment_array = @cp.comments
-    p "comment array is ->>>>>>"
-    p @comment_array
   end
 
   # def addComment
@@ -57,8 +82,6 @@ class CpsController < ApplicationController
   #   end
   # end
 
-
-  
   def choose 
   end
   
@@ -73,9 +96,6 @@ class CpsController < ApplicationController
   def redirect_to_cp_or_character
     session[:id1] = params[:character1]
     session[:id2] = params[:character2]
-    puts "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
-    puts "id1 = #{session[:id1]}"
-    puts "id2 = #{session[:id2]}"
     if session[:id1] != "nil" && session[:id2] != "nil"
       cp = Cp.find(:all, :conditions => {:character1_id => session[:id1], :character2_id => session[:id2]})
       if cp == nil

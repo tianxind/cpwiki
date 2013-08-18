@@ -1,19 +1,26 @@
-<div>
-	<div class="editor_buttons">
-		<button class="makeWYSIWYG_viewHTML">View HTML</button>
-		<button data-tag="bold"><b>Bold</b></button>
-		<button data-tag="italic"><em>Italic</em></button>
-		<button data-tag="underline"><ins>Underline</ins></button>
-		<button data-tag="strikeThrough"><del>Strike</del></button>
-		<button data-tag="insertUnorderedList">• Unordered List</button>
-		<button data-tag="insertOrderedList">1. Ordered List</button>
-		<button data-tag="createLink"><ins>Link</ins></button>
-		<button data-tag="insertImage">Image</button>
-		<button data-value="h1" data-tag="heading">Main title</button>
-		<button data-value="h2" data-tag="heading">Subtitle</button>
-		<button data-tag="removeFormat">Remove format</button>
-		<button data-tag="subtitle">标题</button>
-	</div>
-	<div class="edit_area">
-	</div>
+<style>
+  body { font-size: 62.5%; }
+  label, input { display:block; }
+  input.text { margin-bottom:12px; width:95%; padding: .4em; }
+  fieldset { padding:0; border:0; margin-top:25px; }
+</style>
+<div class="editor_buttons">
+	<button class="makeWYSIWYG_viewHTML">View HTML</button>
+	<button data-tag="bold"><b>Bold</b></button>
+	<button data-tag="italic"><em>Italic</em></button>
+	<button data-tag="underline"><ins>Underline</ins></button>
+	<button data-tag="strikeThrough"><del>Strike</del></button>
+	<button data-tag="insertUnorderedList">• Unordered List</button>
+	<button data-tag="insertOrderedList">1. Ordered List</button>
+    <button data-tag="createLink"><ins>Link</ins></button>
+	<button data-tag="insertImage">Image</button>
+	<button data-value="h1" data-tag="title">Main title</button>
+	<button data-value="h2" data-tag="title">Subtitle</button>
+	<button data-tag="removeFormat">Remove format</button>
+	<button data-tag="uploadImage">Upload</button>
+	<button data-tag="test">Test</button>
+</div>
+<div class="edit_area">
+</div>
+<div id="all_images">
 </div>

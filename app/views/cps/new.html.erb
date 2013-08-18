@@ -37,9 +37,11 @@
 	<%= submit_tag "提交" %>
 	<% end %>
 </div>
+<input type="hidden" id="current_user" value=<%= current_user.id %> />
+<input type="hidden" id="saved_filename" value="" />
 <script type="text/javascript">
 var editor = $(".edit_area")[0];
-makeWYSIWYG(editor);
+myEditor.makeEditor(editor);
 
 // Put html source into hidden text area before submit
 $("#newcp").submit( function() {

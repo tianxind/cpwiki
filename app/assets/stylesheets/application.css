@@ -63,4 +63,5 @@ p.title {
 	height: 200px;
 	overflow-y: scroll;
 	border: solid 1px #CCCCCC;
+	padding: 5px 10px 5px 10px;
 }

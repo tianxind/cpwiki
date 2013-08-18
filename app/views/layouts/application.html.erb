@@ -2,10 +2,14 @@
 <html>
 <head>
   <title>Cpwiki</title>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= stylesheet_link_tag "homepage" %>
   <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "jquery-ui" %>
   <%= javascript_include_tag "myEditor" %>
+  <%= javascript_include_tag "jquery.iframe-transport" %>
+  <%= javascript_include_tag "jquery.remotipart" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -52,7 +56,5 @@
 		</div>
 	</div>
 </div>
-
-
 </body>
 </html>

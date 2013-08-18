@@ -49,11 +49,14 @@
 	      <td><%= form.label(:hair, "发色:")%></td>
 	      <td><%= form.text_field(:hair) %></td>
 	    </tr>
-	    <tr>
-	    	<td><%= form.label(:summary, "简介:")%></td>
-	      <td><%= form.text_area(:summary) %></td>
-	    </tr>
-	  <table>
-	  <%= submit_tag "提交" %>
-	<% end %>	
-</div>
+	</table>
+	<div>
+		<%= form.label(:summary, "简介:")%>			
+		<%= render "shared/editor" %>
+	</div>
+	<%= submit_tag "提交" %>
+	<% end %>
+<script type="text/javascript">
+	var editor = $(".edit_area")[0];
+	myEditor.makeEditor(editor);
+</script>

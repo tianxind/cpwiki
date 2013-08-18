@@ -42,3 +42,6 @@ gem 'devise'
 
 # Admin Gem
 # gem 'activeadmin'
+
+# Handle file upload via Ajax
+gem 'remotipart', '~> 1.2'

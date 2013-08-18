@@ -30,7 +30,8 @@ Cpwiki::Application.routes.draw do
     end
   end
   resources :characters
-  resources :user_infos
+  resources :userinfos
+  resources :photos
 
   # Sample resource route with options:
   #   resources :products do
