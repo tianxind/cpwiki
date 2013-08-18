@@ -20,7 +20,7 @@ class CharactersController < ApplicationController
                                :height => params[:character][:height],
                                :weight => params[:character][:weight],
                                :occupation => params[:character][:occupation],
-                               :summary => params[:character][:summary])
+                               :summary => params[:summary])
                                
     # sex_array = ["男", "女", "不明", "其他"]
     # @character.sex = sex_array[params[:character][:sex].to_i]
@@ -35,7 +35,7 @@ class CharactersController < ApplicationController
       end
       # see if there are any images we need to delete
       pos = 0
-      wiki_content = params[:character][:summary]
+      wiki_content = params[:summary]
       files = Array.new
       while pos < wiki_content.length do
         # Get file name of the image
@@ -47,11 +47,11 @@ class CharactersController < ApplicationController
           break
         end
       end
-      # puts "<<<<<<<<<<<<<<<<<<<all images in wikisource<<<<<<<<<<<<<<"
-      # puts files
+      puts "<<<<<<<<<<<<<<<<<<<all images in wikisource<<<<<<<<<<<<<<"
+      puts files
       deleted_files = params[:images].reject {|i| files.include? i}
-      # puts "<<<<<<<<<<<<<<<<<<<<Deleted files<<<<<<<<<<<<<<<<<<<<<<<"
-      # puts deleted_files
+      puts "<<<<<<<<<<<<<<<<<<<<Deleted files<<<<<<<<<<<<<<<<<<<<<<<"
+      puts deleted_files
       # Delete all entries from database and the files on our server
       deleted_files.each do |f|
         image = Photo.find_by_filename(f)

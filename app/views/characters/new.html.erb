@@ -94,8 +94,7 @@ Create New Character:
 		<%= form.label(:summary, "简介:")%>			
 		<%= render "shared/editor" %>
 	</div>
-	<%= hidden_field_tag :wiki_content %>
-	<%= hidden_field_tag :relation_type, "0" %>
+	<%= hidden_field_tag :summary %>
 	<%= submit_tag "提交" %>
 	<% end %>
 </div>
@@ -104,8 +103,8 @@ Create New Character:
 	var editor = $(".edit_area")[0];
 	myEditor.makeEditor(editor);
 	// Put html source into hidden text area before submit
-	$("#newcharacter").submit( function() {
-		$("#wiki_content").val(editor.innerHTML);
+	$("#new_character").submit( function() {
+		$("#summary").val(editor.innerHTML);
 	});
 </script>
 <input type="hidden" id="current_user" value=<%= current_user.id %> />
