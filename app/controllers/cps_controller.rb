@@ -40,7 +40,7 @@ class CpsController < ApplicationController
     files = Array.new
     while pos < wiki_content.length do
       # Get file name of the image
-      match_data = wiki_content.match(/<img(.+)src=\"(.+)\">/, pos)
+      match_data = wiki_content.match(/<img(.+)src=\"\/images\/(.+)\">/, pos)
       if match_data != nil
         files.push(match_data[2])
         pos += 4
@@ -48,15 +48,17 @@ class CpsController < ApplicationController
         break
       end
     end
-    # deleted_files = params[:images].reject(|i| files.include? i)
+    # puts "<<<<<<<<<<<<<<<<<<<all images in wikisource<<<<<<<<<<<<<<"
+    # puts files
+    deleted_files = params[:images].reject {|i| files.include? i}
     # puts "<<<<<<<<<<<<<<<<<<<<Deleted files<<<<<<<<<<<<<<<<<<<<<<<"
     # puts deleted_files
     # Delete all entries from database and the files on our server
-    # deleted_files.each do |f|
-    #  image = Photo.find_by_filename(f)
-    #  image.destroy
-    #  File.delete(Rails.root.join('public', 'images', image.filename))
-    # end
+    deleted_files.each do |f|
+      image = Photo.find_by_filename(f)
+      image.destroy
+      File.delete(Rails.root.join('public', 'images', image.filename))
+    end
   end
   
   def show

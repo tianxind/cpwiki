@@ -40,11 +40,11 @@ var myEditor = (function() {
 						$("#dialog-form").dialog("open");
 					break;
 					
-					case 'test':
+					/*case 'test':
 						$(".edit_area")[0].innerHTML = "<img class=\"resize\" src=\"/images/1_呆黑猫.jpg\"" +
 						"contenteditable=\"false\">" +
 						"</img>";
-					break;
+					break;*/
 				    
 					default:
 						document.execCommand(tag, false, this.getAttribute('data-value'));
@@ -52,7 +52,7 @@ var myEditor = (function() {
 		
 				e.preventDefault();
 			});	
-		}	
+		}
 	};
 	
 	// The image where the user has his/her cursor on
@@ -127,11 +127,6 @@ var myEditor = (function() {
 	
 	function insertDialogForm() {
 		var dialogForm = "<div id=\"dialog-form\" title=\"Insert Image\">" +
-			"<ul>" +
-			"<li><a href=\"#tab-web\">网络图片</a></li>" +
-			"<li><a href=\"#tab-local\">本地上传</a></li>" + 
-			"<div id=\"tab-web\">" +
-			"</div>" +
 			"<form accept-charset=\"UTF-8\" action=\"/photos\" class=\"new_photo\" data-remote=\"true\"" +
 			" enctype=\"multipart/form-data\" id=\"new_photo\" method=\"post\">" +
 			"<div style=\"margin:0;padding:0;display:inline\">" +
@@ -141,6 +136,29 @@ var myEditor = (function() {
 			"</fiedset>" +
 		    "</form>" + 
 			"</div>";
+		/*var dialogForm = "<div id=\"force\" class=\"tabdialog\">" +
+			"<div id=\"dialog-form\" title=\"Insert Image\" class=\"ui-helper-hidden tabdialog\">" +
+			"<div id=\"tabs-image\">" +
+			"<ul>" +
+			"<li><a href=\"#tab-web\">网络图片</a></li>" +
+			"<li><a href=\"#tab-local\">本地上传</a></li>" + 
+			"</ul>" +
+			"<div id=\"tab-web\">" +
+			"<input type=\"text\" name=\"url\" id=\"url\" class=\"text ui-widget-content ui-corner-all\" />" +
+			"</div>" +
+			"<div id=\"tab-local\">" +
+			"<form accept-charset=\"UTF-8\" action=\"/photos\" class=\"new_photo\" data-remote=\"true\"" +
+			" enctype=\"multipart/form-data\" id=\"new_photo\" method=\"post\">" +
+			"<div style=\"margin:0;padding:0;display:inline\">" +
+			"<fieldset>" +
+			"<input type=\"file\" name=\"file\" id=\"file\" value=\"\" class=\"text ui-widget-content ui-corner-all\" />" +
+			"<input name=\"commit\" id=\"commit\" type=\"submit\" value=\"Upload\">" +
+			"</fiedset>" +
+		    "</form>" + 
+			"</div>" +
+			"</div>" +
+			"</div>" +
+			"</div>";*/
 			
 		var lastForm = $('form');
 		lastForm = lastForm[lastForm.length - 1];
@@ -217,17 +235,9 @@ var myEditor = (function() {
 	function addUploadDialog() {
 		$("#dialog-form").dialog({
 			autoOpen: false,
-			height: 300,
+			height: 200,
 			width: 350,
-			modal: true,
-			buttons: {
-			    "OK": function() {
-			        $( this ).dialog( "close" );
-			    },
-			    Cancel: function() {
-			        $( this ).dialog( "close" );
-			    }
-			}
+			modal: true
 	    });	
 	};
 	
@@ -246,6 +256,7 @@ var myEditor = (function() {
 			
 			// Insert dialog form after the last form on page
 			insertDialogForm();
+			
 			// Configure upload image dialog 
 			addUploadDialog();
 			

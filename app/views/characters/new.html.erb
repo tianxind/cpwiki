@@ -86,16 +86,24 @@ Create Seme Character:
 		<%= form.label(:summary, "简介:")%>			
 		<%= render "shared/editor" %>
 	</div>
+	<%= hidden_field_tag :wiki_content %>
+	<%= hidden_field_tag :relation_type, "0" %>
 	<%= submit_tag "提交" %>
 	<% end %>
 </div>
 <script type="text/javascript">
 	var editor = $(".edit_area")[0];
 	myEditor.makeEditor(editor);
+	// Put html source into hidden text area before submit
+	$("#newcharacter").submit( function() {
+		$("#wiki_content").val(editor.innerHTML);
+	});
 </script>
+<input type="hidden" id="current_user" value=<%= current_user.id %> />
+<input type="hidden" id="saved_filename" value="" />
+<!--script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script-->
+<!--script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script-->
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>‌​
 <script>
 // change type of sex in selection box
 $('#sex_type').on('change',function(){
