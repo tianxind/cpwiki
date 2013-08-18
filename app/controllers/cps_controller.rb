@@ -7,8 +7,11 @@ class CpsController < ApplicationController
   def new
     @photo = Photo.new
     @cp = Cp.new
-    @character1 = Character.find_by_id(session[:id1])
-    @character2 = Character.find_by_id(session[:id2])
+    @seme = Character.find_by_id(session[:seme])
+    @uke = Character.find_by_id(session[:uke])
+    p "session id seme, uke are "
+    p session[:seme]
+    p session[:uke]
   end
 
   def create
@@ -17,22 +20,15 @@ class CpsController < ApplicationController
     @cp = Cp.new(:category => params[:category], 
                  :summary => params[:summary], 
                  :wiki_content => params[:wiki_content],
-                 :character1_id => params[:seme],
-                 :character2_id => params[:uke],
-                 :creator_id => current_user.id)
-
-    if !@cp.save then
-      render :action => :new
-    end
-    
-    # relation type is set to 0 if character1 x character2,
-    # 1 if character2 x character1
-    @relation = Relation.new(:cp_id => @cp.id,
-                             :acronym => params[:acronym], 
-                             :intro => params[:intro],
-                             :relation_type => params[:relation_type])
+                 :seme_id => session[:seme],
+                 :uke_id => session[:uke],
+                 :creator_id => current_user.id,
+                 :acronym => params[:acronym],
+                 :created_at => Time.now)
   
-    if @relation.save
+    if @cp.save
+      session[:seme] = nil
+      session[:uke] = nil
       redirect_to :controller => :cps, :action => :show, :id => @cp.id
     else
       render :action => :new
@@ -52,22 +48,27 @@ class CpsController < ApplicationController
         break
       end
     end
-    deleted_files = params[:images].reject(|i| files.include? i)
-    puts "<<<<<<<<<<<<<<<<<<<<Deleted files<<<<<<<<<<<<<<<<<<<<<<<"
-    puts deleted_files
+    # deleted_files = params[:images].reject(|i| files.include? i)
+    # puts "<<<<<<<<<<<<<<<<<<<<Deleted files<<<<<<<<<<<<<<<<<<<<<<<"
+    # puts deleted_files
     # Delete all entries from database and the files on our server
-    deleted_files.each do |f|
-      image = Photo.find_by_filename(f)
-      image.destroy
-      File.delete(Rails.root.join('public', 'images', image.filename))
-    end
+    # deleted_files.each do |f|
+    #  image = Photo.find_by_filename(f)
+    #  image.destroy
+    #  File.delete(Rails.root.join('public', 'images', image.filename))
+    # end
   end
   
   def show
     @cp = Cp.find_by_id(params[:id])
-    @character1 = @cp.character1
-    @character2 = @cp.character2
+    @seme = Character.find_by_id(@cp.seme_id)
+    @uke = Character.find_by_id(@cp.uke_id)
     @comment_array = @cp.comments
+    @already_liked = (Like.find_by_sql("SELECT * from likes WHERE user_id=" + current_user.id.to_s + " AND cp_id=" + params[:id].to_s)).size
+    p "already_liked size is >>>>>>>>"
+    p @already_liked
+    p "comment array is ->>>>>>"
+    p @comment_array
   end
 
   # def addComment
@@ -94,19 +95,22 @@ class CpsController < ApplicationController
   end
   
   def redirect_to_cp_or_character
-    session[:id1] = params[:character1]
-    session[:id2] = params[:character2]
-    if session[:id1] != "nil" && session[:id2] != "nil"
-      cp = Cp.find(:all, :conditions => {:character1_id => session[:id1], :character2_id => session[:id2]})
-      if cp == nil
-        cp = Cp.find(:all, :conditions => {:character1_id => session[:id2], :character2_id => session[:id1]})
-      end
+    session[:seme] = params[:character1]
+    session[:uke] = params[:character2]
+    puts "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+    puts "semd_id = #{session[:seme]}"
+    puts "uke_id = #{session[:uke]}"
+    if session[:seme] != "nil" && session[:uke] != "nil"
+      cp = Cp.find(:all, :conditions => {:seme_id => session[:seme], :uke_id => session[:uke]})
       if cp.length > 0
+        p "cp length > 0"
         redirect_to :action => :show, :id => cp[0].id
       else
+        p "cp not exist"
         redirect_to :action => :new
       end
     else
+      p "redirect to chara/new"
       redirect_to :controller => :characters, :action => :new
     end
   end

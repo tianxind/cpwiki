@@ -1,11 +1,14 @@
 <p class="character_name"><%= character.name %></p>
+<%
+	 horoscope = ['白羊座', '金牛座', '双子座', '巨蟹座' , '狮子座', '处女座', '天秤座', '天蝎座', '射手座', '摩羯座', '水瓶座', '双鱼座']
+%>
 别名：<%= character.nickname %></br>
-性别：<%= character.sex ? "男" : "女" %></br>
+性别：<%= character.sex %></br>
 生日：<%= character.birth_date %></br>
 发色：<%= character.hair %></br>
 瞳色：<%= character.eye %></br>
 身高：<%= character.height %></br>
 体重：<%= character.weight %></br>
 职业：<%= character.occupation %></br>
-星座：<%= character.horoscope %></br>
+星座：<%= horoscope[character.horoscope] %></br>
 血型：<%= character.blood_type %></br>

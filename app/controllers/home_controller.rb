@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @photo = Photo.new
+  	session[:seme] = nil
+  	session[:uke] = nil
   end
 end
