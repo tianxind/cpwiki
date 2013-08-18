@@ -14,10 +14,13 @@ class CommentsController < ApplicationController
     p params[:id]
     p "current user id is >>>>>>>>"
     p current_user.id.to_s
+    p "date time from ajax is >>>>>>>>>"
+    p params[:create_time]
+    create_time = DateTime.parse(params[:create_time])
     @comment = Comment.new(:cp_id => params[:id],
                            :user_id => current_user.id,
                            :comment_text => params[:comment_text],
-                           :date_time => Time.now)
+                           :date_time => create_time)
     if !@comment.save
       p ">>>>>>>>> comment saving failed"
     else 

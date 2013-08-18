@@ -11,22 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130810211006) do
-
-  create_table "active_admin_comments", :force => true do |t|
-    t.string   "resource_id",   :null => false
-    t.string   "resource_type", :null => false
-    t.integer  "author_id"
-    t.string   "author_type"
-    t.text     "body"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.string   "namespace"
-  end
-
-  add_index "active_admin_comments", ["author_type", "author_id"], :name => "index_active_admin_comments_on_author_type_and_author_id"
-  add_index "active_admin_comments", ["namespace"], :name => "index_active_admin_comments_on_namespace"
-  add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
+ActiveRecord::Schema.define(:version => 20130813231216) do
 
   create_table "admin_users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -49,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20130810211006) do
   create_table "characters", :force => true do |t|
     t.string  "name"
     t.string  "nickname"
-    t.boolean "sex"
+    t.string  "sex"
     t.integer "age_when_first_appear"
     t.date    "birth_date"
     t.integer "horoscope"
@@ -70,20 +55,19 @@ ActiveRecord::Schema.define(:version => 20130810211006) do
   end
 
   create_table "cps", :force => true do |t|
-    t.integer  "creator_id",    :null => false
+    t.integer  "creator_id",   :null => false
     t.datetime "created_at"
-    t.integer  "character1_id", :null => false
-    t.integer  "character2_id", :null => false
+    t.integer  "seme_id",      :null => false
+    t.integer  "uke_id",       :null => false
     t.integer  "category"
+    t.string   "acronym"
     t.text     "summary"
     t.text     "wiki_content"
   end
 
-  create_table "relations", :force => true do |t|
+  create_table "likes", :force => true do |t|
     t.integer "cp_id"
-    t.string  "acronym"
-    t.text    "intro"
-    t.integer "relation_type"
+    t.integer "user_id"
   end
 
   create_table "users", :force => true do |t|
@@ -103,10 +87,12 @@ ActiveRecord::Schema.define(:version => 20130810211006) do
     t.string   "unconfirmed_email"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "username"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
 end

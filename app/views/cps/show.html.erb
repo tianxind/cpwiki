@@ -1,12 +1,17 @@
 <% p "current id is >>>>>>>>>>>>" + @cp.id.to_s %>
+<!-- <div class="wiki_title">
+	<%= @seme.name %>和<%= @uke.name %>的配对	<% if(@already_liked > 0) %><button type="button" id="like">已萌</button><% else %><button type="button" id="like">萌</button><% end %>
+</div> -->
+
 <div class="wiki_title">
-	<%= @character1.name %>和<%= @character2.name %>的配对
+	<%= @seme.name %>和<%= @uke.name %>的配对   <% if @already_liked == 0 %><a href="javascript:void(0)" id="like_button_a" style="background-color:#CCCCCC;">Moe</a><% else %><a href="javascript:void(0)" id="like_button_a" style="background-color:#FFC0CB;">Moed</a><% end %>
 </div>
+
 <div class="wiki_contents">
 	<div class="character_basic_info">
 		<img src="todo" alt="Placeholder"></img>
-		<%= render(:partial => "character_info", :locals => {:character => @character1}) %>
-		<%= render(:partial => "character_info", :locals => {:character => @character2}) %>	
+		<%= render(:partial => "character_info", :locals => {:character => @seme}) %>
+		<%= render(:partial => "character_info", :locals => {:character => @uke}) %>	
 	</div>
 	<p><%= formatted(@cp.summary) %></p>
 	<div class="index">
@@ -14,8 +19,8 @@
 		<ol class="toc">
 	    	<li>角色介绍
 				<ol>
-					<li><%= @character1.name %></li>
-					<li><%= @character2.name %></li>
+					<li><%= @seme.name %></li>
+					<li><%= @uke.name %></li>
 				</ol>
 			</li>
 			<li>配对介绍</li>
@@ -23,15 +28,12 @@
 		</ol>
 	</div>
 	<p class="subtitle">角色介绍</p>
-	<p class="subsubtitle"><%= @character1.name %></p>
-	<p><%= formatted(@character1.summary) %></p>
-	<p class="subsubtitle"><%= formatted(@character2.name) %></p>
-	<p><%= formatted(@character2.summary) %></p>
+	<p class="subsubtitle"><%= @seme.name %></p>
+	<p><%= formatted(@seme.summary) %></p>
+	<p class="subsubtitle"><%= formatted(@uke.name) %></p>
+	<p><%= formatted(@uke.summary) %></p>
 	<p class="subtitle">配对介绍</p>
-	<% for relation in @cp.relations %>
-		<p class="subsubtitle"><%= relation.acronym %></p>
-		<p><%= formatted(relation.intro) %></p>
-	<% end %>
+	<p class="subsubtitle"><%= @cp.acronym %></p>
 	<p class="subtitle">JQ档案</p>
 	<p><%= formatted(@cp.wiki_content) %></p>
 </div>
@@ -39,8 +41,9 @@
 <p class="subtitle">评论</p>
 <div id="comments_block">
 	<% if @comment_array %>
+		<% p "comment_array size is >>>>> " + @comment_array.size.to_s %>
 		<% @comment_array.each do |cmt| %>
-			<p>&gt;&gt; <%= cmt.comment_text %> - <%= User.find_by_id(cmt.user_id).email %> [<%= cmt.date_time.strftime("%Y-%m-%d %T") %>]</p>
+			<p>&gt;&gt; <%= cmt.comment_text %> - <%= User.find_by_id(cmt.user_id).username %> [<%= cmt.date_time.strftime("%Y-%m-%d %T") %>]</p>
 		<% end %>
 	<% end %>
 
@@ -70,29 +73,34 @@ free!
 <br/><button type="button" id="submit_new_comment">提交</button>
 
 <script>
+// add new comment
 $(document).ready(function(){
-  $("button").click(function(){
+  $("button#submit_new_comment").click(function(){
   	var cmt = $('textarea#comment_area').val();
     //$("#new_comment").text(cmt);
 
     console.log("start ajax");
 
-    // get params[:id]
-    var url = window.location.pathname;
-    console.log("url is " + url);
-		var id = url.substring(url.lastIndexOf('/') + 1);
-    console.log("in js id is " + id);
-
-    var userId = <%= current_user.id %>
-    console.log("user id in js is " + id);
+    var username = '<%= current_user.username %>';
+    var index = <%= params[:id] %>;
+    var currentdate = new Date(); 
+		var create_time = currentdate.getFullYear() + "-"
+                + ("0" + (currentdate.getMonth() + 1)).slice(-2) + "-" 
+                + ("0" + currentdate.getDate()).slice(-2) + " "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+    console.log("user id in js is " + username);
+    console.log("index in js is  " + index);
+    console.log("create time is " + create_time);
 
     $.ajax({
 	     type: "POST",
 	     url: "/comments",
 	     dataType: "html",
-	     data: "comment_text=" + cmt + "&id=" + id,
+	     data: "comment_text=" + cmt + "&id=" + index + "&create_time=" + create_time,
 	     success: function(){
-	     	 $('#new_comment').append('<p>&gt;&gt; ' + cmt + ' - current user' + '</p>');
+	     	 $('#new_comment').append('<p>&gt;&gt; ' + cmt + ' - ' + username + ' [' + create_time + ']' + '</p>');
 	     	 //$('#new_comment').append('<div>- ' + cmt + '</div>');
 	       alert("Data Saved");
 	     },
@@ -102,8 +110,82 @@ $(document).ready(function(){
 		});
 
   });
+
+// like/dislike button
+  $("a#like_button_a").click(function(){
+  //   var index = <%= params[:id] %>;
+  //   console.log("index in like button is  " + index);
+  //   $.ajax({
+	 //     type: "POST",
+	 //     url: "/likes",
+	 //     dataType: "html",
+	 //     data: "cp_id=" + index,
+	 //     success: function(){
+	 //     	 console.log("already liked " + <%= @already_liked %>)
+	 //     	 if(document.getElementById('like').text == "萌") {
+	 //     	   $("button#like").css('background-color','#FFC0CB');
+	 //     	   //<%= @already_liked = 1 %>
+	 //     	   //$("button#like").text = "已萌"
+	 //     	   document.getElementById('like').text = "已萌"
+	 //     	   alert("Data Saved, like");
+	 //     	 } else {
+	 //     	 	 $("button#like").css('background-color','#D3D3D3');
+	 //     	 	 //<%= @already_liked = 0 %>
+	 //     	 	 document.getElementById('like').text = "萌"
+	 //     	 	 alert("Data Saved, dislike");
+	 //     	 }
+	 //       // alert("Data Saved");
+	 //     },
+	 //     error: function(){
+	 //     	 alert("Error post");
+	 //     }
+		// });
+  // });
+
+  // $("a#like_button_a").click(function(){
+    var index = <%= params[:id] %>;
+    console.log("index in like button is  " + index);
+    console.log("post like/dislike to controller");
+    console.log($(this).text());
+    var like_text = $(this).text();
+    $.ajax({
+	     type: "POST",
+	     url: "/likes",
+	     dataType: "html",
+	     data: "cp_id=" + index,
+	     success: function(){
+	     	console.log("in success text is " + like_text);
+	     	 //console.log("already liked " + <%= @already_liked %>)
+	     	 if(like_text == "Moe") {
+	     	   $("a#like_button_a").css('background-color','#FFC0CB');
+	     	   //<%= @already_liked = 1 %>
+	     	   //$("button#like").text = "已萌"
+	     	   console.log("in save like");
+	     	   $('a#like_button_a').text('Moed');
+	     	   alert("Data Saved, like");
+	     	 } else {
+	     	 	 $("a#like_button_a").css('background-color','#CCCCCC');
+	     	 	 //<%= @already_liked = 0 %>
+	     	 	 console.log("in save dislike");
+	     	 	 $('a#like_button_a').text('Moe');
+	     	 	 alert("Data Saved, dislike");
+	     	 }
+	       // alert("Data Saved");
+	     },
+	     error: function(){
+	     	 alert("Error post");
+	     }
+		});
+  });
+
 });
- 
+
+	// if(<%= @already_liked %> > 0) {
+	// 	$("button#like").css('background-color','#FFC0CB');
+	// } else {
+	// 	$("button#like").css('background-color','#D3D3D3');
+	// }
+
 </script>
 
 

@@ -1,6 +1,7 @@
 Cpwiki::Application.routes.draw do
   root :to => 'home#index'
   resources :comments
+  resources :likes
 
   devise_for :admin_users
   #ActiveAdmin::Devise.config
@@ -31,6 +32,7 @@ Cpwiki::Application.routes.draw do
   end
   resources :characters
   resources :user_infos
+
 
   # Sample resource route with options:
   #   resources :products do

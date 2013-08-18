@@ -3,7 +3,7 @@ class CreateCharacters < ActiveRecord::Migration
     create_table :characters do |t|
       t.string :name
       t.string :nickname
-      t.boolean :sex
+      t.string :sex
       t.integer :age_when_first_appear
       t.date :birth_date
       t.integer :horoscope

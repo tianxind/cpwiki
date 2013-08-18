@@ -1,3 +1,17 @@
+<%= render(:partial => "create_navbar", :locals => {:step => 2, :step_names => ["输入角色姓名", "填写角色信息", "填写CP信息"]}) %>
+
+<div>
+<% if session[:seme] == "nil" && session[:uke] == "nil"%>
+Create Seme Character:
+<% elsif session[:uke] == "nil" && session[:seme] != "nil" %>
+Create Uke Character:
+<% elsif session[:seme] == "nil" && session[:uke] != "nil" %>
+Create Seme Character:
+<% else %>
+<% redirect_to :controller => :cps, :action => :new %>
+<% end %>
+</div>
+
 <div>
 	<%= form_for(@character, :url => {:action => :create}) do |form| %>
 	  <table class="character">
@@ -15,7 +29,25 @@
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:sex, "性别:")%></td>
-	      <td><%= form.text_field(:sex) %></td>
+<!-- 	      <td><%= form.text_field(:sex) %></td> -->
+<!-- 	      <td><input type="radio" name="sex" value="男" checked="checked" />男
+				<input type="radio" name="sex" value="女" />女
+				<input type="radio" name="sex" value="不明" />不明
+				<input type="radio" name="sex" value="其他" />其他</td> -->
+				<!-- <td><%= form.select(:sex,
+			   [['男', 0], ['女', 1], ['不明', 2], ['其他', 3]]) %></td>
+			  <td> -->
+			  <td>
+					<select name="sex" id="sex_type">
+				    <option value="男">男</option>
+				    <option value="女">女</option>
+				    <option value="不明">不明</option>
+				    <option value="其他">其他</option>
+					</select>
+					<span id="otherSexType" style="display:none;">
+					  <input id="otherSex" type="text" name="sex" placeholder="请指定性别"/>
+				  </span>
+			  </td>	
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:horoscope, "星座:")%></td>
@@ -57,3 +89,39 @@
 	  <%= submit_tag "提交" %>
 	<% end %>	
 </div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>‌​
+<script>
+// change type of sex in selection box
+$('#sex_type').on('change',function(){
+	  console.log("i'm in changing sex type")
+    var selection = $(this).val();
+    switch(selection){
+	    case "其他":
+	    $("#otherSexType").show()
+	    break;
+	    default:
+	    $("#otherSexType").hide()
+    }
+});
+
+// change sex type to others and specify by user input
+$(document).ready(function() {
+   $('#otherSex').keyup(function () { 
+   		console.log("in sex textfield change");
+   		$("#sex_type").val($(this).text());
+   });
+});
+
+
+</script>
+
+
+
+
+
+
+
+

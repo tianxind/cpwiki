@@ -1,15 +1,17 @@
+<%= render(:partial => "create_navbar", :locals => {:step => 3, :step_names => ["输入角色姓名", "填写角色信息", "填写CP信息"]}) %>
+
 <div>
 	<%=  form_tag("/cps", :id => "newcp", :method => :post) do %>
 		<div>
 		  <table class="cp">
 		  	<tr>
 
-		      <td><%= label_tag(:seme, "攻:")%></td>
-		      <td><%= select_tag(:seme, options_for_select([[@character1.name, @character1.id], [@character2.name, @character2.id]], @character1.id)) %></td>
+		      <td><%= label_tag(:seme_id, "攻:")%></td>
+		      <td><%= @seme.name %></td>
 		    </tr>
 		    <tr>
-		      <td><%= label_tag(:uke, "受:")%></td>
-		      <td><%= select_tag(:uke, options_for_select([[@character1.name, @character1.id], [@character2.name, @character2.id]], @character2.id)) %></td>
+		      <td><%= label_tag(:uke_id, "受:")%></td>
+		      <td><%= @uke.name %></td>
 		    </tr>
 		    <tr>
 		      <td><%= label_tag(:acronym, "简称:")%></td>
@@ -37,6 +39,8 @@
 	<%= submit_tag "提交" %>
 	<% end %>
 </div>
+
+
 <script type="text/javascript">
 var editor = $(".edit_area")[0];
 makeWYSIWYG(editor);
@@ -46,25 +50,4 @@ $("#newcp").submit( function() {
 	$("#wiki_content").val(editor.innerHTML);
 });
 
-// Script to relate two dropdown select boxes: one changes, the other
-// should also change
-$("#seme").change(function() {
-	if (this.value == <%= @character2.id %>) {
-		$("#uke").val(<%= @character1.id %>);
-	    $("#relation_type").val(1);
-	} else {
-		$("#uke").val(<%= @character2.id %>);
-		$("#relation_type").val(0);
-	}
-})
-
-$("#uke").change(function() {
-	if (this.value == <%= @character2.id %>) {
-		$("#seme").val(<%= @character1.id %>);
-		$("#relation_type").val(0);
-	} else {
-		$("#seme").val(<%= @character2.id %>);
-		$("#relation_type").val(1);
-	}
-})
 </script>
