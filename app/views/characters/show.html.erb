@@ -1,7 +1,9 @@
 <p class="subtitle">角色信息</p>
 
 <div class="character_basic_info">
-	<img src="todo" alt="Placeholder"></img>
+	<% p "photo is >>>>>>>" %>
+	<% p Photo.find_by_id(@character.profile_image).filename %>
+	<img src="/images/<%= Photo.find_by_id(@character.profile_image).filename %>" alt="Placeholder"></img>
 	<%= render(:partial => "character_info", :locals => {:character => @character}) %>
 </div>
 <div>

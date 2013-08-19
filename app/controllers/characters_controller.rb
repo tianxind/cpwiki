@@ -25,15 +25,21 @@ class CharactersController < ApplicationController
     # sex_array = ["男", "女", "不明", "其他"]
     # @character.sex = sex_array[params[:character][:sex].to_i]
     @character.sex = params[:sex]
-    if @character.save!
-      if session[:seme] == "nil"
-        session[:seme] = @character.id 
-        p "in assigning session[:seme]"
-      elsif session[:uke] == "nil"
-        session[:uke] = @character.id
-        p "in assigning session[:uke]"
+
+    profile_image = params[:character][:profile_image]
+    time = Time.now
+    image_filename = current_user.id.to_s + "_" + profile_image.original_filename
+    @photo = Photo.new(:date_time => time, 
+                       :filename => image_filename, 
+                       :user_id => current_user.id)
+    if @photo.save
+        File.open(Rails.root.join('public', 'images', @photo.filename), 'wb') do |file|
+          file.write(profile_image.read)
+        end
       end
-      
+    @character.profile_image = @photo.id
+
+    if @character.save!     
       # see if there are any images we need to delete
       if params[:images] != nil
         Photo.deleteUnusedImages(params[:summary], params[:images])

@@ -90,7 +90,12 @@ Create New Character:
 	      <td><%= form.label(:hair, "发色:")%></td>
 	      <td><%= form.text_field(:hair) %></td>
 	    </tr>
+	    <tr>
+	    	<td><%= form.label(:profile_image, "角色头像:")%></td>
+	    	<td><%= form.file_field (:profile_image) %></td>
+	    </tr>
 	</table>
+	<br />
 	<div>
 		<%= form.label(:summary, "简介:")%>			
 		<%= render "shared/editor" %>
