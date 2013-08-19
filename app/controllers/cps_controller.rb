@@ -25,7 +25,12 @@ class CpsController < ApplicationController
                  :creator_id => current_user.id,
                  :acronym => params[:acronym],
                  :created_at => Time.now)
-  
+                 
+    # see if there are any images we need to delete
+    if params[:images] != nil
+      Photo.deleteUnusedImages(params[:wiki_content], params[:images])
+    end
+    
     if @cp.save
       session[:seme] = nil
       session[:uke] = nil
@@ -34,11 +39,6 @@ class CpsController < ApplicationController
       redirect_to :controller => :cps, :action => :show, :id => @cp.id
     else
       render :action => :new
-    end
-    
-    # see if there are any images we need to delete
-    if params[:images] != nil
-      Photo.deleteUnusedImages(params[:wiki_content], params[:images])
     end
   end
   

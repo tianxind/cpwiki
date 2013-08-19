@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-  before_filter :authenticate_user!, :only => [:create]
+  before_filter :authenticate_user!, :only => [:create, :deleteUnusedImages]
   
   def create
     uploaded_io = params[:file]

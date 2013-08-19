@@ -77,6 +77,16 @@ class CharactersController < ApplicationController
   def edit
     @character = Character.find_by_id(params[:id])
   end
+  
+  def update
+    @character = Character.find_by_id(params[:id])
+    
+    if @character.update_attributes(params[:character])
+      redirect_to @character
+    else
+      render 'edit'
+    end
+  end
 
   def choose 
   end
@@ -98,5 +108,4 @@ class CharactersController < ApplicationController
       redirect_to :controller => :characters, :action => :show, :id => params[:new_chara]
     end
   end
-
 end

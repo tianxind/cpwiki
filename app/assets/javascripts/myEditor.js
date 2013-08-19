@@ -240,8 +240,10 @@ var myEditor = (function() {
 	};
 	
 	return {
-		makeEditor: function(editor) {
+		makeEditor: function(editor, defaultText) {
 			this.editor = editor;
+			
+			editor.innerHTML = defaultText;
 			
 			// Allows user to edit inside the editor
 			editor.setAttribute("contenteditable", true);
