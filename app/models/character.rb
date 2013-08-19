@@ -15,5 +15,5 @@ class Character < ActiveRecord::Base
     ['狮子座', 4], ['处女座', 5], ['天秤座', 6], ['天蝎座', 7], ['射手座', 8],
     ['摩羯座', 9], ['水瓶座', 10], ['双鱼座', 11]]
     
-  BLOODTYPE = 
+  # BLOODTYPE = 
 end

@@ -1,4 +1,4 @@
-<%= form_for :character, url: character_path(@character.id), method: :patch do |form| %>
+<%= form_for @character, url: character_path(@character.id), method: :put do |form| %>
 	<% if @character.errors.any? %>
 	<div id="errorExplanation">
     	<h2><%= pluralize(@character.errors.count, "error") %> prohibited
@@ -59,9 +59,29 @@
 	      <td><%= form.text_field(:hair) %></td>
 	    </tr>
 	</table>
-  <p>
-    <%= form.submit %>
-  </p>
+	<div>
+		<%= form.label(:summary, "简介:")%>			
+		<%= render "shared/editor" %>
+	</div>
+  <%= form.hidden_field :summary %>
+  <%= form.submit %>
 <% end %>
+
+<script type="text/javascript">
+	var editor = $(".edit_area")[0];
+	var initialText = "";
+	<% if @character.summary != nil && !@character.summary.empty? %>
+		initialText = <%= @character.summary %>;
+	<% end %>
+	myEditor.makeEditor(editor, initialText);
+	// Put html source into hidden text area before submit
+	$(".edit_character").submit( function() {
+		console.log("before submit");
+		$("#character_summary").val(editor.innerHTML);
+		console.log($("#character_summary").val());
+	});
+</script>
+<input type="hidden" id="current_user" value=<%= current_user.id %> />
+<input type="hidden" id="saved_filename" value="" />
  
 <%= link_to 'Back', characters_path %>

@@ -101,7 +101,7 @@ Create New Character:
 
 <script type="text/javascript">
 	var editor = $(".edit_area")[0];
-	myEditor.makeEditor(editor);
+	myEditor.makeEditor(editor, "");
 	// Put html source into hidden text area before submit
 	$("#new_character").submit( function() {
 		$("#summary").val(editor.innerHTML);
