@@ -33,7 +33,7 @@ Create New Character:
 	    </tr>
 	    <tr>
 	    	<td><%= form.label(:birth_date, "生日:")%></td>
-	      <td><%= form.text_field(:birth_date) %></td>
+	      <td><%= form.text_field(:birth_date, :placeholder => "yyyymmdd") %></td>
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:sex, "性别:")%></td>
@@ -67,7 +67,8 @@ Create New Character:
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:blood_type, "血型:")%></td>
-	      <td><%= form.text_field(:blood_type) %></td>
+	      <td><%= form.select(:blood_type,
+			   [['A', 0], ['B', 1], ['AB', 2], ['O', 3], ['不明', 4]]) %></td>
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:occupation, "职业:")%></td>
@@ -109,8 +110,6 @@ Create New Character:
 </script>
 <input type="hidden" id="current_user" value=<%= current_user.id %> />
 <input type="hidden" id="saved_filename" value="" />
-<!--script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script-->
-<!--script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script-->
 
 <script>
 // change type of sex in selection box

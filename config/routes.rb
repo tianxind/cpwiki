@@ -30,7 +30,13 @@ Cpwiki::Application.routes.draw do
       get 'redirect_to_cp_or_character'
     end
   end
-  resources :characters
+  resources :characters do
+    collection do
+      get 'choose'
+      get 'search'
+      get 'redirect_to_character_info_or_new_character'
+    end
+  end
   resources :user_infos
   resources :photos
 

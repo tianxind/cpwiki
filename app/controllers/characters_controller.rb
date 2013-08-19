@@ -81,4 +81,25 @@ class CharactersController < ApplicationController
       render 'edit'
     end
   end
+
+  def choose 
+  end
+  
+  def search
+    params[:chara].strip!
+    @chara = Character.search(params[:chara])
+  end
+  
+  def redirect_to_character_info_or_new_character
+    p "new chara name is >>>>>>>>>"
+    p params[:new_chara]
+    p params[:chara]
+    if params[:new_chara] == "nil"
+      p ">>>>>>>create new chara"
+      redirect_to :controller => :characters, :action => :new
+    else
+      p ">>>>>>>show old chara"
+      redirect_to :controller => :characters, :action => :show, :id => params[:new_chara]
+    end
+  end
 end
