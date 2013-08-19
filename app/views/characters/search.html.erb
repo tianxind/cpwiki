@@ -1,0 +1,3 @@
+<%= form_tag("/characters/redirect_to_character_info_or_new_character", :method => "get") %>
+<%= render(:partial => "results", :locals => {:chara => @chara}) %>
+<%= submit_tag "下一步" %>

@@ -1,0 +1,11 @@
+<p>请输入您要创建的角色姓名：</p>
+<%= form_tag("/characters/search", :method => "get") %>
+<table>
+	<tr>
+		<td><%= label_tag(:chara, "角色名：") %></td>
+		<td><%= text_field_tag(:chara) %></td>
+	</tr>
+	<tr>
+		<td><%= submit_tag "提交" %></td>
+	</tr>
+</table>

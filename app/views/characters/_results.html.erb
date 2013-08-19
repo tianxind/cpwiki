@@ -1,0 +1,16 @@
+<p>搜索<%= params[:chara] %>的结果：</p>
+<% results = @chara %>
+<% radio_name = "new_chara" %>
+<% i = 0 %>
+<% for result in results %>
+	<p>
+		<% checked = i == 0 ? true : false %>
+	    <%= radio_button_tag(radio_name, result.id, checked) %>
+		<%= label_tag :label, result.name %>
+	</p>
+	<% i = i + 1 %>
+<% end %>
+<p>
+	<%= radio_button_tag(radio_name, "nil", checked = results.size == 0 ? true : false) %>
+	<%= label_tag :label, "New character" %>
+</p>
