@@ -36,7 +36,7 @@
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:blood_type, "血型:")%></td>
-	      <td><%= form.text_field(:blood_type) %></td>
+	      <td><%= form.select(:blood_type, Character::BLOODTYPE) %></td>
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:occupation, "职业:")%></td>
@@ -71,7 +71,7 @@
 	var editor = $(".edit_area")[0];
 	var initialText = "";
 	<% if @character.summary != nil && !@character.summary.empty? %>
-		initialText = <%= @character.summary %>;
+		initialText = '<%= formatted(@character.summary) %>';
 	<% end %>
 	myEditor.makeEditor(editor, initialText);
 	// Put html source into hidden text area before submit
