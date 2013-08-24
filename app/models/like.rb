@@ -1,3 +1,5 @@
+#!/bin/env ruby
+# encoding: utf-8
 class Like < ActiveRecord::Base
   # attr_accessible :title, :body
   belongs_to :user

@@ -63,7 +63,7 @@
 <% end %>
 </div> -->
 
-
+<div><span class="error_msg" id="comment_error_msg"></span></div>
 
 <p>添加评论：</p>
 <textarea rows="4" cols="50" id="comment_area">
@@ -77,37 +77,41 @@ free!
 $(document).ready(function(){
   $("button#submit_new_comment").click(function(){
   	var cmt = $('textarea#comment_area').val();
-    //$("#new_comment").text(cmt);
+  	// check whether the comment is empty
+  	if(cmt == "") {
+  		$("#comment_error_msg").text("评论不能为空！");
+  	} else {
+  		$("#comment_error_msg").text("");
+	    console.log("start ajax");
 
-    console.log("start ajax");
+	    var username = '<%= current_user.username %>';
+	    var index = <%= params[:id] %>;
+	    var currentdate = new Date(); 
+			var create_time = currentdate.getFullYear() + "-"
+	                + ("0" + (currentdate.getMonth() + 1)).slice(-2) + "-" 
+	                + ("0" + currentdate.getDate()).slice(-2) + " "  
+	                + currentdate.getHours() + ":"  
+	                + currentdate.getMinutes() + ":" 
+	                + currentdate.getSeconds();
+	    console.log("user id in js is " + username);
+	    console.log("index in js is  " + index);
+	    console.log("create time is " + create_time);
 
-    var username = '<%= current_user.username %>';
-    var index = <%= params[:id] %>;
-    var currentdate = new Date(); 
-		var create_time = currentdate.getFullYear() + "-"
-                + ("0" + (currentdate.getMonth() + 1)).slice(-2) + "-" 
-                + ("0" + currentdate.getDate()).slice(-2) + " "  
-                + currentdate.getHours() + ":"  
-                + currentdate.getMinutes() + ":" 
-                + currentdate.getSeconds();
-    console.log("user id in js is " + username);
-    console.log("index in js is  " + index);
-    console.log("create time is " + create_time);
-
-    $.ajax({
-	     type: "POST",
-	     url: "/comments",
-	     dataType: "html",
-	     data: "comment_text=" + cmt + "&id=" + index + "&create_time=" + create_time,
-	     success: function(){
-	     	 $('#new_comment').append('<p>&gt;&gt; ' + cmt + ' - ' + username + ' [' + create_time + ']' + '</p>');
-	     	 //$('#new_comment').append('<div>- ' + cmt + '</div>');
-	       	 alert("Data Saved");
-	     },
-	     error: function(){
-	     	 alert("Error post");
-	     }
-		});
+	    $.ajax({
+		     type: "POST",
+		     url: "/comments",
+		     dataType: "html",
+		     data: "comment_text=" + cmt + "&id=" + index + "&create_time=" + create_time,
+		     success: function(){
+		     	 $('#new_comment').append('<p>&gt;&gt; ' + cmt + ' - ' + username + ' [' + create_time + ']' + '</p>');
+		     	 //$('#new_comment').append('<div>- ' + cmt + '</div>');
+		       	 alert("Data Saved");
+		     },
+		     error: function(){
+		     	 alert("Error post");
+		     }
+			});
+	  }
 
   });
 
