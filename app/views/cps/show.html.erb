@@ -6,6 +6,7 @@
 <div class="wiki_title">
 	<%= @seme.name %>和<%= @uke.name %>的配对 
 	<%= @cp.acronym.empty? ? "" : "(#{@cp.acronym})" %>&nbsp;&nbsp;<% if @already_liked == 0 %><a href="javascript:void(0)" id="like_button_a" style="background-color:#CCCCCC;">Moe</a><% else %><a href="javascript:void(0)" id="like_button_a" style="background-color:#FFC0CB;">Moed</a><% end %>
+	<span class="edit"><% link_to '编辑攻', "/characters" %></span>
 	<span class="edit"><%= link_to '编辑攻', edit_character_path(@seme) %></span>
 	<span class="edit"><%= link_to '编辑受', edit_character_path(@uke) %></span>
 	<span class="edit"><%= link_to '编辑CP', edit_cp_path(@cp) %></span>
