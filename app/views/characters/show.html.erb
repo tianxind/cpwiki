@@ -1,9 +1,6 @@
 <p class="subtitle">角色信息<span class="edit"><%= link_to 'Edit', edit_character_path(@character) %></span></p>
 
 <div class="character_basic_info">
-	<% p "photo is >>>>>>>" %>
-	<% p Photo.find_by_id(@character.profile_image).filename %>
-	<img src="/images/<%= Photo.find_by_id(@character.profile_image).filename %>" alt="Placeholder"></img>
 	<%= render(:partial => "character_info", :locals => {:character => @character}) %>
 </div>
 <div>

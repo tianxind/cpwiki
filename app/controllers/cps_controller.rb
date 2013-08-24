@@ -56,17 +56,19 @@ class CpsController < ApplicationController
     p @comment_array
   end
 
-  # def addComment
-  #   @cp = Cp.find_by_id(params[:id])
-  #   @comment = Comment.new(:cp_id => @cp.id,
-  #                          :user_id => current_user.id,
-  #                          :comment_text => params[:comment])
-  #   if !@comment.save
-  #     p ">>>>>>>>> comment saving failed"
-  #   else 
-  #     p ">>>>>>>>> save succeed!"
-  #   end
-  # end
+  def edit
+    @cp = Cp.find_by_id(params[:id])
+  end
+
+  def update
+    @cp = Cp.find_by_id(params[:id])
+    
+    if @cp.update_attributes(params[:cp])
+      redirect_to @cp
+    else
+      render 'edit'
+    end
+  end
 
   def choose 
   end
