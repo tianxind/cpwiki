@@ -28,18 +28,25 @@ class CharactersController < ApplicationController
     @character.sex = params[:sex]
 
     profile_image = params[:character][:profile_image]
-    time = Time.now
-    image_filename = current_user.id.to_s + "_" + profile_image.original_filename
-    @photo = Photo.new(:date_time => time, 
-                       :filename => image_filename, 
-                       :user_id => current_user.id)
-    if @photo.save
-        File.open(Rails.root.join('public', 'images', @photo.filename), 'wb') do |file|
-          file.write(profile_image.read)
-        end
+    if profile_image == nil 
+      puts "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+      puts "profile image is nil"
+    end
+    if profile_image != nil
+      puts "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+      puts "saving photo"
+      time = Time.now
+      image_filename = current_user.id.to_s + "_" + profile_image.original_filename
+      @photo = Photo.new(:date_time => time, 
+                         :filename => image_filename, 
+                         :user_id => current_user.id)
+      if @photo.save
+          File.open(Rails.root.join('public', 'images', @photo.filename), 'wb') do |file|
+            file.write(profile_image.read)
+          end
       end
-    @character.profile_image = @photo.id
-
+      @character.profile_image = @photo.id
+    end
     # check chara name validation
     if !@character.valid? then
       flash[:error] = @character.errors.full_messages
