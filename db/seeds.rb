@@ -13,28 +13,32 @@
                               :sex => "小天使",
                               :birth_date =>"19891022",
                               :horoscope => 9,
-                              :blood_type => "A",
+                              :blood_type => 4,
                               :hair => "Brown")
     #makoto.save(:validate => false)
     haruka = Character.create(:name => "Haruka", 
                            :nickname => "haruChan",
                            :sex => "男",
-                           :horoscope => 4)
+                           :horoscope => 4,
+                           :blood_type => 4)
     #haruka.save(:validate => false)
     nagisa = Character.create(:name => "Nagisa", 
                            :nickname => "NagiChan",
                            :sex => "男",
-                           :horoscope => 3)
+                           :horoscope => 3,
+                           :blood_type => 4)
     #nagisa.save(:validate => false) 
     rin = Character.create(:name => "Rin", 
                            :nickname => "RinChan",
                            :sex => "男",
-                           :horoscope => 7)
+                           :horoscope => 7,
+                           :blood_type => 4)
     #rin.save(:validate => false) 
     ren = Character.create(:name => "Ren",
                            :nickname => "RenChan",
                            :sex => "男",
-                           :horoscope => 10)
+                           :horoscope => 10,
+                           :blood_type => 4)
 
     # Create initial users
     
