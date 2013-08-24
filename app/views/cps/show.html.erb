@@ -4,7 +4,7 @@
 </div> -->
 
 <div class="wiki_title">
-	<%= @seme.name %>和<%= @uke.name %>的配对   <% if @already_liked == 0 %><a href="javascript:void(0)" id="like_button_a" style="background-color:#CCCCCC;">Moe</a><% else %><a href="javascript:void(0)" id="like_button_a" style="background-color:#FFC0CB;">Moed</a><% end %>
+	<%= @seme.name %>和<%= @uke.name %>的配对 (<%= @cp.summary %>)&nbsp;&nbsp;<% if @already_liked == 0 %><a href="javascript:void(0)" id="like_button_a" style="background-color:#CCCCCC;">Moe</a><% else %><a href="javascript:void(0)" id="like_button_a" style="background-color:#FFC0CB;">Moed</a><% end %>
 	<span class="edit"><%= link_to '编辑攻', edit_character_path(@seme) %></span>
 	<span class="edit"><%= link_to '编辑受', edit_character_path(@uke) %></span>
 	<span class="edit"><%= link_to '编辑CP', edit_cp_path(@cp) %></span>
@@ -26,7 +26,6 @@
 					<li><%= @uke.name %></li>
 				</ol>
 			</li>
-			<li>配对介绍</li>
 			<li>JQ档案</li>
 		</ol>
 	</div>
@@ -35,8 +34,6 @@
 	<p><%= formatted(@seme.summary) %></p>
 	<p class="subsubtitle"><%= formatted(@uke.name) %></p>
 	<p><%= formatted(@uke.summary) %></p>
-	<p class="subtitle">配对介绍</p>
-	<p class="subsubtitle"><%= @cp.acronym %></p>
 	<p class="subtitle">JQ档案</p>
 	<p><%= formatted(@cp.wiki_content) %></p>
 </div>

@@ -20,12 +20,12 @@
 		    <tr>
 		      <td><%= label_tag(:category, "作品类别:")%></td>
 	      	<td><%= select_tag(:category, options_for_select(
-			   [['动漫', 0], ['影视', 1], ['游戏', 2], ['小说', 3], ['其他', 4]], 4)) %>
+			   Cp::CATEGORY, 4)) %>
 		  </td>
 		    </tr>
 		    <tr>
-		      <td><%= label_tag(:intro, "简介:")%></td>
-		      <td><%= text_area_tag(:intro) %></td>
+		      <td><%= label_tag(:summary, "简介:")%></td>
+		      <td><%= text_area_tag(:summary) %></td>
 		    </tr>
 		  </table>
 		</div>

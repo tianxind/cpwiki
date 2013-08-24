@@ -72,6 +72,7 @@ class CharactersController < ApplicationController
 
   def show
     @character = Character.find_by_id(params[:id])
+    @profile_image = Photo.find_by_id(@character.profile_image)
   end
   
   def edit

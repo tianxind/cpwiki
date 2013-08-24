@@ -1,0 +1,54 @@
+<%= form_for @cp, url: cp_path(@cp.id), method: :put do |form| %>
+	<% if @cp.errors.any? %>
+	<div id="errorExplanation">
+    	<h2><%= pluralize(@cp.errors.count, "error") %> prohibited
+      	  this cp from being saved:</h2>
+    	<ul>
+    	<% @cp.errors.full_messages.each do |msg| %>
+      	  <li><%= msg %></li>
+    	<% end %>
+    	</ul>
+  	</div>
+  	<% end %>
+	<table>
+	    <tr>
+	      <td><%= form.label(:acronym, "简称:")%></td>
+		  <td><%= form.text_field :acronym %></td>
+	    </tr>
+	    <tr>
+	      <td><%= form.label(:category, "作品类别:")%></td>
+		  <td>
+			  <%= form.select(:category, Cp::CATEGORY) %>
+		  </td>
+	    </tr>
+    	<tr>
+	      <td><%= label_tag(:summary, "简介:")%></td>
+	      <td><%= text_area_tag(:summary) %></td>
+	    </tr>
+	</table>
+	<div>
+		<%= form.label(:wiki_content, "JQ档案:")%>			
+		<%= render "shared/editor" %>
+	</div>
+  <%= form.hidden_field :wiki_content %>
+  <%= form.submit %>
+<% end %>
+
+<script type="text/javascript">
+	var editor = $(".edit_area")[0];
+	var initialText = "";
+	<% if @cp.wiki_content != nil && !@cp.wiki_content.empty? %>
+		initialText = '<%= formatted(@cp.wiki_content) %>';
+	<% end %>
+	myEditor.makeEditor(editor, initialText);
+	// Put html source into hidden text area before submit
+	$(".edit_cp").submit( function() {
+		console.log("before submit");
+		$("#cp_wiki_content").val(editor.innerHTML);
+		console.log($("#cp_wiki_content").val());
+	});
+</script>
+<input type="hidden" id="current_user" value=<%= current_user.id %> />
+<input type="hidden" id="saved_filename" value="" />
+ 
+<%= link_to 'Back', cp_path(@cp.id) %>

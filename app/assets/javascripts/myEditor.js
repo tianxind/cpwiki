@@ -28,6 +28,8 @@ var myEditor = (function() {
 						if (src) {
 							document.execCommand('insertImage', false, src);
 						}
+						replaceImageHTML(src);
+
 					break;
 			
 					case 'title':
@@ -89,22 +91,12 @@ var myEditor = (function() {
 		hoveredImage = false;
 	}
 	
-	function resizeImage(image) {
-		// Might because image has not been fully loaded, can modify innerHTML?
-		// or Do a callback again?
-		console.log(image.clientWidth);
-		console.log(image.clientHeight);
-		var width = image.clientWidth.split('px')[0];
-		var height = image.clientHeight.split('px')[0];
-		// We will scale all images to have a width of 200px
-		var scale = width/200.0;
-		height /= scale;
-		image.width(200);
-		image.height(height);
-	};
-	
-	function replaceImageHTML() {
-		
+	function replaceImageHTML(src) {
+		var originalStr = "<img src=\"" + src + "\">";
+		var replaceStr = "<img class=\"resize\" src=\"" + src + "\"></img>";
+		var wikiSource = $(".edit_area")[0].innerHTML;
+		wikiSource = wikiSource.replace(originalStr, replaceStr);
+		$(".edit_area")[0].innerHTML = wikiSource;
 	};
 	
 	function insertDeleteButton() {
@@ -177,12 +169,7 @@ var myEditor = (function() {
 			var filename = paths[paths.length - 1];
 			var src = "/images/" + $("#current_user").val() + "_" + filename;
 			document.execCommand('insertImage', false, src);
-			replaceImageHTML();
-			var originalStr = "<img src=\"" + src + "\">";
-			var replaceStr = "<img class=\"resize\" src=\"" + src + "\"></img>";
-			var wikiSource = $(".edit_area")[0].innerHTML;
-			wikiSource = wikiSource.replace(originalStr, replaceStr);
-			$(".edit_area")[0].innerHTML = wikiSource;
+			replaceImageHTML(src);
 			
 			// Bind event to show delete button
 			var image = $("img[src='" + src + "']");
