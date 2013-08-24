@@ -1,15 +1,7 @@
 <%= form_for @character, url: character_path(@character.id), method: :put do |form| %>
-	<% if @character.errors.any? %>
-	<div id="errorExplanation">
-    	<h2><%= pluralize(@character.errors.count, "error") %> prohibited
-      	  this character from being saved:</h2>
-    	<ul>
-    	<% @character.errors.full_messages.each do |msg| %>
-      	  <li><%= msg %></li>
-    	<% end %>
-    	</ul>
-  	</div>
-  	<% end %>
+    <% @character.errors.full_messages.each do |msg| %>
+      	<div><span class="error_msg"><%= msg %></span></div>
+    <% end %>
 	<table>
 	    <tr>
 	      <td><%= form.label(:name, "姓名:")%></td>
