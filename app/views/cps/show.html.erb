@@ -4,7 +4,8 @@
 </div> -->
 
 <div class="wiki_title">
-	<%= @seme.name %>和<%= @uke.name %>的配对 (<%= @cp.summary %>)&nbsp;&nbsp;<% if @already_liked == 0 %><a href="javascript:void(0)" id="like_button_a" style="background-color:#CCCCCC;">Moe</a><% else %><a href="javascript:void(0)" id="like_button_a" style="background-color:#FFC0CB;">Moed</a><% end %>
+	<%= @seme.name %>和<%= @uke.name %>的配对 
+	<%= @cp.acronym.empty? ? "" : "(#{@cp.acronym})" %>&nbsp;&nbsp;<% if @already_liked == 0 %><a href="javascript:void(0)" id="like_button_a" style="background-color:#CCCCCC;">Moe</a><% else %><a href="javascript:void(0)" id="like_button_a" style="background-color:#FFC0CB;">Moed</a><% end %>
 	<span class="edit"><%= link_to '编辑攻', edit_character_path(@seme) %></span>
 	<span class="edit"><%= link_to '编辑受', edit_character_path(@uke) %></span>
 	<span class="edit"><%= link_to '编辑CP', edit_cp_path(@cp) %></span>
@@ -12,7 +13,6 @@
 
 <div class="wiki_contents">
 	<div class="character_basic_info">
-		<img src="todo" alt="Placeholder"></img>
 		<%= render(:partial => "character_info", :locals => {:character => @seme}) %>
 		<%= render(:partial => "character_info", :locals => {:character => @uke}) %>	
 	</div>
@@ -67,7 +67,6 @@
 
 <p>添加评论：</p>
 <textarea rows="4" cols="50" id="comment_area">
-free!
 </textarea>
 
 <br/><button type="button" id="submit_new_comment">提交</button>
@@ -170,10 +169,10 @@ $(document).ready(function(){
 	     	 	 $('a#like_button_a').text('Moe');
 	     	 	 alert("Data Saved, dislike");
 	     	 }
-	       // alert("Data Saved");
 	     },
 	     error: function(){
-	     	 alert("Error post");
+	     	// Customize error info
+	     	alert("Something went wrong.");
 	     }
 		});
   });

@@ -23,6 +23,7 @@ class CommentsController < ApplicationController
                            :date_time => create_time)
     if !@comment.save
       p ">>>>>>>>> comment saving failed"
+      render
     else 
       p ">>>>>>>>> save succeed!"
       redirect_to :controller => :cps, :action => :show, :id => params[:id]
