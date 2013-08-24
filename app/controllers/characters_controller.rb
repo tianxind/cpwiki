@@ -12,6 +12,7 @@ class CharactersController < ApplicationController
     p params[:character]
     @character = Character.new(:name => params[:character][:name],
                                :nickname => params[:character][:nickname],
+                               :work => params[:character][:work],
                                :birth_date => params[:character][:birth_date],
                                :horoscope => params[:character][:horoscope],
                                :blood_type => params[:character][:blood_type],
