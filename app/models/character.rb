@@ -5,7 +5,7 @@ class Character < ActiveRecord::Base
   attr_accessible :name, :nickname, :sex, :age_when_first_appear, :birth_date,
   :hair, :eye, :height, :weight, :occupation, :summary, :horoscope, :blood_type, :profile_image
 
-  validates :name, :horoscope, :presence => true
+  validates :name, :horoscope, :presence => { :message => "不能为空！" }
   
   def self.search(q)
     find(:all, :conditions => ['name like ? or nickname like ?', "%#{q}%", "%#{q}%"])
@@ -16,4 +16,13 @@ class Character < ActiveRecord::Base
     ['摩羯座', 9], ['水瓶座', 10], ['双鱼座', 11]]
     
   BLOODTYPE = [['A', 0], ['B', 1], ['AB', 2], ['O', 3], ['不明', 4]]
+
+  HUMANIZED_ATTRIBUTES = {
+    :name => "角色姓名",
+    :horoscope => "星座"
+  }
+
+  def self.human_attribute_name(attr, options={})
+    HUMANIZED_ATTRIBUTES[attr.to_sym] || super
+  end
 end

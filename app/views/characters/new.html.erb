@@ -2,6 +2,10 @@
 	<%= render(:partial => "create_navbar", :locals => {:step => 2, :step_names => ["输入角色姓名", "填写角色信息", "填写CP信息"]}) %>
 <% end %>
 
+<% @character.errors.full_messages.each do |msg| %>
+  <div><span class="error_msg"><%= msg %></span></div>
+<% end %>
+
 <div>
 <% if session[:seme] == "nil" && session[:uke] == "nil" %>
 Create Seme Character:
@@ -20,7 +24,7 @@ Create New Character:
 	    <tr>
 	      <td><%= form.label(:name, "姓名:")%></td>
 	      <% if (session[:seme] == nil && session[:uke] == nil) %>
-	      	<td><%= form.text_field(:name) %></td>
+	      	<td><%= form.text_field(:name, :value => session[:new_chara_name]) %></td>
 	      <% elsif (session[:seme] == "nil" && session[:uke] == "nil") %>
 	        <td><%= form.text_field(:name, :value => session[:name1]) %></td>
 	      <% else %>

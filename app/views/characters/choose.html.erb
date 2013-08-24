@@ -1,3 +1,6 @@
+<% if flash[:error] %>
+  <div><span class="error_msg"><%= flash[:error] %></span></div>
+<% end %>
 <p>请输入您要创建的角色姓名：</p>
 <%= form_tag("/characters/search", :method => "get") %>
 <table>

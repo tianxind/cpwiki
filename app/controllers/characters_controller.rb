@@ -39,34 +39,45 @@ class CharactersController < ApplicationController
       end
     @character.profile_image = @photo.id
 
-    if @character.save!     
-      # see if there are any images we need to delete
-      if params[:images] != nil
-        Photo.deleteUnusedImages(params[:summary], params[:images])
-      end
-    
-      # If both seme and uke are nil, then the user intends to only create character
-      if session[:seme] == nil && session[:uke] == nil
-        # for only create a single character
-        redirect_to :controller => :characters, :action => :show, :id => @character.id
-      # Otherwise the user intends to create a cp 
-      else
-        if session[:seme] == "nil"
-          session[:seme] = @character.id 
-          p "in assigning session[:seme]"
-        elsif session[:uke] == "nil"
-          session[:uke] = @character.id
-          p "in assigning session[:uke]"
-        end
-        if session[:uke] != "nil"
-          redirect_to :controller => :cps, :action => :new
-        else
-          redirect_to :controller => :characters, :action => :new
-        end
-      end
+    # check chara name validation
+    if !@character.valid? then
+      flash[:error] = @character.errors.full_messages
+      render(:action => :new)
     else
-      # Delete all files ???
-      render :action => new
+
+      if @character.save!
+        # set the session of new_chara_name to nil, no matter this function is called when create cp or create chara
+        # could remove the next line if user is forced to create chara through /character/choose instead of directly input url with /character/new
+        session[:new_chara_name] = nil
+
+        # see if there are any images we need to delete
+        if params[:images] != nil
+          Photo.deleteUnusedImages(params[:summary], params[:images])
+        end
+      
+        # If both seme and uke are nil, then the user intends to only create character
+        if session[:seme] == nil && session[:uke] == nil
+          # for only create a single character
+          redirect_to :controller => :characters, :action => :show, :id => @character.id
+        # Otherwise the user intends to create a cp 
+        else
+          if session[:seme] == "nil"
+            session[:seme] = @character.id 
+            p "in assigning session[:seme]"
+          elsif session[:uke] == "nil"
+            session[:uke] = @character.id
+            p "in assigning session[:uke]"
+          end
+          if session[:uke] != "nil"
+            redirect_to :controller => :cps, :action => :new
+          else
+            redirect_to :controller => :characters, :action => :new
+          end
+        end
+      else
+        # Delete all files ???
+        render :action => new
+      end
     end
   end
 
@@ -92,8 +103,14 @@ class CharactersController < ApplicationController
   end
   
   def search
-    params[:chara].strip!
-    @chara = Character.search(params[:chara])
+    if params[:chara] != ""
+      params[:chara].strip!
+      session[:new_chara_name] = params[:chara]
+      @chara = Character.search(params[:chara])
+    else 
+      flash[:error] = "请填写创建角色姓名！"
+      redirect_to(:controller => :characters, :action => :choose)
+    end
   end
   
   def redirect_to_character_info_or_new_character
@@ -109,3 +126,13 @@ class CharactersController < ApplicationController
     end
   end
 end
+
+
+
+
+
+
+
+
+
+

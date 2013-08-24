@@ -1,3 +1,5 @@
+#!/bin/env ruby
+# encoding: utf-8
 class CpsController < ApplicationController
   #before_filter :authenticate_user!
 
@@ -70,17 +72,25 @@ class CpsController < ApplicationController
   end
   
   def search
-    session[:category] = params[:category]
-    params[:name1].strip!
-    params[:name2].strip!
-    session[:name1] = params[:name1]
-    session[:name2] = params[:name2]
+    p "in search params is"
+    p params
+    # check if input names are null
+    if params[:name1] != "" && params[:name2] != ""
+      session[:category] = params[:category]
+      params[:name1].strip!
+      params[:name2].strip!
+      session[:name1] = params[:name1]
+      session[:name2] = params[:name2]
 
-    p "in seach func session name1 and name 2 are"
-    p session[:name1]
-    p session[:name2]
-    @character1 = Character.search(params[:name1])
-    @character2 = Character.search(params[:name2])
+      p "in seach func session name1 and name 2 are"
+      p session[:name1]
+      p session[:name2]
+      @character1 = Character.search(params[:name1])
+      @character2 = Character.search(params[:name2])
+    else 
+      flash[:error] = "请填写创建角色姓名！"
+      redirect_to(:controller => :cps, :action => :choose)
+    end
   end
   
   def redirect_to_cp_or_character
