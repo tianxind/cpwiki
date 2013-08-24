@@ -8,7 +8,15 @@ class Cp < ActiveRecord::Base
   
   has_many :comments
 
+  validates :seme_id, :uke_id, :creator_id, :presence => { :message => "不能为空！"}  
+
   attr_accessible :category, :summary, :wiki_content, :seme_id, :uke_id, :creator_id, :created_at, :acronym
+
+  HUMANIZED_ATTRIBUTES = {
+    :seme_id => "攻",
+    :uke_id => "受",
+    :creator_id => "创建者"
+  }
 
   CATEGORY = [['动漫', 0], ['影视', 1], ['游戏', 2], ['小说', 3], ['其他', 4]]
 end

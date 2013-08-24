@@ -5,5 +5,9 @@ class Comment < ActiveRecord::Base
 
   attr_accessible :cp_id, :user_id, :date_time, :comment_text
 
-  validates :comment_text, :presence => true
+  validates :comment_text, :presence => { :message => "不能为空！" }
+
+  HUMANIZED_ATTRIBUTES = {
+    :comment_text => "评论"
+  }
 end

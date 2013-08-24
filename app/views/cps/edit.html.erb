@@ -1,15 +1,7 @@
 <%= form_for @cp, url: cp_path(@cp.id), method: :put do |form| %>
-	<% if @cp.errors.any? %>
-	<div id="errorExplanation">
-    	<h2><%= pluralize(@cp.errors.count, "error") %> prohibited
-      	  this cp from being saved:</h2>
-    	<ul>
-    	<% @cp.errors.full_messages.each do |msg| %>
-      	  <li><%= msg %></li>
-    	<% end %>
-    	</ul>
-  	</div>
-  	<% end %>
+	<% @cp.errors.full_messages.each do |msg| %>
+  	  <div><span class="error_msg"><%= msg %></span></div>
+	<% end %>
 	<table>
 	    <tr>
 	      <td><%= form.label(:acronym, "简称:")%></td>

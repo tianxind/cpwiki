@@ -5,7 +5,7 @@ class Character < ActiveRecord::Base
   attr_accessible :name, :nickname, :work, :sex, :age_when_first_appear, :birth_date,
   :hair, :eye, :height, :weight, :occupation, :summary, :horoscope, :blood_type, :profile_image
 
-  validates :name, :horoscope, :presence => { :message => "不能为空！" }
+  validates :name, :horoscope, :blood_type, :presence => { :message => "不能为空！" }
   
   def self.search(q)
     find(:all, :conditions => ['name like ? or nickname like ?', "%#{q}%", "%#{q}%"])
@@ -19,7 +19,8 @@ class Character < ActiveRecord::Base
 
   HUMANIZED_ATTRIBUTES = {
     :name => "角色姓名",
-    :horoscope => "星座"
+    :horoscope => "星座",
+    :blood_type => "血型"
   }
 
   def self.human_attribute_name(attr, options={})

@@ -1,6 +1,9 @@
 <%= render(:partial => "create_navbar", :locals => {:step => 3, :step_names => ["输入角色姓名", "填写角色信息", "填写CP信息"]}) %>
 
 <div>
+	<% @cp.errors.full_messages.each do |msg| %>
+  		<div><span class="error_msg"><%= msg %></span></div>
+	<% end %>
 	<%=  form_tag("/cps", :id => "newcp", :method => :post) do %>
 		<div>
 		  <table class="cp">
