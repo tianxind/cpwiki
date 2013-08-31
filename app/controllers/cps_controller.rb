@@ -7,6 +7,9 @@ class CpsController < ApplicationController
   end
 
   def new
+    if session[:new_chara_name] == nil && session[:seme] == nil && session[:uke] == nil
+      redirect_to :controller => :cps, :action => :choose
+    end
     @photo = Photo.new
     @cp = Cp.new
     @seme = Character.find_by_id(session[:seme])
@@ -40,6 +43,7 @@ class CpsController < ApplicationController
       session[:name2] = nil
       redirect_to :controller => :cps, :action => :show, :id => @cp.id
     else
+      flash[:errors] = "保存失败！"
       render :action => :new
     end
   end
@@ -73,6 +77,9 @@ class CpsController < ApplicationController
   end
 
   def choose 
+    session[:seme] = nil
+    session[:uke] = nil
+    session[:new_chara_name] = nil
   end
   
   def search
@@ -107,6 +114,8 @@ class CpsController < ApplicationController
       cp = Cp.find(:all, :conditions => {:seme_id => session[:seme], :uke_id => session[:uke]})
       if cp.length > 0
         p "cp length > 0"
+        session[:seme] = nil
+        session[:uke] = nil
         redirect_to :action => :show, :id => cp[0].id
       else
         p "cp not exist"

@@ -5,6 +5,10 @@ class CharactersController < ApplicationController
   before_filter :authenticate_user!, :except => [:show, :choose, :search, :redirect_to_character_info_or_new_character]
 
   def new
+    # redirect user to characters/choose if user type in /characters/new
+    if session[:new_chara_name] == nil && session[:seme] == nil && session[:uke] == nil
+      redirect_to :controller => :characters, :action => :choose
+    end
     @character = Character.new
   end
   
@@ -51,10 +55,8 @@ class CharactersController < ApplicationController
     end
     # check chara name validation
     if !@character.valid? then
-      flash[:error] = @character.errors.full_messages
       render(:action => :new)
     else
-
       if @character.save!
         # set the session of new_chara_name to nil, no matter this function is called when create cp or create chara
         # could remove the next line if user is forced to create chara through /character/choose instead of directly input url with /character/new
@@ -86,6 +88,7 @@ class CharactersController < ApplicationController
         end
       else
         # Delete all files ???
+        flash[:error] = "保存失败！"
         render :action => new
       end
     end
@@ -114,6 +117,9 @@ class CharactersController < ApplicationController
   end
 
   def choose 
+    session[:seme] = nil
+    session[:uke] = nil
+    session[:new_chara_name] = nil
   end
   
   def search

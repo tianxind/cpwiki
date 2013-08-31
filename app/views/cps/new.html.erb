@@ -4,6 +4,9 @@
 	<% @cp.errors.full_messages.each do |msg| %>
   		<div><span class="error_msg"><%= msg %></span></div>
 	<% end %>
+	<% if flash[:errors] != nil %>
+		<div><span class="error_msg"><%= flash[:errors] %></div>
+	<% end %>
 	<%=  form_tag("/cps", :id => "newcp", :method => :post) do %>
 		<div>
 		  <table class="cp">
@@ -52,6 +55,23 @@ myEditor.makeEditor(editor, "");
 // Put html source into hidden text area before submit
 $("#newcp").submit( function() {
 	$("#wiki_content").val(editor.innerHTML);
+});
+
+// warn user when user leave this page except submitting the form
+$('input[name=commit]').click(function() {
+  window.submit_button_clicked = true;
+});
+
+$(window).bind('beforeunload', function(){
+	if(!window.submit_button_clicked){
+  	return '确定要离开此创建页面?';
+  }
+});
+
+$(window).unload(function(){
+	$.session.remove("seme");
+  $.session.remove("uke");
+  $.session.remove("new_chara_name");
 });
 
 </script>
