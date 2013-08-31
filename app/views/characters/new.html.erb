@@ -1,5 +1,5 @@
 <% if !(session[:seme] == nil && session[:uke] == nil) %>
-	<%= render(:partial => "create_navbar", :locals => {:step => 2, :step_names => ["输入角色姓名", "填写角色信息", "填写CP信息"]}) %>
+	<%= render(:partial => "shared/create_navbar", :locals => {:step => 2, :step_names => ["输入角色姓名", "填写角色信息", "填写CP信息"]}) %>
 <% end %>
 
 <% @character.errors.full_messages.each do |msg| %>
