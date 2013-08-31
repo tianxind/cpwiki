@@ -1,7 +1,7 @@
 #!/bin/env ruby
 # encoding: utf-8
 class CpsController < ApplicationController
-  #before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:search, :show, :redirect_to_cp_or_character]
 
   def index
   end
@@ -49,7 +49,9 @@ class CpsController < ApplicationController
     @seme = Character.find_by_id(@cp.seme_id)
     @uke = Character.find_by_id(@cp.uke_id)
     @comment_array = @cp.comments
-    @already_liked = (Like.find_by_sql("SELECT * from likes WHERE user_id=" + current_user.id.to_s + " AND cp_id=" + params[:id].to_s)).size
+    if user_signed_in? then 
+      @already_liked = Like.where(:user_id => current_user.id, :cp_id =>params[:id]).size
+    end
     p "already_liked size is >>>>>>>>"
     p @already_liked
     p "comment array is ->>>>>>"

@@ -29,6 +29,30 @@ var myEditor = (function() {
 							document.execCommand('insertImage', false, src);
 						}
 						replaceImageHTML(src);
+						/*var image = $("img[src='" + src + "']");
+						console.log(image);
+						image.mouseenter(function(e) {
+							console.log("show delete button");
+							var rect = image[0].getBoundingClientRect();
+							var top = rect.top + $(document).scrollTop() + $(editor).scrollTop();
+							var left = rect.left + $(document).scrollLeft() + $(editor).scrollLeft();
+							console.log("top: " + top + ", left: " + left);
+							var deleteButton = $(".delete_button")[0];
+							deleteButton.style.visibility = 'visible';
+							deleteButton.style.top = top + "px";
+							deleteButton.style.left = left + "px";
+							hoveredImage = image[0];
+						});
+			
+						image.mouseleave(function(e) {
+							console.log("hide delete button");
+							var deleteButton = $(".delete_button")[0];
+							if (e.relatedTarget == deleteButton) {
+								return;
+							}
+							deleteButton.style.visibility = 'hidden';
+							hoveredImage = false;
+						});*/
 
 					break;
 			
@@ -69,11 +93,11 @@ var myEditor = (function() {
 		deleteButton.style.visibility = 'hidden';
 	}
 
-	function showDeleteButton(image) {
+	/*function showDeleteButton(image) {
 		console.log("show delete button");
 		var rect = image.getBoundingClientRect();
-		var top = rect.top + $(document).scrollTop();
-		var left = rect.left + $(document).scrollLeft();
+		var top = rect.top + $(document).scrollTop() + editor.scrollTop();
+		var left = rect.left + $(document).scrollLeft() + editor.scrollLeft();
 		var deleteButton = $(".delete_button")[0];
 		deleteButton.style.visibility = 'visible';
 		deleteButton.style.top = top + "px";
@@ -89,7 +113,7 @@ var myEditor = (function() {
 		var deleteButton = $(".delete_button")[0];
 		deleteButton.style.visibility = 'hidden';
 		hoveredImage = false;
-	}
+	}*/
 	
 	function replaceImageHTML(src) {
 		var originalStr = "<img src=\"" + src + "\">";
@@ -172,17 +196,17 @@ var myEditor = (function() {
 			replaceImageHTML(src);
 			
 			// Bind event to show delete button
-			var image = $("img[src='" + src + "']");
+			/*var image = $("img[src='" + src + "']");
 			image.mouseenter(function(e) {
 				console.log("show delete button");
 				var rect = image[0].getBoundingClientRect();
-				var top = rect.top + $(document).scrollTop();
-				var left = rect.left + $(document).scrollLeft();
+				var top = rect.top + $(document).scrollTop() + $(editor).scrollTop();
+				var left = rect.left + $(document).scrollLeft() + $(editor).scrollLeft();
 				var deleteButton = $(".delete_button")[0];
 				deleteButton.style.visibility = 'visible';
 				deleteButton.style.top = top + "px";
 				deleteButton.style.left = left + "px";
-				hoveredImage = image;
+				hoveredImage = image[0];
 			});
 			
 			image.mouseleave(function(e) {
@@ -192,7 +216,8 @@ var myEditor = (function() {
 					return;
 				}
 				deleteButton.style.visibility = 'hidden';
-			});
+				hoveredImage = false;
+			});*/
 			
 			$("#dialog-form").dialog("close");
 

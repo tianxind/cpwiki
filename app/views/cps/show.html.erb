@@ -1,12 +1,17 @@
 <% p "current id is >>>>>>>>>>>>" + @cp.id.to_s %>
-<!-- <div class="wiki_title">
-	<%= @seme.name %>和<%= @uke.name %>的配对	<% if(@already_liked > 0) %><button type="button" id="like">已萌</button><% else %><button type="button" id="like">萌</button><% end %>
-</div> -->
 
 <div class="wiki_title">
 	<%= @seme.name %>和<%= @uke.name %>的配对 
-	<%= @cp.acronym.empty? ? "" : "(#{@cp.acronym})" %>&nbsp;&nbsp;<% if @already_liked == 0 %><a href="javascript:void(0)" id="like_button_a" style="background-color:#CCCCCC;">Moe</a><% else %><a href="javascript:void(0)" id="like_button_a" style="background-color:#FFC0CB;">Moed</a><% end %>
-	<span class="edit"><% link_to '编辑攻', "/characters" %></span>
+	<%= @cp.acronym.empty? ? "" : "(#{@cp.acronym})" %>&nbsp;&nbsp;
+	<% if @already_liked %>
+		<% if @already_liked == 0 %>
+			<a href="javascript:void(0)" id="like_button_a" style="background-color:#CCCCCC;">Moe</a>
+		<% else %>
+			<a href="javascript:void(0)" id="like_button_a" style="background-color:#FFC0CB;">Moed</a>
+		<% end %>
+	<% else %>
+		<span>只有注册用户才可以开启“萌”功能</span>
+	<% end %>
 	<span class="edit"><%= link_to '编辑攻', edit_character_path(@seme) %></span>
 	<span class="edit"><%= link_to '编辑受', edit_character_path(@uke) %></span>
 	<span class="edit"><%= link_to '编辑CP', edit_cp_path(@cp) %></span>
@@ -51,102 +56,59 @@
 	<div id="new_comment"></div>
 </div>
 
-
-<!-- <div class="comment_box">
-	<%=  form_tag("/comments", :method => "post") do %>
-	  <table>
-	    <tr>
-	      <td><%= label_tag(:comment_text, "评论:")%></td>
-	      <td><%= text_area_tag(:comment_text) %></td>
-			</tr>
-	  </table>
-  <%= submit_tag "提交GO" %>
-<% end %>
-</div> -->
-
 <div><span class="error_msg" id="comment_error_msg"></span></div>
 
-<p>添加评论：</p>
-<textarea rows="4" cols="50" id="comment_area">
-</textarea>
-
-<br/><button type="button" id="submit_new_comment">提交</button>
-
 <script>
+function insertCommentBox() {
+	$('.homepage_content').append("<p>添加评论：</p>"
+		+ "<textarea rows=\"4\" cols=\"50\" id=\"comment_area\">"
+	    + "</textarea>"
+		+ "<br/><button type=\"button\" id=\"submit_new_comment\">提交</button>");
+}
 // add new comment
 $(document).ready(function(){
-  $("button#submit_new_comment").click(function(){
-  	var cmt = $('textarea#comment_area').val();
-  	// check whether the comment is empty
-  	if(cmt == "") {
-  		$("#comment_error_msg").text("评论不能为空！");
-  	} else {
-  		$("#comment_error_msg").text("");
-	    console.log("start ajax");
+  <% if user_signed_in? %>
+    insertCommentBox();
+  	$("button#submit_new_comment").click(function(){
+  		var cmt = $('textarea#comment_area').val();
+  		// check whether the comment is empty
+  		if(cmt == "") {
+  			$("#comment_error_msg").text("评论不能为空！");
+  		} else {
+  			$("#comment_error_msg").text("");
+	    	console.log("start ajax");
 
-	    var username = '<%= current_user.username %>';
-	    var index = <%= params[:id] %>;
-	    var currentdate = new Date(); 
+	    	var username = '<%= current_user.username %>';
+	    	var index = <%= params[:id] %>;
+	    	var currentdate = new Date(); 
 			var create_time = currentdate.getFullYear() + "-"
 	                + ("0" + (currentdate.getMonth() + 1)).slice(-2) + "-" 
 	                + ("0" + currentdate.getDate()).slice(-2) + " "  
 	                + currentdate.getHours() + ":"  
 	                + currentdate.getMinutes() + ":" 
 	                + currentdate.getSeconds();
-	    console.log("user id in js is " + username);
-	    console.log("index in js is  " + index);
-	    console.log("create time is " + create_time);
+	    	console.log("user id in js is " + username);
+	    	console.log("index in js is  " + index);
+	    	console.log("create time is " + create_time);
 
-	    $.ajax({
-		     type: "POST",
-		     url: "/comments",
-		     dataType: "html",
-		     data: "comment_text=" + cmt + "&id=" + index + "&create_time=" + create_time,
-		     success: function(){
-		     	 $('#new_comment').append('<p>&gt;&gt; ' + cmt + ' - ' + username + ' [' + create_time + ']' + '</p>');
-		     	 //$('#new_comment').append('<div>- ' + cmt + '</div>');
-		       	 alert("Data Saved");
-		     },
-		     error: function(){
-		     	 alert("Error post");
-		     }
+	    	$.ajax({
+		     	type: "POST",
+		    	url: "/comments",
+		     	dataType: "html",
+		     	data: "comment_text=" + cmt + "&id=" + index + "&create_time=" + create_time,
+		     	success: function(){
+		     		$('#new_comment').append('<p>&gt;&gt; ' + cmt + ' - ' + username + ' [' + create_time + ']' + '</p>');
+		       	 	alert("Data Saved");
+		       	 	$('#comment_area').val("");
+		     	},
+		     	error: function(){
+		     		alert("Error post");
+		     	}
 			});
-	  }
+		}
+  	}); // button.click
 
-  });
-
-// like/dislike button
   $("a#like_button_a").click(function(){
-  //   var index = <%= params[:id] %>;
-  //   console.log("index in like button is  " + index);
-  //   $.ajax({
-	 //     type: "POST",
-	 //     url: "/likes",
-	 //     dataType: "html",
-	 //     data: "cp_id=" + index,
-	 //     success: function(){
-	 //     	 console.log("already liked " + <%= @already_liked %>)
-	 //     	 if(document.getElementById('like').text == "萌") {
-	 //     	   $("button#like").css('background-color','#FFC0CB');
-	 //     	   //<%= @already_liked = 1 %>
-	 //     	   //$("button#like").text = "已萌"
-	 //     	   document.getElementById('like').text = "已萌"
-	 //     	   alert("Data Saved, like");
-	 //     	 } else {
-	 //     	 	 $("button#like").css('background-color','#D3D3D3');
-	 //     	 	 //<%= @already_liked = 0 %>
-	 //     	 	 document.getElementById('like').text = "萌"
-	 //     	 	 alert("Data Saved, dislike");
-	 //     	 }
-	 //       // alert("Data Saved");
-	 //     },
-	 //     error: function(){
-	 //     	 alert("Error post");
-	 //     }
-		// });
-  // });
-
-  // $("a#like_button_a").click(function(){
     var index = <%= params[:id] %>;
     console.log("index in like button is  " + index);
     console.log("post like/dislike to controller");
@@ -169,7 +131,6 @@ $(document).ready(function(){
 	     	   alert("Data Saved, like");
 	     	 } else {
 	     	 	 $("a#like_button_a").css('background-color','#CCCCCC');
-	     	 	 //<%= @already_liked = 0 %>
 	     	 	 console.log("in save dislike");
 	     	 	 $('a#like_button_a').text('Moe');
 	     	 	 alert("Data Saved, dislike");
@@ -179,16 +140,12 @@ $(document).ready(function(){
 	     	// Customize error info
 	     	alert("Something went wrong.");
 	     }
-		});
-  });
-
-});
-
-	// if(<%= @already_liked %> > 0) {
-	// 	$("button#like").css('background-color','#FFC0CB');
-	// } else {
-	// 	$("button#like").css('background-color','#D3D3D3');
-	// }
+	});
+  }); // like_button_a.click
+<% else %>
+	$('.homepage_content').append('<div>只有注册用户才可以开启评论功能</div>');
+<% end %>
+}); // document.ready
 
 </script>
 
