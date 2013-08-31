@@ -1,11 +1,17 @@
 <% p "current id is >>>>>>>>>>>>" + @cp.id.to_s %>
-<!-- <div class="wiki_title">
-	<%= @seme.name %>和<%= @uke.name %>的配对	<% if(@already_liked > 0) %><button type="button" id="like">已萌</button><% else %><button type="button" id="like">萌</button><% end %>
-</div> -->
 
 <div class="wiki_title">
 	<%= @seme.name %>和<%= @uke.name %>的配对 
-	<%= @cp.acronym.empty? ? "" : "(#{@cp.acronym})" %>&nbsp;&nbsp;<% if @already_liked == 0 %><a href="javascript:void(0)" id="like_button_a" style="background-color:#CCCCCC;">Moe</a><% else %><a href="javascript:void(0)" id="like_button_a" style="background-color:#FFC0CB;">Moed</a><% end %>
+	<%= @cp.acronym.empty? ? "" : "(#{@cp.acronym})" %>&nbsp;&nbsp;
+	<% if @already_liked %>
+		<% if @already_liked == 0 %>
+			<a href="javascript:void(0)" id="like_button_a" style="background-color:#CCCCCC;">Moe</a>
+		<% else %>
+			<a href="javascript:void(0)" id="like_button_a" style="background-color:#FFC0CB;">Moed</a>
+		<% end %>
+	<% else %>
+		<span>只有注册用户才可以开启“萌”功能</span>
+	<% end %>
 	<span class="edit"><%= link_to '编辑攻', edit_character_path(@seme) %></span>
 	<span class="edit"><%= link_to '编辑受', edit_character_path(@uke) %></span>
 	<span class="edit"><%= link_to '编辑CP', edit_cp_path(@cp) %></span>
@@ -50,27 +56,9 @@
 	<div id="new_comment"></div>
 </div>
 
-
-<!-- <div class="comment_box">
-	<%=  form_tag("/comments", :method => "post") do %>
-	  <table>
-	    <tr>
-	      <td><%= label_tag(:comment_text, "评论:")%></td>
-	      <td><%= text_area_tag(:comment_text) %></td>
-			</tr>
-	  </table>
-  <%= submit_tag "提交GO" %>
-<% end %>
-</div> -->
-
 <div><span class="error_msg" id="comment_error_msg"></span></div>
 
 <div><span id="comment_result"></span></div>
-
-<p>添加评论：</p>
-<textarea rows="4" cols="50" id="comment_area">
-</textarea>
-
 <br/><button type="button" id="submit_new_comment">提交</button>
 
 <script>
@@ -103,26 +91,37 @@
   };
 })(jQuery);
 
+<script>
+function insertCommentBox() {
+	$('.homepage_content').append("<p>添加评论：</p>"
+		+ "<textarea rows=\"4\" cols=\"50\" id=\"comment_area\">"
+	    + "</textarea>"
+		+ "<br/><button type=\"button\" id=\"submit_new_comment\">提交</button>");
+}
+
 // add new comment
 $(document).ready(function(){
-  $("button#submit_new_comment").click(function(){
-  	var cmt = $('textarea#comment_area').val();
-  	// check whether the comment is empty
-  	if(cmt == "") {
-  		$("#comment_error_msg").text("评论不能为空！");
-  	} else {
-  		$("#comment_error_msg").text("");
-	    console.log("start ajax");
+  <% if user_signed_in? %>
+    insertCommentBox();
+  	$("button#submit_new_comment").click(function(){
+  		var cmt = $('textarea#comment_area').val();
+  		// check whether the comment is empty
+  		if(cmt == "") {
+  			$("#comment_error_msg").text("评论不能为空！");
+  		} else {
+  			$("#comment_error_msg").text("");
+	    	console.log("start ajax");
 
-	    var username = '<%= current_user.username %>';
-	    var index = <%= params[:id] %>;
-	    var currentdate = new Date(); 
+	    	var username = '<%= current_user.username %>';
+	    	var index = <%= params[:id] %>;
+	    	var currentdate = new Date(); 
 			var create_time = currentdate.getFullYear() + "-"
 	                + ("0" + (currentdate.getMonth() + 1)).slice(-2) + "-" 
 	                + ("0" + currentdate.getDate()).slice(-2) + " "  
 	                + currentdate.getHours() + ":"  
 	                + currentdate.getMinutes() + ":" 
 	                + currentdate.getSeconds();
+
 	    console.log("user id in js is " + username);
 	    console.log("index in js is  " + index);
 	    console.log("create time is " + create_time);
@@ -156,7 +155,6 @@ $(document).ready(function(){
 	  }
   });
 
-// like/dislike button
   $("a#like_button_a").click(function(){
     var index = <%= params[:id] %>;
     console.log("index in like button is  " + index);
@@ -180,7 +178,6 @@ $(document).ready(function(){
 	     	   //alert("Data Saved, like");
 	     	 } else {
 	     	 	 $("a#like_button_a").css('background-color','#CCCCCC');
-	     	 	 //<%= @already_liked = 0 %>
 	     	 	 console.log("in save dislike");
 	     	 	 $('a#like_button_a').text('Moe');
 	     	 	 //alert("Data Saved, dislike");
@@ -191,8 +188,11 @@ $(document).ready(function(){
 	     	//alert("Something went wrong.");
 	     }
 		});
-  });
-});
+  }); // like_button_a.click
+<% else %>
+	$('.homepage_content').append('<div>只有注册用户才可以开启评论功能</div>');
+<% end %>
+}); // document.ready
 
 </script>
 
