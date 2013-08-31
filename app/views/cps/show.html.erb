@@ -12,8 +12,8 @@
 	<% else %>
 		<span>只有注册用户才可以开启“萌”功能</span>
 	<% end %>
-	<span class="edit"><%= link_to '编辑攻', edit_character_path(@seme) %></span>
-	<span class="edit"><%= link_to '编辑受', edit_character_path(@uke) %></span>
+	<span class="edit"><%= link_to '编辑攻', "/characters/#{@seme.id}/edit?fromcp=#{@cp.id}"  %></span>
+	<span class="edit"><%= link_to '编辑受', "/characters/#{@uke.id}/edit?fromcp=#{@cp.id}" %></span>
 	<span class="edit"><%= link_to '编辑CP', edit_cp_path(@cp) %></span>
 </div>
 

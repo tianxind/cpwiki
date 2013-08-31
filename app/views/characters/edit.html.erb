@@ -60,6 +60,9 @@
 		<%= render "shared/editor" %>
 	</div>
   <%= form.hidden_field :summary %>
+  <% if params[:fromcp] %>
+  	<%= hidden_field_tag :fromcp, params[:fromcp] %>
+  <% end %> 
   <%= form.submit %>
 <% end %>
 

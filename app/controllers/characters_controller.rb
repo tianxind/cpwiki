@@ -106,7 +106,7 @@ class CharactersController < ApplicationController
     @character = Character.find_by_id(params[:id])
     
     if @character.update_attributes(params[:character])
-      if params[:fromcp] != nil then
+      if params[:fromcp] == nil then
         redirect_to @character
       else
         redirect_to cp_path(params[:fromcp])
