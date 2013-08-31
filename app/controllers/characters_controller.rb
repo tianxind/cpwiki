@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 class CharactersController < ApplicationController
-  before_filter :authenticate_user! :except => [:show, :choose, :search, :redirect_to_character_info_or_new_character]
+  before_filter :authenticate_user!, :except => [:show, :choose, :search, :redirect_to_character_info_or_new_character]
 
   def new
     @character = Character.new
@@ -104,7 +104,7 @@ class CharactersController < ApplicationController
     @character = Character.find_by_id(params[:id])
     
     if @character.update_attributes(params[:character])
-      if params[:fromcp] != nil then
+      if params[:fromcp] == nil then
         redirect_to @character
       else
         redirect_to cp_path(params[:fromcp])
