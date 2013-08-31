@@ -1,0 +1,13 @@
+.flash_message_success {
+	font-size: 12px;
+	padding: 5px;
+	color: green;
+	background-color: #99FF99;
+}
+
+.flash_message_fail {
+	font-size: 12px;
+	padding: 5px;
+	color: red;
+	background-color: #FFC0CB;
+}

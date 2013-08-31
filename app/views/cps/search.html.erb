@@ -1,4 +1,4 @@
-<%= render(:partial => "create_navbar", :locals => {:step => 1, :step_names => ["输入角色姓名", "填写角色信息", "填写CP信息"]}) %>
+<%= render(:partial => "shared/create_navbar", :locals => {:step => 1, :step_names => ["输入角色姓名", "填写角色信息", "填写CP信息"]}) %>
 <%= form_tag("/cps/redirect_to_cp_or_character", :method => "get") %>
 <%= render(:partial => "results", :locals => {:character => 1}) %>
 <%= render(:partial => "results", :locals => {:character => 2}) %>

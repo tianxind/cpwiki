@@ -13,8 +13,8 @@
 
 <div class="wiki_contents">
 	<div class="character_basic_info">
-		<%= render(:partial => "character_info", :locals => {:character => @seme}) %>
-		<%= render(:partial => "character_info", :locals => {:character => @uke}) %>	
+		<%= render(:partial => "shared/character_info", :locals => {:character => @seme}) %>
+		<%= render(:partial => "shared/character_info", :locals => {:character => @uke}) %>	
 	</div>
 	<p><%= formatted(@cp.summary) %></p>
 	<div class="index">
@@ -65,6 +65,8 @@
 
 <div><span class="error_msg" id="comment_error_msg"></span></div>
 
+<div><span id="comment_result"></span></div>
+
 <p>添加评论：</p>
 <textarea rows="4" cols="50" id="comment_area">
 </textarea>
@@ -72,6 +74,35 @@
 <br/><button type="button" id="submit_new_comment">提交</button>
 
 <script>
+// flash error/success msg
+(function($) {
+  $.fn.flash_message = function(options) {   
+    options = $.extend({
+      text: 'Done',
+      time: 1000,
+      how: 'before',
+      class_name: ''
+    }, options);
+    
+    return $(this).each(function() {
+      if( $(this).parent().find('.flash_message').get(0) )
+        return;
+      
+      var message = $('<span />', {
+        'class': 'flash_message ' + options.class_name,
+        text: options.text
+      }).hide().fadeIn('fast');
+      
+      $(this)[options.how](message);
+      
+      message.delay(options.time).fadeOut('normal', function() {
+        $(this).remove();
+      });
+      
+    });
+  };
+})(jQuery);
+
 // add new comment
 $(document).ready(function(){
   $("button#submit_new_comment").click(function(){
@@ -97,55 +128,36 @@ $(document).ready(function(){
 	    console.log("create time is " + create_time);
 
 	    $.ajax({
-		     type: "POST",
-		     url: "/comments",
-		     dataType: "html",
-		     data: "comment_text=" + cmt + "&id=" + index + "&create_time=" + create_time,
-		     success: function(){
-		     	 $('#new_comment').append('<p>&gt;&gt; ' + cmt + ' - ' + username + ' [' + create_time + ']' + '</p>');
-		     	 //$('#new_comment').append('<div>- ' + cmt + '</div>');
-		       	 alert("Data Saved");
+		    type: "POST",
+		    url: "/comments",
+		    dataType: "html",
+		    data: "comment_text=" + cmt + "&id=" + index + "&create_time=" + create_time,
+		    success: function(){
+		      $('#new_comment').append('<p>&gt;&gt; ' + cmt + ' - ' + username + ' [' + create_time + ']' + '</p>');
+		      // show success msg
+				  $('#comment_result').flash_message({
+				    text: '评论成功!',
+				    how: 'append',
+			      class_name: 'flash_message_success'
+				  });
+				  // clear the text area after successful submit
+				  $('textarea#comment_area').val('');
 		     },
 		     error: function(){
-		     	 alert("Error post");
+		     	// show fail msg
+		     	 $('#comment_result').flash_message({
+				    text: '评论失败!',
+				    how: 'append',
+			      class_name: 'flash_message_fail'
+				   });
+				   $('textarea#comment_area').val(cmt);
 		     }
 			});
 	  }
-
   });
 
 // like/dislike button
   $("a#like_button_a").click(function(){
-  //   var index = <%= params[:id] %>;
-  //   console.log("index in like button is  " + index);
-  //   $.ajax({
-	 //     type: "POST",
-	 //     url: "/likes",
-	 //     dataType: "html",
-	 //     data: "cp_id=" + index,
-	 //     success: function(){
-	 //     	 console.log("already liked " + <%= @already_liked %>)
-	 //     	 if(document.getElementById('like').text == "萌") {
-	 //     	   $("button#like").css('background-color','#FFC0CB');
-	 //     	   //<%= @already_liked = 1 %>
-	 //     	   //$("button#like").text = "已萌"
-	 //     	   document.getElementById('like').text = "已萌"
-	 //     	   alert("Data Saved, like");
-	 //     	 } else {
-	 //     	 	 $("button#like").css('background-color','#D3D3D3');
-	 //     	 	 //<%= @already_liked = 0 %>
-	 //     	 	 document.getElementById('like').text = "萌"
-	 //     	 	 alert("Data Saved, dislike");
-	 //     	 }
-	 //       // alert("Data Saved");
-	 //     },
-	 //     error: function(){
-	 //     	 alert("Error post");
-	 //     }
-		// });
-  // });
-
-  // $("a#like_button_a").click(function(){
     var index = <%= params[:id] %>;
     console.log("index in like button is  " + index);
     console.log("post like/dislike to controller");
@@ -165,29 +177,22 @@ $(document).ready(function(){
 	     	   //$("button#like").text = "已萌"
 	     	   console.log("in save like");
 	     	   $('a#like_button_a').text('Moed');
-	     	   alert("Data Saved, like");
+	     	   //alert("Data Saved, like");
 	     	 } else {
 	     	 	 $("a#like_button_a").css('background-color','#CCCCCC');
 	     	 	 //<%= @already_liked = 0 %>
 	     	 	 console.log("in save dislike");
 	     	 	 $('a#like_button_a').text('Moe');
-	     	 	 alert("Data Saved, dislike");
+	     	 	 //alert("Data Saved, dislike");
 	     	 }
 	     },
 	     error: function(){
 	     	// Customize error info
-	     	alert("Something went wrong.");
+	     	//alert("Something went wrong.");
 	     }
 		});
   });
-
 });
-
-	// if(<%= @already_liked %> > 0) {
-	// 	$("button#like").css('background-color','#FFC0CB');
-	// } else {
-	// 	$("button#like").css('background-color','#D3D3D3');
-	// }
 
 </script>
 

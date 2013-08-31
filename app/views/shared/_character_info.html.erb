@@ -1,9 +1,10 @@
+<% @profile_image = Photo.find_by_id(character.profile_image) %>
 <% if @profile_image != nil %>
 <img src="/images/<%= @profile_image.filename %>" alt="Placeholder"></img>
 <% else %>
 <p>No image</p>
 <% end %>
-<p class="character_name"><%= character.name %></p>
+<p class="character_name"><a href="/characters/<%= character.id.to_s %>"><%= character.name %></a></p>
 别名：<%= character.nickname %></br>
 作品：<%= character.work	%></br>
 性别：<%= character.sex %></br>
