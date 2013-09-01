@@ -50,6 +50,11 @@ class CpsController < ApplicationController
   
   def show
     @cp = Cp.find_by_id(params[:id])
+    @related_cps = Cp.find_by_seme_id(@cp.seme_id) 
+
+    # + Cp.find_by_seme_id(@cp.uke_id) 
+    #   + Cp.find_by_uke_id(@cp.seme_id) + Cp.find_by_uke_id(@cp.uke_id)
+    # @related_cps.uniq!
     @seme = Character.find_by_id(@cp.seme_id)
     @uke = Character.find_by_id(@cp.uke_id)
     @comment_array = @cp.comments

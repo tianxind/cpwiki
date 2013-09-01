@@ -42,6 +42,15 @@
 	<p><%= formatted(@uke.summary) %></p>
 	<p class="subtitle">JQ档案</p>
 	<p><%= formatted(@cp.wiki_content) %></p>
+	<div class="related_cps">
+		<b>相关CP</b>&nbsp;&nbsp;
+		<% for cp in @related_cps %>
+			<%= cp.acronym %>
+			<% if cp != @related_cps.last %>
+				&nbsp;|&nbsp;
+			<% end %>
+		<% end %> 
+	</div>
 </div>
 
 <p class="subtitle">评论</p>
