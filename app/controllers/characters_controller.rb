@@ -15,15 +15,28 @@ class CharactersController < ApplicationController
   def create
     #@character = Character.new(params[:character])
     p "chara params is >>>>>>>>"
-    p params[:character]
+    p params
+    p "sex is "
+    p params[:sex]
 
     @character = Character.new(params[:character])
-    if params[:sex] == ""
-      @character.sex = params[:sex]
-    end                             
+    # @character = Character.new(:name => params[:character][:name],
+    #                            :nickname => params[:character][:nickname],
+    #                            :birth_date => params[:character][:birth_date],
+    #                            :horoscope => params[:character][:horoscope],
+    #                            :blood_type => params[:character][:blood_type],
+    #                            :hair => params[:character][:hair],
+    #                            :eye => params[:character][:eye],
+    #                            :height => params[:character][:height],
+    #                            :weight => params[:character][:weight],
+    #                            :occupation => params[:character][:occupation],
+    #                            :summary => params[:summary])
+    # if params[:sex] != ""
+    #   @character.sex = params[:sex]
+    # end                             
     # sex_array = ["男", "女", "不明", "其他"]
     # @character.sex = sex_array[params[:character][:sex].to_i]
-    
+    @character.summary = params[:summary]
 
     profile_image = params[:character][:profile_image]
     if profile_image != nil
@@ -91,13 +104,14 @@ class CharactersController < ApplicationController
     @character = Character.find_by_id(params[:id])
     @profile_image = Photo.find_by_id(@character.profile_image)
     # @photo = Photo.new
+    p "in edit params are"
+    p params
   end
   
   def update
     @character = Character.find_by_id(params[:id])
-    if params[:character][:sex] == nil
-      params[:character][:sex] = params[:sex]
-    end
+    p "in update params are"
+    p params
     if @character.update_attributes(params[:character])
       if params[:fromcp] == nil then
         redirect_to @character
