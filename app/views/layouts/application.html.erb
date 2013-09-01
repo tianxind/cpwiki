@@ -98,11 +98,13 @@ $("#charamode").click(function(event) {
 
 });
 
-$('#query').keyup(function(event) {
-	if (event.which == 13 /* Enter Key */) {
-		$('#search').click();
-	}
-})
+$('#chara-form').submit(function() {
+	return $.trim($('#query').val()) != "";
+});
+
+$('#cp-form').submit(function() {
+	return $.trim($('#seme').val()) != "" || $.trim($('#uke').val()) != "";
+});
 </script>
 </body>
 </html>
