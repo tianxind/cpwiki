@@ -1,0 +1,5 @@
+<div>
+	<% for cp in @cps %>
+		<%= render(:partial => "cps/snippet", :locals => {:cp => cp}) %>
+	<% end %>
+</div>

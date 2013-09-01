@@ -25,6 +25,7 @@ Cpwiki::Application.routes.draw do
   resources :home do
     collection do 
       get 'search'
+      get 'search_by_seme_uke'
     end
   end
 

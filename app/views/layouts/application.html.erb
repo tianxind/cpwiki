@@ -43,21 +43,38 @@
 	</div>
 	<div class="right_container">
 		<div class="navbar_container">
-		<table class="navbar" cellspacing="0">
-			<tr>
-			<td>Main Page</td>
+		<!-- <table class="navbar" cellspacing="0"> -->
+		<!-- 	<tr> -->
+		<!-- 	<td>Main Page</td>
 			<td>Change Language</td>
 			<td class="right_most_cell">
 				<form action="/home/search" method="get">
 					<input id="query" name="query" type="text" placeholder="请输入角色名称或CP简称"></input>
-					攻：<input id="seme" name="seme" type="text" />
-					受：<input id="uke" name="uke" type="text" />
+					攻：<input id="seme" name="seme" type="text" display:"none" />
+					受：<input id="uke" name="uke" type="text" display:"none" />
 					<input type="submit" id="search" value="搜索"></input>
 				    <button id="cpmode">切换到CP模式</button>
 				</form>
 			</td>
 			</tr>
-		</table>
+		</table> -->
+			<span>Main Page</span>
+			<span>Change Language</span>
+			<span class="right_most_cell">
+				<form id="chara-form" action="/home/search" method="get">
+					<input id="query" name="query" type="text" placeholder="请输入角色名称或CP简称"></input>
+					<input type="submit" id="search" value="搜索"></input>
+				    <button id="cpmode">切换到攻受模式</button>
+				</form>
+				<form id="cp-form" action="/home/search_by_seme_uke" method="get" style="display:none">
+					<label for="seme">攻:</label>
+					<input id="seme" name="seme"></input>
+					<label for="uke">受:</label>
+					<input id="uke" name="uke"></input>
+					<input type="submit" id="search" value="搜索"></input>
+				    <button id="charamode">切换到角色/简称模式</button>
+				</form>
+			</span>
 		</div>
 
 		<div class="homepage_content">
@@ -67,13 +84,20 @@
 </div>
 
 <script>
-var mode = 0;
-$('#cpmode').click(function(event) {
+$("#cpmode").click(function(event) {
 	event.preventDefault();
-	if (mode == 0) {
-	} else {
-	}
-})
+	$('#cp-form').show();
+	$('#chara-form').hide();
+
+});
+
+$("#charamode").click(function(event) {
+	event.preventDefault();
+	$('#chara-form').show();
+	$('#cp-form').hide();
+
+});
+
 $('#query').keyup(function(event) {
 	if (event.which == 13 /* Enter Key */) {
 		$('#search').click();

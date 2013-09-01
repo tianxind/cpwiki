@@ -23,4 +23,15 @@ class Cp < ActiveRecord::Base
   def self.search_by_acronym(q)
     find(:all, :conditions => ['acronym like ?', "%#{q}%"])
   end
+
+  def self.search_by_seme_uke(seme, uke)
+    cps = Cp.joins(:seme).where('characters.name like ?', "%#{seme}%")
+    results = []
+    for cp in cps
+      if cp.uke.name.downcase.index(uke.downcase) != nil
+        results.push(cp)
+      end
+    end
+    return results
+  end
 end
