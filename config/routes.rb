@@ -22,7 +22,12 @@ Cpwiki::Application.routes.draw do
   # This route can be invoked with purchase_url(:id => product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
-  resources :home
+  resources :home do
+    collection do 
+      get 'search'
+    end
+  end
+
   resources :cps do
     collection do 
       get 'choose'
@@ -30,6 +35,7 @@ Cpwiki::Application.routes.draw do
       get 'redirect_to_cp_or_character'
     end
   end
+
   resources :characters do
     collection do
       get 'choose'
@@ -37,6 +43,7 @@ Cpwiki::Application.routes.draw do
       get 'redirect_to_character_info_or_new_character'
     end
   end
+
   resources :user_infos
   
   resources :photos do

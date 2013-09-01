@@ -126,7 +126,7 @@ class CharactersController < ApplicationController
       params[:chara].strip!
       session[:new_chara_name] = params[:chara]
       @chara = Character.search(params[:chara])
-    else 
+    else
       flash[:error] = "请填写创建角色姓名！"
       redirect_to(:controller => :characters, :action => :choose)
     end

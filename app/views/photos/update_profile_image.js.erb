@@ -1,0 +1,6 @@
+$('#character_profile_image').val("<%= @photo.id %>");
+if ($('#img_profile_image').length != 0) {
+	$('#img_profile_image').attr("src", '<%= "/images/#{@photo.filename}" %>');
+} else {
+	$('#no_profile_image').replaceWith("<%= "<img id='profile_image' class='resize' src='/images/#{@photo.filename}'></img>" %>");
+}

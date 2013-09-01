@@ -47,7 +47,13 @@
 			<tr>
 			<td>Main Page</td>
 			<td>Change Language</td>
-			<td class="right_most_cell"><input type="text" placeholder="Enter name of character or cp"></input></td>
+			<td class="right_most_cell">
+				<form action="/home/search" method="get">
+					<input id="query" name="query" type="text" placeholder="请输入角色名称或CP简称"></input>
+					<input type="submit" id="search" value="搜索"></input>
+				    <button id="cpmode">切换到CP模式</button>
+				</form>
+			</td>
 			</tr>
 		</table>
 		</div>
@@ -57,5 +63,16 @@
 		</div>
 	</div>
 </div>
+
+<script>
+$('#cpmode').click(function(event) {
+	event.preventDefault();
+})
+$('#query').keyup(function(event) {
+	if (event.which == 13 /* Enter Key */) {
+		$('#search').click();
+	}
+})
+</script>
 </body>
 </html>

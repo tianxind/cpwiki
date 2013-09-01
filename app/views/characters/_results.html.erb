@@ -3,11 +3,9 @@
 <% radio_name = "new_chara" %>
 <% i = 0 %>
 <% for result in results %>
-	<p>
-		<% checked = i == 0 ? true : false %>
-	    <%= radio_button_tag(radio_name, result.id, checked) %>
-		<%= label_tag :label, result.name %>
-	</p>
+	<% checked = i == 0 ? true : false %>
+	<%= radio_button_tag(radio_name, result.id, checked) %>
+	<%= render(:partial => "snippet", :locals => {:character => result}) %>
 	<% i = i + 1 %>
 <% end %>
 <p>

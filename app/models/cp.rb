@@ -19,4 +19,8 @@ class Cp < ActiveRecord::Base
   }
 
   CATEGORY = [['动漫', 0], ['影视', 1], ['游戏', 2], ['小说', 3], ['其他', 4]]
+
+  def self.search_by_acronym(q)
+    find(:all, :conditions => ['acronym like ?', "%#{q}%"])
+  end
 end
