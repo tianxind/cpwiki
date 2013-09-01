@@ -1,21 +1,42 @@
 class PhotosController < ApplicationController
   before_filter :authenticate_user!, :only => [:create, :deleteUnusedImages]
   
+  def gen_image_filename(original_filename)
+    return @photo.date_time.to_s(:number) + "_" + original_filename
+  end
+
   def create
     uploaded_io = params[:file]
     @photo = Photo.new
     @photo.user_id = current_user.id
     @photo.date_time = DateTime.now
-    @photo.filename = current_user.id.to_s + "_" + uploaded_io.original_filename
+    @photo.filename = gen_image_filename(uploaded_io.original_filename)
     respond_to do |format|
       if @photo.save
         File.open(Rails.root.join('public', 'images', @photo.filename), 'wb') do |file|
           file.write(params[:file].read)
         end
+        format.js
       end
     end
   end
   
+  def update_profile_image
+    uploaded_io = params[:profile_image]
+    @photo = Photo.new
+    @photo.user_id = current_user.id
+    @photo.date_time = DateTime.now
+    @photo.filename = gen_image_filename(uploaded_io.original_filename)
+    respond_to do |format|
+      if @photo.save
+        File.open(Rails.root.join('public', 'images', @photo.filename), 'wb') do |file|
+          file.write(params[:profile_image].read)
+        end
+        format.js
+      end
+    end
+  end
+
   def deleteUnusedImages(wiki_content, all_images)
     pos = 0
     files = Array.new

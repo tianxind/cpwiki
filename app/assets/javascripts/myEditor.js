@@ -80,7 +80,7 @@ var myEditor = (function() {
 			});	
 		}
 	};
-	
+
 	// The image where the user has his/her cursor on
 	var hoveredImage = false;
 	
@@ -186,15 +186,6 @@ var myEditor = (function() {
 		});
 		
 		// Bind Ajax events
-		$('#dialog-form').on('ajax:success', function() {
-			console.log("inside Ajax success callback");
-			var original_filename = $('#saved_filename').val();
-			var paths = original_filename.split('\\');
-			var filename = paths[paths.length - 1];
-			var src = "/images/" + $("#current_user").val() + "_" + filename;
-			document.execCommand('insertImage', false, src);
-			replaceImageHTML(src);
-			
 			// Bind event to show delete button
 			/*var image = $("img[src='" + src + "']");
 			image.mouseenter(function(e) {
@@ -218,24 +209,6 @@ var myEditor = (function() {
 				deleteButton.style.visibility = 'hidden';
 				hoveredImage = false;
 			});*/
-			
-			$("#dialog-form").dialog("close");
-
-			// remove file input and bind onchange again
-			$("#file").remove();
-			var fileInput = $("<input type=\"file\" name=\"file\" id=\"file\" value=\"\" class=\"text ui-widget-content ui-corner-all\" />");
-			fileInput.insertBefore($('#commit'));
-			$('#file').change(function() {
-				console.log("inside onchange for file field");
-				// Set filename field to send to server
-				$('#saved_filename').val($('#file').val());
-				console.log($('#saved_filename').val());
-			});
-			
-			// Insert image src into all_images div
-			$("#all_images").append("<input type=\"hidden\" id=\"images[]\" name=\"images[]\" value=\"" + 
-				$("#current_user").val() + "_" + filename + "\"/>");
-		});
 	}
 	
 	function isTextNode(node) {
