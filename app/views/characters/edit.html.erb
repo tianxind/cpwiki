@@ -22,7 +22,15 @@
 	    <tr>
 	      <td><%= form.label(:sex, "性别:")%></td>
 		  <td>
-			  <%= form.select(:sex, [["男", "男"], ["女", "女"], ["不明", "不明"], ["其他", "其他"]]) %>
+			  <select name="sex" id="sex_type">
+				    <option value="男">男</option>
+				    <option value="女">女</option>
+				    <option value="不明">不明</option>
+				    <option value="其他">其他</option>
+					</select>
+			  <span id="otherSexType" style="display:none;">
+				  <input id="otherSex" type="text" name="sex" placeholder="请指定性别"/>
+				</span>
 		  </td>
 	    </tr>
 	    <tr>
@@ -84,3 +92,59 @@
 <input type="hidden" id="saved_filename" value="" />
  
 <%= link_to 'Back', character_path(@character.id) %>
+
+
+<script>
+// select correct sex
+$("select#sex_type option").each(function() { 
+	var sex = '<%= @character.sex %>';
+	this.selected = (this.text == sex); 
+});
+
+// change type of sex in selection box
+$('#sex_type').on('change',function(){
+	  console.log("i'm in changing sex type")
+    var selection = $(this).val();
+    switch(selection){
+	    case "其他":
+	    $("#otherSexType").show()
+	    break;
+	    default:
+	    $("#otherSexType").hide()
+    }
+});
+
+// change sex type to others and specify by user input
+$(document).ready(function() {
+   $('#otherSex').keyup(function () { 
+   		console.log("in sex textfield change");
+   		$("#sex_type").val($(this).text());
+   });
+});
+
+// warn user when user leave this page except submitting the form
+$('input[name=commit]').click(function() {
+  window.submit_button_clicked = true;
+});
+
+$(window).bind('beforeunload', function(){
+	if(!window.submit_button_clicked){
+  	return '确定要离开此创建页面?';
+  }
+});
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
