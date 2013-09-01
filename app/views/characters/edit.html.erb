@@ -34,7 +34,7 @@
 	    <tr>
 	      <td><%= form.label(:sex, "性别:")%></td>
 		  <td>
-			  <select name="sex" id="sex_type">
+			  <select name="normal_sex" id="normalSex">
 				    <option value="男">男</option>
 				    <option value="女">女</option>
 				    <option value="不明">不明</option>
@@ -83,6 +83,7 @@
 		<%= render "shared/editor" %>
 	</div>
   <%= form.hidden_field :summary %>
+  <%= form.hidden_field :sex %>
   <!-- redirecting back to cp if editing request originates from a cp/show page -->
   <% if params[:fromcp] %>
   	<%= hidden_field_tag :fromcp, params[:fromcp] %>
@@ -102,6 +103,13 @@
 		console.log("before submit");
 		$("#character_summary").val(editor.innerHTML);
 		console.log($("#character_summary").val());
+
+		// change for character sex
+		if($('#normalSex').val() != '男' && $('#normalSex').val() != '女' && $('#normalSex').val() != '不明') {
+			$("#character_sex").val($('#otherSex').val());
+		} else {	
+			$("#character_sex").val($('#normalSex').val());
+		}
 	});
 	/*$("#photo-form").bind("ajax:success", function() {
 		alert($(this).data);
@@ -115,30 +123,32 @@
 
 <script>
 // select correct sex
-$("select#sex_type option").each(function() { 
+$("select#normalSex").each(function() { 
 	var sex = '<%= @character.sex %>';
-	this.selected = (this.text == sex); 
+	console.log("currenct sex is " + sex);
+	console.log("currenct text is " + $("select#normalSex").val());
+	if(sex != '男' && sex != '女' && sex != '不明') {
+		$("#otherSexType").show();
+		$('#normalSex option[value=其他]').prop('selected', true);
+		$("#otherSex").val(sex);
+	} else {
+		$('#normalSex option[value=' + sex + ']').prop('selected', true);
+	}
 });
 
 // change type of sex in selection box
-$('#sex_type').on('change',function(){
-	  console.log("i'm in changing sex type")
+$('#normalSex').on('change',function(){
+	  console.log("i'm in changing sex type");
     var selection = $(this).val();
+    console.log("selection is: "+ selection);
     switch(selection){
 	    case "其他":
-	    $("#otherSexType").show()
+	    	$("#otherSexType").show();
 	    break;
 	    default:
-	    $("#otherSexType").hide()
+	    	$('#otherSex').val("");
+	    	$("#otherSexType").hide();
     }
-});
-
-// change sex type to others and specify by user input
-$(document).ready(function() {
-   $('#otherSex').keyup(function () { 
-   		console.log("in sex textfield change");
-   		$("#sex_type").val($(this).text());
-   });
 });
 
 // warn user when user leave this page except submitting the form
