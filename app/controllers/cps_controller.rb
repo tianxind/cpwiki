@@ -50,16 +50,19 @@ class CpsController < ApplicationController
   
   def show
     @cp = Cp.find_by_id(params[:id])
+
+    # Find related cps (seme and uke in our current cp also appear in these cps)
+    @related_cps = Cp.find_all_by_seme_id(@cp.seme_id) + Cp.find_all_by_seme_id(@cp.uke_id) +
+      Cp.find_all_by_uke_id(@cp.seme_id) + Cp.find_all_by_uke_id(@cp.uke_id)
+    @related_cps.uniq!
+    @related_cps.delete_if { |cp| cp == @cp }
+
     @seme = Character.find_by_id(@cp.seme_id)
     @uke = Character.find_by_id(@cp.uke_id)
     @comment_array = @cp.comments
     if user_signed_in? then 
       @already_liked = Like.where(:user_id => current_user.id, :cp_id =>params[:id]).size
     end
-    p "already_liked size is >>>>>>>>"
-    p @already_liked
-    p "comment array is ->>>>>>"
-    p @comment_array
   end
 
   def edit

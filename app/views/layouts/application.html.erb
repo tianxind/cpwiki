@@ -15,7 +15,7 @@
 <body>
 	<div class="user_nav">
 		<% if user_signed_in? %>
-			Signed in as <%= current_user.email %>. Not you?
+			Signed in as <%= link_to current_user.username, user_infos_path %>. Not you?
 			<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
 		<% else %>
 			<%= link_to "Sign up", new_user_registration_path %> or 
@@ -98,11 +98,13 @@ $("#charamode").click(function(event) {
 
 });
 
-$('#query').keyup(function(event) {
-	if (event.which == 13 /* Enter Key */) {
-		$('#search').click();
-	}
-})
+$('#chara-form').submit(function() {
+	return $.trim($('#query').val()) != "";
+});
+
+$('#cp-form').submit(function() {
+	return $.trim($('#seme').val()) != "" || $.trim($('#uke').val()) != "";
+});
 </script>
 </body>
 </html>
