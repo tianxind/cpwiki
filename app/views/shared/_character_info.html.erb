@@ -1,6 +1,6 @@
 <% @profile_image = Photo.find_by_id(character.profile_image) %>
 <% if @profile_image != nil %>
-<img src="/images/<%= @profile_image.filename %>" alt="Placeholder"></img>
+<img class='resize' src="/images/<%= @profile_image.filename %>" alt="Placeholder"></img>
 <% else %>
 <p>No image</p>
 <% end %>

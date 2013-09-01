@@ -26,15 +26,11 @@ class CharactersController < ApplicationController
     
 
     profile_image = params[:character][:profile_image]
-    if profile_image == nil 
-      puts "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
-      puts "profile image is nil"
-    end
     if profile_image != nil
       puts "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
       puts "saving photo"
       time = Time.now
-      image_filename = current_user.id.to_s + "_" + profile_image.original_filename
+      image_filename = Photo.gen_image_filename(profile_image.original_filename)
       @photo = Photo.new(:date_time => time, 
                          :filename => image_filename, 
                          :user_id => current_user.id)
@@ -51,7 +47,8 @@ class CharactersController < ApplicationController
     else
       if @character.save!
         # set the session of new_chara_name to nil, no matter this function is called when create cp or create chara
-        # could remove the next line if user is forced to create chara through /character/choose instead of directly input url with /character/new
+        # could remove the next line if user is forced to create chara through /character/choose instead of directly 
+        # input url with /character/new
         session[:new_chara_name] = nil
 
         # see if there are any images we need to delete
@@ -92,6 +89,8 @@ class CharactersController < ApplicationController
   
   def edit
     @character = Character.find_by_id(params[:id])
+    @profile_image = Photo.find_by_id(@character.profile_image)
+    # @photo = Photo.new
   end
   
   def update
@@ -128,14 +127,9 @@ class CharactersController < ApplicationController
   end
   
   def redirect_to_character_info_or_new_character
-    p "new chara name is >>>>>>>>>"
-    p params[:new_chara]
-    p params[:chara]
     if params[:new_chara] == "nil"
-      p ">>>>>>>create new chara"
       redirect_to :controller => :characters, :action => :new
     else
-      p ">>>>>>>show old chara"
       redirect_to :controller => :characters, :action => :show, :id => params[:new_chara]
     end
   end

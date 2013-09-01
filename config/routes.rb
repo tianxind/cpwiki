@@ -38,7 +38,12 @@ Cpwiki::Application.routes.draw do
     end
   end
   resources :user_infos
-  resources :photos
+  
+  resources :photos do
+    collection do
+      post 'update_profile_image'
+    end
+  end
 
 
   # Sample resource route with options:

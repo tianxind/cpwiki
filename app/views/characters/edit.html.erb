@@ -1,7 +1,19 @@
+<% @character.errors.full_messages.each do |msg| %>
+    <div><span class="error_msg"><%= msg %></span></div>
+<% end %>
+<div id="profile-image-form">
+	<form accept-charset=\"UTF-8\" action="/photos/update_profile_image" class="new_profile_image" data-remote="true" enctype="multipart/form-data" id="new_profile_image" method="post">
+		<label for="profile_image">角色头像:</label>
+	    <% if @profile_image %>
+	      	<img id="img_profile_image" class="resize" src="<%= "/images/#{@profile_image.filename}" %>" alt="File not found"></img>
+	    <% else %>
+	        <span id="no_profile_image">尚未添加头像</span>
+	    <% end %>
+		<input type="file" name="profile_image" id="profile_image" value="" />
+		<input name="commit" id="commit" type="submit" value="Upload">
+    </form>
+</div>
 <%= form_for @character, url: character_path(@character.id), method: :put do |form| %>
-    <% @character.errors.full_messages.each do |msg| %>
-      	<div><span class="error_msg"><%= msg %></span></div>
-    <% end %>
 	<table>
 	    <tr>
 	      <td><%= form.label(:name, "姓名:")%></td>
@@ -62,12 +74,16 @@
 	      <td><%= form.label(:hair, "发色:")%></td>
 	      <td><%= form.text_field(:hair) %></td>
 	    </tr>
+	    <tr>
+	      <td><%= form.hidden_field(:profile_image) %></td>
+	    </tr>
 	</table>
 	<div>
 		<%= form.label(:summary, "简介:")%>			
 		<%= render "shared/editor" %>
 	</div>
   <%= form.hidden_field :summary %>
+  <!-- redirecting back to cp if editing request originates from a cp/show page -->
   <% if params[:fromcp] %>
   	<%= hidden_field_tag :fromcp, params[:fromcp] %>
   <% end %> 
@@ -87,6 +103,9 @@
 		$("#character_summary").val(editor.innerHTML);
 		console.log($("#character_summary").val());
 	});
+	/*$("#photo-form").bind("ajax:success", function() {
+		alert($(this).data);
+	})*/
 </script>
 <input type="hidden" id="current_user" value=<%= current_user.id %> />
 <input type="hidden" id="saved_filename" value="" />
