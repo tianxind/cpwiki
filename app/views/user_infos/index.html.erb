@@ -5,7 +5,7 @@ Basic user profile:
 <p>Email: <%= @user.email %></p>
 
 <div class="subtitle">
-Entries created by you:
+CPs created by you:
 </div>
 <div class="cps_created_by_user">
 <% if @cp_entries.size != 0 %>
@@ -18,7 +18,20 @@ Entries created by you:
 </div>
 
 <div class="subtitle">
-Entries you like:
+Characters created by you:
+</div>
+<div class="characters_created_by_user">
+<% if @character_entries != nil && @character_entries.size != 0 %>
+	<% @character_entries.each do |entry| %>
+		<p class="entry_list"><a href="<%= "/characters/" + entry.id.to_s %>"><%= entry.name %></a> [<%= entry.created_at.strftime("%Y-%m-%d %T") %>]</p>
+	<% end %>
+<% else %>
+	<p>None</p>
+<% end %>
+</div>
+
+<div class="subtitle">
+Cps you like:
 </div>
 <div class="cps_liked_by_user">
 <% if @user_likes.size != 0 %>

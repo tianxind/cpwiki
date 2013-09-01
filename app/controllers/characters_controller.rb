@@ -20,6 +20,10 @@ class CharactersController < ApplicationController
     p params[:sex]
 
     @character = Character.new(params[:character])
+    @character.creator_id = current_user.id
+    @character.created_at = Time.now
+    p "chara info is >>>>>>>>>"
+    p @character
     # @character = Character.new(:name => params[:character][:name],
     #                            :nickname => params[:character][:nickname],
     #                            :birth_date => params[:character][:birth_date],
