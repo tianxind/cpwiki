@@ -44,3 +44,28 @@
 <input type="hidden" id="saved_filename" value="" />
  
 <%= link_to 'Back', cp_path(@cp.id) %>
+
+<script>
+
+// warn user when user leave this page except submitting the form
+$('input[name=commit]').click(function() {
+  window.submit_button_clicked = true;
+});
+
+$(window).bind('beforeunload', function(){
+	if(!window.submit_button_clicked){
+  	return '确定要离开此创建页面?';
+  }
+});
+
+</script>
+
+
+
+
+
+
+
+
+
+

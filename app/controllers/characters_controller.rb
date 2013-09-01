@@ -16,22 +16,14 @@ class CharactersController < ApplicationController
     #@character = Character.new(params[:character])
     p "chara params is >>>>>>>>"
     p params[:character]
-    @character = Character.new(:name => params[:character][:name],
-                               :nickname => params[:character][:nickname],
-                               :work => params[:character][:work],
-                               :birth_date => params[:character][:birth_date],
-                               :horoscope => params[:character][:horoscope],
-                               :blood_type => params[:character][:blood_type],
-                               :hair => params[:character][:hair],
-                               :eye => params[:character][:eye],
-                               :height => params[:character][:height],
-                               :weight => params[:character][:weight],
-                               :occupation => params[:character][:occupation],
-                               :summary => params[:summary])
-                               
+
+    @character = Character.new(params[:character])
+    if params[:sex] == ""
+      @character.sex = params[:sex]
+    end                             
     # sex_array = ["男", "女", "不明", "其他"]
     # @character.sex = sex_array[params[:character][:sex].to_i]
-    @character.sex = params[:sex]
+    
 
     profile_image = params[:character][:profile_image]
     if profile_image != nil
@@ -103,7 +95,9 @@ class CharactersController < ApplicationController
   
   def update
     @character = Character.find_by_id(params[:id])
-    
+    if params[:character][:sex] == nil
+      params[:character][:sex] = params[:sex]
+    end
     if @character.update_attributes(params[:character])
       if params[:fromcp] == nil then
         redirect_to @character

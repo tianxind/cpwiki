@@ -5,6 +5,7 @@
 <% for result in results %>
 	<% checked = i == 0 ? true : false %>
 	<%= radio_button_tag(radio_name, result.id, checked) %>
+	<!--a href="/characters/<%= result.id %>"><%= label_tag :label, result.name %></a-->
 	<%= render(:partial => "snippet", :locals => {:character => result}) %>
 	<% i = i + 1 %>
 <% end %>

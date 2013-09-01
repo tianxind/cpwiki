@@ -1,5 +1,19 @@
 module ApplicationHelper
+  # Defines how long a snippet should be
+  MAX_SNIPPET_LENGTH = 30
+
   def formatted(text)
     return text == nil ? "" : text.html_safe
+  end
+
+  def make_snippet(text)
+  	if (!text) then return "" end
+  	# This doesn't return the formatted text yet. Need to decide
+  	# tomorrow what to return (formatted or pure text)
+  	if (text.length < MAX_SNIPPET_LENGTH) 
+  		return text
+  	else
+  		return text[0..MAX_SNIPPET_LENGTH] + "..."
+  	end
   end
 end

@@ -1,0 +1,18 @@
+<div>
+	<h1>角色</h1>
+	<% if @characters.length == 0 then %>
+		<p>暂无角色搜索结果</p>
+	<% else %>
+		<% for character in @characters %>
+			<%= render(:partial => "characters/snippet", :locals => {:character => character}) %>
+		<% end %>
+	<% end %>
+	<h1>CP</h1>
+	<% if @cps.length == 0 then %>
+		<p>暂无角色搜索结果</p>
+	<% else %>
+		<% for cp in @cps %>
+			<%= render(:partial => "cps/snippet", :locals => {:cp => cp}) %>
+		<% end %>
+	<% end %>
+</div>

@@ -6,7 +6,7 @@
 	<p>
 		<% checked = i == 0 ? true : false %>
 	    <%= radio_button_tag(radio_name, result.id, checked) %>
-		<%= label_tag :label, result.name %>
+		<a href="/characters/<%= result.id %>"><%= label_tag :label, result.name %></a>
 	</p>
 	<% i = i + 1 %>
 <% end %>

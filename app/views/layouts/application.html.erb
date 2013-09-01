@@ -50,6 +50,8 @@
 			<td class="right_most_cell">
 				<form action="/home/search" method="get">
 					<input id="query" name="query" type="text" placeholder="请输入角色名称或CP简称"></input>
+					攻：<input id="seme" name="seme" type="text" />
+					受：<input id="uke" name="uke" type="text" />
 					<input type="submit" id="search" value="搜索"></input>
 				    <button id="cpmode">切换到CP模式</button>
 				</form>
@@ -65,8 +67,12 @@
 </div>
 
 <script>
+var mode = 0;
 $('#cpmode').click(function(event) {
 	event.preventDefault();
+	if (mode == 0) {
+	} else {
+	}
 })
 $('#query').keyup(function(event) {
 	if (event.which == 13 /* Enter Key */) {

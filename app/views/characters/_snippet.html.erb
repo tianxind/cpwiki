@@ -1,1 +1,5 @@
-<span><%= character.name %>&nbsp;&nbsp;出自<em><%= character.work %><em></span>
+<%= link_to character.name, character_path(character) %>
+<span>&nbsp;&nbsp;出自
+<% if character.work then %><em><%= character.work %></em><% end %>
+</span>
+<p><%= make_snippet(character.summary) %></p>
