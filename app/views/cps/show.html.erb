@@ -7,7 +7,7 @@
 		<% if @already_liked == 0 %>
 			<a href="javascript:void(0)" id="like_button_a" style="background-color:#CCCCCC;">Moe</a>
 		<% else %>
-			<a href="javascript:void(0)" id="like_button_a" style="background-color:#FFC0CB;">Moed</a>
+			<a href="javascript:vid(0)" id="like_button_a" style="background-color:#FFC0CB;">Moed</a>
 		<% end %>
 	<% else %>
 		<span>只有注册用户才可以开启“萌”功能</span>
@@ -144,7 +144,7 @@ $(document).ready(function(){
 				  $('#comment_result').flash_message({
 				    text: '评论成功!',
 				    how: 'append',
-			      class_name: 'flash_message_success'
+			        class_name: 'flash_message_success'
 				  });
 				  // clear the text area after successful submit
 				  $('textarea#comment_area').val('');
@@ -154,9 +154,9 @@ $(document).ready(function(){
 		     	 $('#comment_result').flash_message({
 				    text: '评论失败!',
 				    how: 'append',
-			      class_name: 'flash_message_fail'
+			        class_name: 'flash_message_fail'
 				   });
-				   $('textarea#comment_area').val(cmt);
+				 $('textarea#comment_area').val(cmt);
 		     }
 			});
 	  }

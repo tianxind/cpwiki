@@ -5,7 +5,6 @@ class CreateComments < ActiveRecord::Migration
     	t.integer :user_id
     	t.text :comment_text
     	t.datetime :date_time
-      
     end
   end
 end

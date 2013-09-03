@@ -1,0 +1,35 @@
+<div id="photo_div">
+	<img id="photo" src='<%= "/images/#{@photo.filename}" %>' class="photo_to_tag"></img>
+	<div id="dialog" title="添加评论">
+  		<form>
+    		<input type="text" name="comment" id="comment" class="text ui-widget-content ui-corner-all" />
+			<input type="hidden" id="xpos" />
+			<input type="hidden" id="ypos" />
+			<input type="hidden" id="photo_id" value='<%= @photo.id %>' />
+  		</form>
+	</div>
+</div>
+<script>
+// $(function() {
+//     $("#dialog").dialog({
+//       autoOpen: false,
+//       resizable: false,
+//       height: 200,
+//       modal: true,
+//       buttons: {
+//         Cancel: function() {
+//           $(this).dialog( "close" );
+//         },
+//         "提交": function() {
+          
+//         }
+//       }
+//     });
+// });
+
+Tagger.makeTagger($('#photo'), $('#photo_div'), $('#dialog'), $('#xpos'), $('#ypos'), $('photo_id'));
+// $('#photo').click(function(e) {
+// 	$("#dialog").dialog("open");
+// 	$("#dialog").dialog("option", { position: [e.pageX + 5, e.pageY + 5] });
+// });
+</script>

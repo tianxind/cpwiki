@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   
   has_many :cps
   has_many :comments
+  has_many :tags
   
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable

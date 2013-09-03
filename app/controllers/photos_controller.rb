@@ -63,4 +63,8 @@ class PhotosController < ApplicationController
       File.delete(Rails.root.join('public', 'images', image.filename))
     end
   end
+
+  def show
+    @photo = Photo.find_by_id(params[:id])
+  end
 end
