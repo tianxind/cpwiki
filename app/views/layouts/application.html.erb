@@ -15,11 +15,11 @@
 <body>
 	<div class="user_nav">
 		<% if user_signed_in? %>
-			Signed in as <%= link_to current_user.username, user_infos_path %>. Not you?
-			<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+			您好! <%= link_to current_user.username, user_infos_path %> 
+			[<%= link_to "退出", destroy_user_session_path, :method => :delete %>]
 		<% else %>
-			<%= link_to "Sign up", new_user_registration_path %> or 
-			<%= link_to "Sign in", new_user_session_path %>
+			[<%= link_to "注册", new_user_registration_path %>] 
+			[<%= link_to "登录", new_user_session_path %>]
 		<% end %>
 	</div>
 <!-- 	<% flash.each do |name, msg| %>
@@ -28,17 +28,17 @@
 
 	<div class="content">
 	<div class="left_sidebar">
-		<img class="logo" src="/cp-wiki-logo_2nd.jpg"></img>
-		<h4><a href="/">Main Page</a></h4>
-		<h4><a href="#">Help</a></h4>
-		<h4><a href="/cps/choose">Create New CP</a></h4>
-		<h4><a href="/characters/choose">Create New Character</a></h4>
-		<h4><a href="#">Categories</a></h4>
+		<img class="logo" src="/cpwiki_logo.png"></img>
+		<h4><a href="/">主页</a></h4>
+		<h4><a href="#">帮助</a></h4>
+		<h4><a href="/cps/choose">创建新CP</a></h4>
+		<h4><a href="/characters/choose">创建新角色</a></h4>
+		<h4><a href="#">分类</a></h4>
 			<div class="submenu" id="category_submenu">
-				<ul><a href="#">Anime</a></ul>
-				<ul><a href="#">Movie</a></ul>
-				<ul><a href="#">Game</a></ul>
-				<ul><a href="#">Novel</a></ul>
+				<ul><a href="#">动漫</a></ul>
+				<ul><a href="#">电影</a></ul>
+				<ul><a href="#">游戏</a></ul>
+				<ul><a href="#">小说</a></ul>
 			</div>
 	</div>
 	<div class="right_container">
@@ -58,11 +58,10 @@
 			</td>
 			</tr>
 		</table> -->
-			<span>Main Page</span>
-			<span>Change Language</span>
+			<!-- <span id="language">中文|English</span> -->
 			<span class="right_most_cell">
 				<form id="chara-form" action="/home/search" method="get">
-					<input id="query" name="query" type="text" placeholder="请输入角色名称或CP简称"></input>
+					<input id="query" name="query" type="text" placeholder="角色名称/CP简称"></input>
 					<input type="submit" id="search" value="搜索"></input>
 				    <button id="cpmode">切换到攻受模式</button>
 				</form>
@@ -71,7 +70,7 @@
 					<input id="seme" name="seme"></input>
 					<label for="uke">受:</label>
 					<input id="uke" name="uke"></input>
-					<input type="submit" id="search" value="搜索"></input>
+					<input type="submit" id="search" class="button" value="搜索"></input>
 				    <button id="charamode">切换到角色/简称模式</button>
 				</form>
 			</span>
