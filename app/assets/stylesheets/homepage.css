@@ -3,18 +3,20 @@
 }
 
 .content_crossbar {
-	background-color: #eeeeee;
+	background-color: #ffffff;
 	text-align: center;
 	border: 1px solid #cccccc;
+	border-radius:5px;
 	display: inline-block;
 	width: 100%;
 }
 
 .newest {
-	background-color: #eeeeee;
+	background-color: #ffffff;
 	text-align: center;
 	border: 1px solid #cccccc;
-	width: 48%;
+	border-radius:5px;
+	width: 49%;
 	margin: 5px 0px;
 	height: 250px;
 	display: inline-block;
@@ -22,12 +24,58 @@
 }
 
 .hottest {
-	background-color: #eeeeee;
+	background-color: #ffffff;
 	text-align: center;
 	border: 1px solid #cccccc;
-	width: 48%;
+	border-radius:5px;
+	width: 49%;
 	margin: 5px 0px;
 	height: 250px;
 	display: inline-block;
 	float: right;
 }
+
+.contact_bar {
+	background-color: #ffffff;
+	text-align: center;
+	display: inline-block;
+	width: 100%;
+}
+
+#bottomtable td {
+	font-size: 12px;
+	color: #e7eaef;
+	background-color: #576069;
+	border: 1px solid #576069;
+	border-radius:5px;
+	width: 80px;
+	height: 40px;
+}
+
+#bottomtable {
+	border-collapse:separate;
+	border-spacing: 10px;
+	margin-left:auto; 
+  margin-right:auto;
+  margin-top: 100px;
+}
+
+.title {
+	font-size: 12px;
+	color: #576069;
+	text-align: center;
+}
+
+label {
+	color: #576069;
+	font-size: 12px;
+}
+
+
+
+
+
+
+
+
+
