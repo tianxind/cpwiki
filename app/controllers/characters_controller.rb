@@ -22,42 +22,8 @@ class CharactersController < ApplicationController
     @character = Character.new(params[:character])
     @character.creator_id = current_user.id
     @character.created_at = Time.now
-    p "chara info is >>>>>>>>>"
-    p @character
-    # @character = Character.new(:name => params[:character][:name],
-    #                            :nickname => params[:character][:nickname],
-    #                            :birth_date => params[:character][:birth_date],
-    #                            :horoscope => params[:character][:horoscope],
-    #                            :blood_type => params[:character][:blood_type],
-    #                            :hair => params[:character][:hair],
-    #                            :eye => params[:character][:eye],
-    #                            :height => params[:character][:height],
-    #                            :weight => params[:character][:weight],
-    #                            :occupation => params[:character][:occupation],
-    #                            :summary => params[:summary])
-    # if params[:sex] != ""
-    #   @character.sex = params[:sex]
-    # end                             
-    # sex_array = ["男", "女", "不明", "其他"]
-    # @character.sex = sex_array[params[:character][:sex].to_i]
     @character.summary = params[:summary]
 
-    profile_image = params[:character][:profile_image]
-    if profile_image != nil
-      puts "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
-      puts "saving photo"
-      time = Time.now
-      image_filename = Photo.gen_image_filename(profile_image.original_filename)
-      @photo = Photo.new(:date_time => time, 
-                         :filename => image_filename, 
-                         :user_id => current_user.id)
-      if @photo.save
-          File.open(Rails.root.join('public', 'images', @photo.filename), 'wb') do |file|
-            file.write(profile_image.read)
-          end
-      end
-      @character.profile_image = @photo.id
-    end
     # check chara name validation
     if !@character.valid? then
       render(:action => :new)
@@ -107,7 +73,6 @@ class CharactersController < ApplicationController
   def edit
     @character = Character.find_by_id(params[:id])
     @profile_image = Photo.find_by_id(@character.profile_image)
-    # @photo = Photo.new
     p "in edit params are"
     p params
   end
