@@ -63,3 +63,13 @@ img.photo_to_tag {
 	z-index: 2;
 	visibility: hidden;
 }
+
+div#photo_div {
+	position: relative;
+}
+
+div.tag {
+	position: absolute;
+	z-index: 2;
+	background: ;
+}

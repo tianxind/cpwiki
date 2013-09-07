@@ -1,35 +1,70 @@
 <div id="photo_div">
 	<img id="photo" src='<%= "/images/#{@photo.filename}" %>' class="photo_to_tag"></img>
-	<div id="dialog" title="添加评论">
-  		<form>
-    		<input type="text" name="comment" id="comment" class="text ui-widget-content ui-corner-all" />
-			<input type="hidden" id="xpos" />
-			<input type="hidden" id="ypos" />
-			<input type="hidden" id="photo_id" value='<%= @photo.id %>' />
-  		</form>
-	</div>
+<!-- 	<div class="tag" style="display:none">This is a test.</div> -->
+</div>
+<div id="dialog" title="添加评论">
+		<form>
+		<input type="text" name="comment" id="comment" class="text ui-widget-content ui-corner-all" />
+		<input type="hidden" id="xpos" />
+		<input type="hidden" id="ypos" />
+		<input type="hidden" id="photo_id" value='<%= @photo.id %>' />
+		</form>
 </div>
 <script>
-// $(function() {
-//     $("#dialog").dialog({
-//       autoOpen: false,
-//       resizable: false,
-//       height: 200,
-//       modal: true,
-//       buttons: {
-//         Cancel: function() {
-//           $(this).dialog( "close" );
-//         },
-//         "提交": function() {
-          
-//         }
-//       }
-//     });
-// });
+$('#dialog').dialog({
+	autoOpen: false,
+	resizable: false,
+	height: 200,
+	modal: true,
+	buttons: {
+	Cancel: function() {
+		$(this).dialog( "close" );
+	},
+	"提交": function() {
+		comment = $("#comment").val();
+		xpos = $("#xpos").val();
+		ypos = $("#ypos").val();
+		$.ajax({
+			type: "POST",
+			url: "/tags",
+			dataType: "html",
+			data: "comment=" + comment + "&xpos=" + xpos + "&ypos="
+				+ ypos + "&photo_id=" + '<%= @photo.id %>',
+			success: function(){
+				alert("success");
+				$('#dialog').dialog("close");
+				// Insert tag at correct position
+				var newTag = "<div class='tag' style='left:" + xpos + "px;top:" + ypos + "px;'>" 
+					+ comment + "</div>";
+				console.log(newTag);
+				$("#photo_div").append(newTag);
+			},
+			error: function(){
+				alert("Post failed");
+				$('#dialog').dialog("close");
+			}
+		});
+	}
+	}
+});
 
-Tagger.makeTagger($('#photo'), $('#photo_div'), $('#dialog'), $('#xpos'), $('#ypos'), $('photo_id'));
-// $('#photo').click(function(e) {
-// 	$("#dialog").dialog("open");
-// 	$("#dialog").dialog("option", { position: [e.pageX + 5, e.pageY + 5] });
-// });
+$('#photo').click(function(e) {
+	$('#dialog').dialog("open");
+	// var photo_div = document.getElementById('photo_div');
+	var photoDiv = $('#photo_div');
+	// $('.tag').css('left', e.pageX - photoDiv.offset().left);
+	// $('.tag').css('top', e.pageY - photoDiv.offset().top);
+	// $('.tag').position({ left: e.pageX - photo_div.offset.left, top: e.pageY - photo_div.offset.top });
+	// console.log($('.tag').css('left'));
+	// console.log($('.tag').css('top'));
+	// console.log($('.tag').position());
+	// $('.tag').show();
+	//$('#dialog').dialog("option", { position: [e.pageX - photo_div.offsetLeft,
+	//	e.pageY - photo_div.offsetTop] });
+	// $('#dialog').dialog("option", { position: [e.pageX - $('#photo_div').offset.left + 5,
+	// 	e.pageY - $('#photo_div') .offset.top + 5 ] });
+	$('#dialog').dialog("option", { position: [e.pageX - $(document).scrollLeft() + 5, e.pageY -$(document).scrollTop() + 5] });
+	$('#xpos').val(e.pageX - photoDiv.offset().left);
+	$('#ypos').val(e.pageY - photoDiv.offset().top);
+});
 </script>
