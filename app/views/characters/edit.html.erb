@@ -5,31 +5,31 @@
 	<form accept-charset=\"UTF-8\" action="/photos/update_profile_image" class="new_profile_image" data-remote="true" enctype="multipart/form-data" id="new_profile_image" method="post">
 		<label for="profile_image">角色头像:</label>
 	    <% if @profile_image %>
-	      	<img id="img_profile_image" class="resize" src="<%= "/images/#{@profile_image.filename}" %>" alt="File not found"></img>
+	      	<img id="img_profile_image" class="resize" src="<%= "/images/#{@profile_image.filename}" %>" alt="未找到文件"></img>
 	    <% else %>
 	        <span id="no_profile_image">尚未添加头像</span>
 	    <% end %>
 		<input type="file" name="profile_image" id="profile_image" value="" />
-		<input name="commit" id="commit" type="submit" value="Upload">
+		<input name="commit" id="commit" type="submit" value="上传头像" class="submit_button">
     </form>
 </div>
 <%= form_for @character, url: character_path(@character.id), method: :put do |form| %>
 	<table>
 	    <tr>
 	      <td><%= form.label(:name, "姓名:")%></td>
-		  <td><%= form.text_field :name %></td>
+		  <td><%= form.text_field :name, :class => 'input_text_field' %></td>
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:nickname, "别名:")%></td>
-	      <td><%= form.text_field :nickname %></td>
+	      <td><%= form.text_field :nickname, :class => 'input_text_field' %></td>
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:work, "出自作品:")%></td>
-	      <td><%= form.text_field :work %></td>
+	      <td><%= form.text_field :work, :class => 'input_text_field' %></td>
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:birth_date, "生日:")%></td>
-	      <td><%= form.text_field :birth_date %></td>
+	      <td><%= form.text_field :birth_date, :class => 'input_text_field' %></td>
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:sex, "性别:")%></td>
@@ -56,23 +56,23 @@
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:occupation, "职业:")%></td>
-	      <td><%= form.text_field(:occupation) %></td>
+	      <td><%= form.text_field(:occupation, :class => 'input_text_field') %></td>
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:height, "身高:")%></td>
-	      <td><%= form.text_field(:height) %></td>
+	      <td><%= form.text_field(:height, :class => 'input_text_field') %></td>
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:weight, "体重:")%></td>
-	      <td><%= form.text_field(:weight) %></td>
+	      <td><%= form.text_field(:weight, :class => 'input_text_field') %></td>
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:eye, "瞳色:")%></td>
-	      <td><%= form.text_field(:eye) %></td>
+	      <td><%= form.text_field(:eye, :class => 'input_text_field') %></td>
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:hair, "发色:")%></td>
-	      <td><%= form.text_field(:hair) %></td>
+	      <td><%= form.text_field(:hair, :class => 'input_text_field') %></td>
 	    </tr>
 	    <tr>
 	      <td><%= form.hidden_field(:profile_image) %></td>
@@ -88,7 +88,7 @@
   <% if params[:fromcp] %>
   	<%= hidden_field_tag :fromcp, params[:fromcp] %>
   <% end %> 
-  <%= form.submit %>
+  <%= submit_tag "更新", :class => "submit_button" %>
 <% end %>
 
 <script type="text/javascript">
@@ -118,7 +118,7 @@
 <input type="hidden" id="current_user" value=<%= current_user.id %> />
 <input type="hidden" id="saved_filename" value="" />
  
-<%= link_to 'Back', character_path(@character.id) %>
+<%= link_to '<<返回', character_path(@character.id) %>
 
 
 <script>

@@ -149,7 +149,7 @@ input {
   font-size: 12px;
   padding: 4px 3px;
   outline: 0;
-  -webkit-appearance: none;
+  /*-webkit-appearance: none;*/
 }
 
 input:focus {
@@ -216,6 +216,7 @@ button:hover {
 
 select {
 	border-color: #cccccc;
+	color: #576069;
 }
 
 select:focus {
@@ -224,6 +225,11 @@ select:focus {
 	border-color: #f98d9e;
 }
 
+.radio_button {
+  display: block;
+  clear: left;
+  float: left;
+}
 
 
 

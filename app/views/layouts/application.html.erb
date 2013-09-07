@@ -61,15 +61,15 @@
 			<!-- <span id="language">中文|English</span> -->
 			<span class="right_most_cell">
 				<form id="chara-form" action="/home/search" method="get">
-					<input id="query" name="query" type="text" placeholder="角色名称/CP简称"></input>
+					<input id="query" class="input_text_field" name="query" type="text" placeholder="角色名称/CP简称"></input>
 					<input type="submit" id="search" value="搜索"></input>
 				    <button id="cpmode">切换到攻受模式</button>
 				</form>
 				<form id="cp-form" action="/home/search_by_seme_uke" method="get" style="display:none">
 					<label for="seme">攻:</label>
-					<input id="seme" name="seme"></input>
+					<input id="seme" name="seme" class="input_text_field"></input>
 					<label for="uke">受:</label>
-					<input id="uke" name="uke"></input>
+					<input id="uke" name="uke" class="input_text_field"></input>
 					<input type="submit" id="search" class="button" value="搜索"></input>
 				    <button id="charamode">切换到角色/简称模式</button>
 				</form>
