@@ -2,4 +2,4 @@
 <%= form_tag("/cps/redirect_to_cp_or_character", :method => "get") %>
 <%= render(:partial => "results", :locals => {:character => 1}) %>
 <%= render(:partial => "results", :locals => {:character => 2}) %>
-<%= submit_tag "下一步" %>
+<%= submit_tag "下一步", :class => "submit_button" %>

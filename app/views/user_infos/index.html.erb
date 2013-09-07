@@ -1,45 +1,65 @@
 <div class="subtitle">
-Basic user profile:
+用户基本信息:
 </div>
-<p>Username: <%= current_user.username %></p>
-<p>Email: <%= @user.email %></p>
+<table>
+	<tr>
+		<td>用户名:</td>
+		<td><%= current_user.username %></td>
+	</tr>
+	<tr>
+		<td>邮件:</td>
+		<td><%= @user.email %></td>
+	</tr>
+</table>
 
 <div class="subtitle">
-CPs created by you:
+已创建CP:
 </div>
 <div class="cps_created_by_user">
 <% if @cp_entries.size != 0 %>
-	<% @cp_entries.each do |entry| %>
-		<p class="entry_list"><a href="<%= "/cps/" + entry.id.to_s %>"><%= Character.find_by_id(entry.seme_id).name %> ♥ <%= Character.find_by_id(entry.uke_id).name %></a> [<%= entry.created_at.strftime("%Y-%m-%d %T") %>]</p>
-	<% end %>
+	<table class="cps_created_by_user_table">
+		<% @cp_entries.each do |entry| %>
+			<tr>
+				<td class="entry_list"><a href="<%= "/cps/" + entry.id.to_s %>"><%= Character.find_by_id(entry.seme_id).name %> ♥ <%= Character.find_by_id(entry.uke_id).name %></a></td><td> [<%= entry.created_at.strftime("%Y-%m-%d %T") %>]</td>
+			</tr>
+		<% end %>
+	</table>
 <% else %>
-	<p>None</p>
+	<p>还未创建CP</p>
 <% end %>
 </div>
 
 <div class="subtitle">
-Characters created by you:
+已创建角色:
 </div>
 <div class="characters_created_by_user">
 <% if @character_entries != nil && @character_entries.size != 0 %>
-	<% @character_entries.each do |entry| %>
-		<p class="entry_list"><a href="<%= "/characters/" + entry.id.to_s %>"><%= entry.name %></a> [<%= entry.created_at.strftime("%Y-%m-%d %T") %>]</p>
-	<% end %>
+	<table class="characters_created_by_user_table">
+		<% @character_entries.each do |entry| %>
+			<tr>
+				<td class="entry_list"><a href="<%= "/characters/" + entry.id.to_s %>"><%= entry.name %></a></td><td> [<%= entry.created_at.strftime("%Y-%m-%d %T") %>]</td>
+			</tr>
+		<% end %>
+	</table>
 <% else %>
-	<p>None</p>
+	<p>还未创建角色</p>
 <% end %>
 </div>
 
 <div class="subtitle">
-Cps you like:
+已萌CP:
 </div>
 <div class="cps_liked_by_user">
 <% if @user_likes.size != 0 %>
-	<% @user_likes.each do |like| %>
-		<p class="like_list"><a href="<%= "/cps/" + Cp.find_by_id(like.cp_id).id.to_s %>"><%= Character.find_by_id(Cp.find_by_id(like.cp_id).seme_id).name %> ♥ <%= Character.find_by_id(Cp.find_by_id(like.cp_id).uke_id).name %></a></p>
-	<% end %>
+	<table class="cps_liked_by_user_table">
+		<% @user_likes.each do |like| %>
+			<tr>
+				<td class="like_list"><a href="<%= "/cps/" + Cp.find_by_id(like.cp_id).id.to_s %>"><%= Character.find_by_id(Cp.find_by_id(like.cp_id).seme_id).name %> ♥ <%= Character.find_by_id(Cp.find_by_id(like.cp_id).uke_id).name %></a></td>
+			</tr>
+		<% end %>
+	</table>
 <% else %>
-	<p>None</p>
+	<p>还没有萌的CP</p>
 <% end %>
 </div>
 

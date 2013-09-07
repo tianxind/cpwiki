@@ -9,28 +9,41 @@ h1 {
 }
 
 .wiki_title {
-	font-size: 12px;
-	border-bottom: solid 1px #0372f7;
+	font-size: 14px;
+	border-bottom: solid 1px #f98d9e;
 }
 
 .character_basic_info {
-	width: 30%;
+	width: 25%;
 	float: right;	
 	margin: 5px;
-	padding: 2px;
-	border: solid 1px #aaaaaa;
+	padding: 5px;
 	background-color: white;
+	border: 1px solid #cccccc;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
 
 p.character_name {
-	background-color: #dfede0;
+	background-color: #ffc1cb;
+	font-size: 16px;
+	text-align: center;
+}
+
+.chara_profile_image {
+	text-align: center;
 }
 
 .index {
 	width: 30%;
 	margin: 5px;
+	margin-left: 0px;
 	padding: 2px;
-	border: solid 1px #aaaaaa;
+	border: 1px solid #cccccc;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
 
 .toc {
@@ -38,13 +51,13 @@ p.character_name {
 }
 
 .subtitle {
-	font-size: 11px;
-	border-bottom: solid 1px #0372f7;
+	font-size: 14px;
+	border-bottom: solid 1px #f98d9e;
 	overflow: hidden;
 }
 
 .subsubtitle {
-	font-size: 10px;
+	font-size: 12px;
 	font-weight: bold;
 }
 
@@ -59,3 +72,44 @@ img.resize {
 	z-index: 2;
 	visibility: hidden;
 }
+
+#heart {
+	color: #f98d9e;
+	font-size: 16px;
+}
+
+#wiki_name_title {
+	font-weight: bold;
+}
+
+#comment_area {
+	margin-top: 10px;
+	border: 1px solid #cccccc;
+	-moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  color: #576069;
+}
+
+#comment_area:focus {
+	outline: none;
+	box-shadow: 0 0 0px #719ECE;
+	border-color: #f98d9e;
+}
+
+.each_comment {
+	margin: 1px;
+	padding: 1px;
+}
+
+.divide_line {
+	border-bottom:1px solid #cccccc;
+}
+
+
+
+
+
+
+
+

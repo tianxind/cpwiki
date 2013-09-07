@@ -3,3 +3,24 @@
 	border-top-color: #FFC0CB;
 	border-top-width: 1px;*/
 }
+
+.cps_created_by_user_table {
+	margin-bottom: 10px;
+	font-size: 14px;
+	margin-right: 2px;
+	font-family: Tahoma;
+}
+
+.characters_created_by_user_table {
+	margin-bottom: 10px;
+	font-size: 14px;
+	margin-right: 2px;
+	font-family: Tahoma;
+}
+
+.cps_liked_by_user_table {
+	margin-bottom: 10px;
+	font-size: 14px;
+	margin-right: 2px;
+	font-family: Tahoma;
+}

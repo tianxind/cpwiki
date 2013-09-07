@@ -15,6 +15,7 @@ body {
 	font-family: Tahoma, Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	background-color: #ffffff;
+	color: #576069;
 }
 
 #language {
@@ -120,7 +121,9 @@ h4 {
 
 a {
 	text-decoration:none;
+	color: #576069;
 }
+
 .left_sidebar a:active {
 	color: #576069;
 }
@@ -183,6 +186,37 @@ button:hover {
 
 #uke {
 	width: 80px;
+}
+
+.edit {
+	float: right;
+	font-size: 12px;
+}
+
+.input_text_field {
+	color: #576069;
+}
+
+.input_text_area {
+	color: #576069;
+	margin-top: 5px;
+	border: 1px solid #cccccc;
+	-moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  width: 300px;
+  height: 100px;
+}
+
+.input_text_area:focus {
+	outline: none;
+	box-shadow: 0 0 0px #719ECE;
+	border-color: #f98d9e;
+}
+
+select {
+	background-color: #ffc1cb;
+	
 }
 
 

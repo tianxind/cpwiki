@@ -1,25 +1,26 @@
 <% p "current id is >>>>>>>>>>>>" + @cp.id.to_s %>
 
 <div class="wiki_title">
-	<%= @seme.name %>和<%= @uke.name %>的配对 
+	<span id="wiki_name_title"><%= @seme.name %><span id="heart"> ♥ </span><%= @uke.name %></span>
 	<%= (@cp.acronym == nil || @cp.acronym == "") ? "" : "(#{@cp.acronym})" %>&nbsp;&nbsp;
 	<% if @already_liked %>
 		<% if @already_liked == 0 %>
-			<a href="javascript:void(0)" id="like_button_a" style="background-color:#CCCCCC;">Moe</a>
+			<a href="javascript:void(0)" id="like_button_a" style="background-color:#CCCCCC;">萌</a>
 		<% else %>
-			<a href="javascript:void(0)" id="like_button_a" style="background-color:#FFC0CB;">Moed</a>
+			<a href="javascript:void(0)" id="like_button_a" style="background-color:#FFC0CB;">已萌</a>
 		<% end %>
 	<% else %>
-		<span>只有注册用户才可以开启“萌”功能</span>
+		<span>[只有注册用户才可以开启“萌”功能]</span>
 	<% end %>
-	<span class="edit"><%= link_to '编辑攻', "/characters/#{@seme.id}/edit?fromcp=#{@cp.id}"  %></span>
-	<span class="edit"><%= link_to '编辑受', "/characters/#{@uke.id}/edit?fromcp=#{@cp.id}" %></span>
-	<span class="edit"><%= link_to '编辑CP', edit_cp_path(@cp) %></span>
+	<span class="edit">[<%= link_to '编辑攻', "/characters/#{@seme.id}/edit?fromcp=#{@cp.id}"  %>]</span>
+	<span class="edit">[<%= link_to '编辑受', "/characters/#{@uke.id}/edit?fromcp=#{@cp.id}" %>]</span>
+	<span class="edit">[<%= link_to '编辑CP', edit_cp_path(@cp) %>]</span>
 </div>
 
 <div class="wiki_contents">
 	<div class="character_basic_info">
 		<%= render(:partial => "shared/character_info", :locals => {:character => @seme}) %>
+		<p class="divide_line"></p>
 		<%= render(:partial => "shared/character_info", :locals => {:character => @uke}) %>	
 	</div>
 	<p><%= formatted(@cp.summary) %></p>
@@ -43,9 +44,9 @@
 	<p class="subtitle">JQ档案</p>
 	<p><%= formatted(@cp.wiki_content) %></p>
 	<div class="related_cps">
-		<b>相关CP</b>&nbsp;&nbsp;
+		<b>相关CP:</b>&nbsp;&nbsp;
 		<% for cp in @related_cps %>
-			<%= link_to "#{cp.seme.name}X#{cp.uke.name}", cp_path(cp) %>
+			<%= link_to "#{cp.seme.name}♥#{cp.uke.name}", cp_path(cp) %>
 			<% if cp != @related_cps.last %>
 				&nbsp;|&nbsp;
 			<% end %>
@@ -58,7 +59,7 @@
 	<% if @comment_array %>
 		<% p "comment_array size is >>>>> " + @comment_array.size.to_s %>
 		<% @comment_array.each do |cmt| %>
-			<p>&gt;&gt; <%= cmt.comment_text %> - <%= User.find_by_id(cmt.user_id).username %> [<%= cmt.date_time.strftime("%Y-%m-%d %T") %>]</p>
+			<p class="each_comment">&gt;&gt; <%= cmt.comment_text %> - <%= User.find_by_id(cmt.user_id).username %> [<%= cmt.date_time.strftime("%Y-%m-%d %T") %>]</p>
 		<% end %>
 	<% end %>
 
@@ -100,8 +101,7 @@
 })(jQuery);
 
 function insertCommentBox() {
-	$('.homepage_content').append("<p>添加评论：</p>"
-		+ "<textarea rows=\"4\" cols=\"50\" id=\"comment_area\">"
+	$('.homepage_content').append("<textarea rows=\"4\" cols=\"50\" id=\"comment_area\" placeholder=\"在此添加评论\">"
 	    + "</textarea>"
 		+ "<br/><button type=\"button\" id=\"submit_new_comment\">提交</button>");
 }
@@ -176,17 +176,17 @@ $(document).ready(function(){
 	     success: function(){
 	     	console.log("in success text is " + like_text);
 	     	 //console.log("already liked " + <%= @already_liked %>)
-	     	 if(like_text == "Moe") {
+	     	 if(like_text == "萌") {
 	     	   $("a#like_button_a").css('background-color','#FFC0CB');
 	     	   //<%= @already_liked = 1 %>
 	     	   //$("button#like").text = "已萌"
 	     	   console.log("in save like");
-	     	   $('a#like_button_a').text('Moed');
+	     	   $('a#like_button_a').text('已萌');
 	     	   //alert("Data Saved, like");
 	     	 } else {
 	     	 	 $("a#like_button_a").css('background-color','#CCCCCC');
 	     	 	 console.log("in save dislike");
-	     	 	 $('a#like_button_a').text('Moe');
+	     	 	 $('a#like_button_a').text('萌');
 	     	 	 //alert("Data Saved, dislike");
 	     	 }
 	     },
@@ -197,7 +197,7 @@ $(document).ready(function(){
 		});
   }); // like_button_a.click
 <% else %>
-	$('.homepage_content').append('<div>只有注册用户才可以开启评论功能</div>');
+	$('.homepage_content').append('<div>[只有注册用户才可以开启评论功能]</div>');
 <% end %>
 }); // document.ready
 

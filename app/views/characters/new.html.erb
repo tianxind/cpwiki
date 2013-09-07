@@ -1,6 +1,8 @@
+<div class="create_cp_nav_bar">
 <% if !(session[:seme] == nil && session[:uke] == nil) %>
-	<%= render(:partial => "shared/create_navbar", :locals => {:step => 2, :step_names => ["输入角色姓名", "填写角色信息", "填写CP信息"]}) %>
+	<%= render(:partial => "shared/create_navbar", :locals => {:step => 2, :step_names => ["输入角色姓名  ", "填写角色信息  ", "填写CP信息  "]}) %>
 <% end %>
+</div>
 
 <% @character.errors.full_messages.each do |msg| %>
   <div><span class="error_msg"><%= msg %></span></div>
@@ -9,15 +11,15 @@
 	<div><span class="error_msg"><%= flash[:errors] %></div>
 <% end %>
 
-<div>
+<div class="create_new_chara_notice">
 <% if session[:seme] == "nil" && session[:uke] == "nil" %>
-Create Seme Character:
+创建小攻:
 <% elsif session[:uke] == "nil" && session[:seme] != "nil" %>
-Create Uke Character:
+创建小受:
 <% elsif session[:seme] == "nil" && session[:uke] != "nil" %>
-Create Seme Character:
+创建小攻:
 <% else %>
-Create New Character:
+创建新角色:
 <% end %>
 </div>
 
@@ -27,26 +29,26 @@ Create New Character:
 	    <tr>
 	      <td><%= form.label(:name, "姓名:")%></td>
 	      <% if (session[:seme] == nil && session[:uke] == nil) %>
-	      	<td><%= form.text_field(:name, :value => session[:new_chara_name]) %></td>
+	      	<td><%= form.text_field(:name, :value => session[:new_chara_name], :class => 'input_text_field') %></td>
 	      <% elsif (session[:seme] == "nil" && session[:uke] == "nil") %>
-	        <td><%= form.text_field(:name, :value => session[:name1]) %></td>
+	        <td><%= form.text_field(:name, :value => session[:name1], :class => 'input_text_field') %></td>
 	      <% elsif (session[:seme] == "nil" && session[:uke] != "nil") %>
-	        <td><%= form.text_field(:name, :value => session[:name1]) %></td>
+	        <td><%= form.text_field(:name, :value => session[:name1], :class => 'input_text_field') %></td>
 	      <% else %>
-	      	<td><%= form.text_field(:name, :value => session[:name2]) %></td>
+	      	<td><%= form.text_field(:name, :value => session[:name2], :class => 'input_text_field') %></td>
 	      <% end %>
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:nickname, "别名:")%></td>
-	      <td><%= form.text_field(:nickname) %></td>
+	      <td><%= form.text_field(:nickname, :class => 'input_text_field') %></td>
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:work, "出自作品:")%></td>
-	      <td><%= form.text_field(:work) %></td>
+	      <td><%= form.text_field(:work, :class => 'input_text_field') %></td>
 	    </tr>
 	    <tr>
 	    	<td><%= form.label(:birth_date, "生日:")%></td>
-	      <td><%= form.text_field(:birth_date) %></td>
+	      <td><%= form.text_field(:birth_date, :class => 'input_text_field') %></td>
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:sex, "性别:")%></td>
@@ -72,23 +74,23 @@ Create New Character:
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:occupation, "职业:")%></td>
-	      <td><%= form.text_field(:occupation) %></td>
+	      <td><%= form.text_field(:occupation, :class => 'input_text_field') %></td>
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:height, "身高:")%></td>
-	      <td><%= form.text_field(:height) %></td>
+	      <td><%= form.text_field(:height, :class => 'input_text_field') %></td>
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:weight, "体重:")%></td>
-	      <td><%= form.text_field(:weight) %></td>
+	      <td><%= form.text_field(:weight, :class => 'input_text_field') %></td>
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:eye, "瞳色:")%></td>
-	      <td><%= form.text_field(:eye) %></td>
+	      <td><%= form.text_field(:eye, :class => 'input_text_field') %></td>
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:hair, "发色:")%></td>
-	      <td><%= form.text_field(:hair) %></td>
+	      <td><%= form.text_field(:hair, :class => 'input_text_field') %></td>
 	    </tr>
 	    <tr>
 	    	<td><%= form.label(:profile_image, "角色头像:")%></td>
@@ -102,7 +104,7 @@ Create New Character:
 	</div>
 	<%= form.hidden_field :sex %>
 	<%= hidden_field_tag :summary %>
-	<%= submit_tag "提交" %>
+	<%= submit_tag "提交", :class => "submit_button" %>
 	<% end %>
 </div>
 

@@ -1,3 +1,34 @@
 .current_step {
-	background-color: #99CCFF;
+	background-color: #ffc1cb;
+	border: 1px solid #ffc1cb;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.create_new_chara_notice {
+	font-size: 14px;
+}
+
+.create_cp_nav_bar {
+	font-size: 14px;
+}
+
+.search_result_nav_bar {
+	font-size: 14px;
+}
+
+.create_new_chara_name_notice {
+	font-size: 14px;
+}
+
+.submit_button {
+	background-color: #576069;
+	color: #e7eaef;
+	border: none;
+	padding: 3px;
+}
+
+.submit_button:hover {
+	color: #f98d9e;
 }

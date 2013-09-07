@@ -1,4 +1,4 @@
-<p>搜索<%= params[:chara] %>的结果：</p>
+<p class="search_result_nav_bar">搜索[<%= params[:chara] %>]的结果：</p>
 <% results = @chara %>
 <% radio_name = "new_chara" %>
 <% i = 0 %>
@@ -11,5 +11,5 @@
 <% end %>
 <p>
 	<%= radio_button_tag(radio_name, "nil", checked = results.size == 0 ? true : false) %>
-	<%= label_tag :label, "New character" %>
+	<%= label_tag :label, "新角色" %>
 </p>

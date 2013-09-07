@@ -1,4 +1,6 @@
+<div class="create_cp_nav_bar">
 <%= render(:partial => "shared/create_navbar", :locals => {:step => 3, :step_names => ["输入角色姓名", "填写角色信息", "填写CP信息"]}) %>
+</div>
 
 <div>
 	<% @cp.errors.full_messages.each do |msg| %>
@@ -21,7 +23,7 @@
 		    </tr>
 		    <tr>
 		      <td><%= label_tag(:acronym, "简称:")%></td>
-		      <td><%= text_field_tag(:acronym) %></td>
+		      <td><%= text_field_tag(:acronym, nil, :class => 'input_text_field') %></td>
 		    </tr>
 		    <tr>
 		      <td><%= label_tag(:category, "作品类别:")%></td>
@@ -31,7 +33,7 @@
 		    </tr>
 		    <tr>
 		      <td><%= label_tag(:summary, "简介:")%></td>
-		      <td><%= text_area_tag(:summary) %></td>
+		      <td><%= text_area_tag(:summary, nil, :class => 'input_text_area') %></td>
 		    </tr>
 		  </table>
 		</div>
@@ -42,7 +44,7 @@
 	</div>
 	<%= hidden_field_tag :wiki_content %>
 	<%= hidden_field_tag :relation_type, "0" %>
-	<%= submit_tag "提交" %>
+	<%= submit_tag "提交", :class => "submit_button" %>
 	<% end %>
 </div>
 <input type="hidden" id="current_user" value=<%= current_user.id %> />

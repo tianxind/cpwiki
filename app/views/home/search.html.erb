@@ -1,5 +1,5 @@
 <div>
-	<h1>角色</h1>
+	<p class="subtitle">角色</p>
 	<% if @characters.length == 0 then %>
 		<p>暂无角色搜索结果</p>
 	<% else %>
@@ -7,7 +7,7 @@
 			<%= render(:partial => "characters/snippet", :locals => {:character => character}) %>
 		<% end %>
 	<% end %>
-	<h1>CP</h1>
+	<p class="subtitle">CP</p>
 	<% if @cps.length == 0 then %>
 		<p>暂无角色搜索结果</p>
 	<% else %>
