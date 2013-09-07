@@ -20,8 +20,6 @@ class CpsController < ApplicationController
   end
 
   def create
-    puts "<<<<<<<<<<<<<<<<What are the params?"
-    puts params
     @cp = Cp.new(:category => params[:category], 
                  :summary => params[:summary], 
                  :wiki_content => params[:wiki_content],

@@ -67,6 +67,10 @@ img.resize {
 	z-index: 1;
 }
 
+img.photo_to_tag {
+	z-index: 1;
+}
+
 .delete_button {
 	position: absolute;
 	z-index: 2;
@@ -106,10 +110,13 @@ img.resize {
 	border-bottom:1px solid #cccccc;
 }
 
+div#photo_div {
+	position: relative;
+}
 
-
-
-
-
-
+div.tag {
+	position: absolute;
+	z-index: 2;
+	background: ;
+}
 

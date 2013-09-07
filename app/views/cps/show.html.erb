@@ -6,7 +6,6 @@
 	<% if @already_liked %>
 		<% if @already_liked == 0 %>
 			<a href="javascript:void(0)" id="like_button_a" style="background-color:#CCCCCC;">萌</a>
-		<% else %>
 			<a href="javascript:void(0)" id="like_button_a" style="background-color:#FFC0CB;">已萌</a>
 		<% end %>
 	<% else %>
@@ -144,7 +143,7 @@ $(document).ready(function(){
 				  $('#comment_result').flash_message({
 				    text: '评论成功!',
 				    how: 'append',
-			      class_name: 'flash_message_success'
+			        class_name: 'flash_message_success'
 				  });
 				  // clear the text area after successful submit
 				  $('textarea#comment_area').val('');
@@ -154,9 +153,9 @@ $(document).ready(function(){
 		     	 $('#comment_result').flash_message({
 				    text: '评论失败!',
 				    how: 'append',
-			      class_name: 'flash_message_fail'
+			        class_name: 'flash_message_fail'
 				   });
-				   $('textarea#comment_area').val(cmt);
+				 $('textarea#comment_area').val(cmt);
 		     }
 			});
 	  }

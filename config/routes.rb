@@ -53,6 +53,7 @@ Cpwiki::Application.routes.draw do
     end
   end
 
+  resources :tags
 
   # Sample resource route with options:
   #   resources :products do
