@@ -1,6 +1,6 @@
+<p class="subtitle">点击图片添加评论&nbsp;&nbsp;<a onclick="showAllTags()">[显示所有评论]</a></p>
 <div id="photo_div">
 	<img id="photo" src='<%= "/images/#{@photo.filename}" %>' class="photo_to_tag"></img>
-<!-- 	<div class="tag" style="display:none">This is a test.</div> -->
 </div>
 <div id="dialog" title="添加评论">
 		<form>
@@ -36,8 +36,9 @@ $('#dialog').dialog({
 				// Insert tag at correct position
 				var newTag = "<div class='tag' style='left:" + xpos + "px;top:" + ypos + "px;'>" 
 					+ comment + "</div>";
-				console.log(newTag);
+				// console.log(newTag);
 				$("#photo_div").append(newTag);
+				$('#comment').val("");
 			},
 			error: function(){
 				alert("Post failed");
@@ -50,21 +51,18 @@ $('#dialog').dialog({
 
 $('#photo').click(function(e) {
 	$('#dialog').dialog("open");
-	// var photo_div = document.getElementById('photo_div');
 	var photoDiv = $('#photo_div');
-	// $('.tag').css('left', e.pageX - photoDiv.offset().left);
-	// $('.tag').css('top', e.pageY - photoDiv.offset().top);
-	// $('.tag').position({ left: e.pageX - photo_div.offset.left, top: e.pageY - photo_div.offset.top });
-	// console.log($('.tag').css('left'));
-	// console.log($('.tag').css('top'));
-	// console.log($('.tag').position());
-	// $('.tag').show();
-	//$('#dialog').dialog("option", { position: [e.pageX - photo_div.offsetLeft,
-	//	e.pageY - photo_div.offsetTop] });
-	// $('#dialog').dialog("option", { position: [e.pageX - $('#photo_div').offset.left + 5,
-	// 	e.pageY - $('#photo_div') .offset.top + 5 ] });
 	$('#dialog').dialog("option", { position: [e.pageX - $(document).scrollLeft() + 5, e.pageY -$(document).scrollTop() + 5] });
 	$('#xpos').val(e.pageX - photoDiv.offset().left);
 	$('#ypos').val(e.pageY - photoDiv.offset().top);
 });
+
+function showAllTags() {
+	<% for tag in @tags %>
+		var newTag = "<div class='tag' style='left:" + <%= tag.pos_x %> + "px;top:" + <%= tag.pos_y %>
+			+ "px;'>" + '<%= tag.comment %>' + "</div>";
+		// console.log(newTag);
+		$("#photo_div").append(newTag);
+	<% end %>
+}
 </script>

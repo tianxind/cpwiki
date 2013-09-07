@@ -117,7 +117,7 @@ var myEditor = (function() {
 	
 	function replaceImageHTML(src) {
 		var originalStr = "<img src=\"" + src + "\">";
-		var replaceStr = "<img class=\"resize\" src=\"" + src + "\"></img>";
+		var replaceStr = "<img class=\"resize wiki_image\" src=\"" + src + "\"></img>";
 		var wikiSource = $(".edit_area")[0].innerHTML;
 		wikiSource = wikiSource.replace(originalStr, replaceStr);
 		$(".edit_area")[0].innerHTML = wikiSource;
