@@ -10,6 +10,6 @@
 	<% i = i + 1 %>
 <% end %>
 <p>
-	<%= radio_button_tag(radio_name, "nil", checked = results.size == 0 ? true : false) %>
-	<%= label_tag :label, "新角色" %>
+	<%= radio_button_tag(radio_name, "nil", checked = results.size == 0 ? true : false, :class => 'radio_button') %>
+	<%= label_tag :label, "新角色", :class => 'new_chara_label_in_search' %>
 </p>

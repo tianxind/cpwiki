@@ -6,6 +6,7 @@
 	<% if @already_liked %>
 		<% if @already_liked == 0 %>
 			<a href="javascript:void(0)" id="like_button_a" style="background-color:#CCCCCC;">萌</a>
+		<% else %>
 			<a href="javascript:void(0)" id="like_button_a" style="background-color:#FFC0CB;">已萌</a>
 		<% end %>
 	<% else %>
@@ -53,12 +54,11 @@
 	</div>
 </div>
 
-<p class="subtitle">评论</p>
 <div id="comments_block">
+	<p class="subtitle">评论</p>
 	<% if @comment_array %>
-		<% p "comment_array size is >>>>> " + @comment_array.size.to_s %>
 		<% @comment_array.each do |cmt| %>
-			<p class="each_comment">&gt;&gt; <%= cmt.comment_text %> - <%= User.find_by_id(cmt.user_id).username %> [<%= cmt.date_time.strftime("%Y-%m-%d %T") %>]</p>
+			<p class="each_comment wordwrap">&gt;&gt; <%= cmt.comment_text %> - <%= User.find_by_id(cmt.user_id).username %> [<%= cmt.date_time.strftime("%Y-%m-%d %T") %>]</p>
 		<% end %>
 	<% end %>
 
