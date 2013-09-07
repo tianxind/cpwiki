@@ -215,8 +215,13 @@ button:hover {
 }
 
 select {
-	background-color: #ffc1cb;
-	
+	border-color: #cccccc;
+}
+
+select:focus {
+	outline: none;
+	background-color: #ffedf0;
+	border-color: #f98d9e;
 }
 
 
