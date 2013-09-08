@@ -1,3 +1,2 @@
-<%= link_to cp.acronym, cp_path(cp) %>
-<%= link_to cp.seme.name, character_path(cp.seme) %>攻，<%= link_to cp.uke.name, character_path(cp.uke) %>受的配对
-<p><%= make_snippet(cp.summary) %></p>
+<%= link_to cp.seme.name + " ♥ " + cp.uke.name, cp_path(cp) %>
+<p class="search_result_snippet">&nbsp;&nbsp;&nbsp;&nbsp;<%= make_snippet(cp.summary) %></p>

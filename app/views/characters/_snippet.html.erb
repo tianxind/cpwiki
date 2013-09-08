@@ -1,5 +1,5 @@
 <%= link_to character.name, character_path(character) %>
-<span>&nbsp;&nbsp;出自
+<span class="search_result_work">&nbsp;&nbsp;出自
 <% if character.work then %><em><%= character.work %></em><% end %>
 </span>
-<p><%= make_snippet(character.summary) %></p>
+<div class="search_result_snippet">&nbsp;&nbsp;&nbsp;&nbsp;<%= make_snippet(character.summary) %></div>
