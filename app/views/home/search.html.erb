@@ -9,7 +9,7 @@
 	<% end %>
 	<p class="subtitle">CP</p>
 	<% if @cps.length == 0 then %>
-		<p>暂无角色搜索结果</p>
+		<p>暂无CP搜索结果</p>
 	<% else %>
 		<% for cp in @cps %>
 			<%= render(:partial => "cps/snippet", :locals => {:cp => cp}) %>

@@ -9,7 +9,7 @@ h1 {
 }
 
 .wiki_title {
-	font-size: 14px;
+	font-size: 16px;
 	border-bottom: solid 1px #f98d9e;
 }
 
@@ -135,4 +135,28 @@ div.tag {
 #comments_block {
 	clear: right;
 }
+
+.search_result_snippet {
+	color: #a8b1b9;
+	font-size: 12px;
+}
+
+.search_result_work {
+	color: #a8b1b9;
+	font-size: 12px;
+}
+
+.search_result_semeuke {
+	font-size: 12px;
+}
+
+
+
+
+
+
+
+
+
+
 

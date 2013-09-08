@@ -203,6 +203,8 @@ button:hover {
 .edit {
 	float: right;
 	font-size: 12px;
+	line-height: 30px; 
+	vertical-align: bottom;
 }
 
 .input_text_field {
