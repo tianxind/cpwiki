@@ -45,7 +45,7 @@
 <input type="hidden" id="current_user" value=<%= current_user.id %> />
 <input type="hidden" id="saved_filename" value="" />
  
-<%= link_to '<<返回', cp_path(@cp.id) %>
+<%= link_to '<<返回', cp_path(@cp.id), :class => 'edit_back_button' %>
 
 <script>
 

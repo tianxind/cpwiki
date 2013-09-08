@@ -58,7 +58,7 @@
 	<p class="subtitle">评论</p>
 	<% if @comment_array %>
 		<% @comment_array.each do |cmt| %>
-			<p class="each_comment wordwrap">&gt;&gt; <%= cmt.comment_text %> - <%= User.find_by_id(cmt.user_id).username %> [<%= cmt.date_time.strftime("%Y-%m-%d %T") %>]</p>
+			<div class="each_comment wordwrap">&gt;&gt; <%= cmt.comment_text %> - <%= User.find_by_id(cmt.user_id).username %> [<%= cmt.date_time.strftime("%Y-%m-%d %T") %>]</div>
 		<% end %>
 	<% end %>
 
@@ -99,10 +99,15 @@
   };
 })(jQuery);
 
+// function insertCommentBox() {
+// 	$('.homepage_content').append("<textarea rows=\"4\" cols=\"50\" id=\"comment_area\" placeholder=\"在此添加评论\">"
+// 	    + "</textarea>"
+// 		+ "<br/><button type=\"button\" id=\"submit_new_comment\">提交</button>");
+// }
+
 function insertCommentBox() {
-	$('.homepage_content').append("<textarea rows=\"4\" cols=\"50\" id=\"comment_area\" placeholder=\"在此添加评论\">"
-	    + "</textarea>"
-		+ "<br/><button type=\"button\" id=\"submit_new_comment\">提交</button>");
+	$('.homepage_content').append("<form name=\"comment_box_form\"><textarea rows=\"4\" cols=\"50\" id=\"comment_area\" placeholder=\"在此添加评论\" name=\"limitedtextarea\" onKeyDown=\"limitText(this.form.limitedtextarea,this.form.countdown,200);\" onKeyUp=\"limitText(this.form.limitedtextarea,this.form.countdown,200);\"></textarea>"
+		+ "<br/><button type=\"button\" id=\"submit_new_comment\">提交</button>&nbsp<input readonly class=\"comment_limit_chars\" id=\"limit_chars_countdown\" type=\"text\" name=\"countdown\" size=\"1\" value=\"255\"><input readonly class=\"comment_limit_chars\" type=\"text\" size=\"2\" value=\"/255\"></form>");
 }
 
 // add new comment
@@ -138,7 +143,9 @@ $(document).ready(function(){
 		    dataType: "html",
 		    data: "comment_text=" + cmt + "&id=" + index + "&create_time=" + create_time,
 		    success: function(){
-		      $('#new_comment').append('<p>&gt;&gt; ' + cmt + ' - ' + username + ' [' + create_time + ']' + '</p>');
+		      $('#new_comment').append('&gt;&gt; ' + cmt + ' - ' + username + ' [' + create_time + ']' + '</br>');
+		      // resume chars limit to 255
+		      $('input#limit_chars_countdown').val('255');
 		      // show success msg
 				  $('#comment_result').flash_message({
 				    text: '评论成功!',
@@ -200,6 +207,14 @@ $(document).ready(function(){
 <% end %>
 }); // document.ready
 
+// limit number of characters in comment box
+function limitText(limitField, limitCount, limitNum) {
+	if (limitField.value.length > limitNum) {
+		limitField.value = limitField.value.substring(0, limitNum);
+	} else {
+		limitCount.value = limitNum - limitField.value.length;
+	}
+}
 </script>
 
 

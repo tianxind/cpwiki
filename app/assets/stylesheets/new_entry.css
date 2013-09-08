@@ -36,3 +36,9 @@
 .new_chara_label_in_search {
 	font-size: 12px;
 }
+
+.edit_back_button {
+	float: right;
+	margin-right: 30px;
+	font-size: 12px;
+}
