@@ -23,9 +23,9 @@ body {
 	color: #576069;
 }
 
-.navbar_container {
-	text-align: right;
-	width: 99%;	
+.navbar_container_table {
+	margin-left:auto;
+	margin-right:5px;
 }
 
 .user_nav {
@@ -84,11 +84,23 @@ p.title {
 }
 
 .edit_area {
-	width: 100%;
+	width: 95%;
 	height: 200px;
 	overflow-y: scroll;
 	border: solid 1px #CCCCCC;
 	padding: 5px 10px 5px 10px;
+	color: #576069;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border: 1px solid #cccccc;
+	-moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.edit_area:focus {
+	outline: none;
+	border-color: #f98d9e;
 }
 
 .error_msg {
