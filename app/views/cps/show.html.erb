@@ -6,7 +6,6 @@
 	<% if @already_liked %>
 		<% if @already_liked == 0 %>
 			<a href="javascript:void(0)" id="like_button_a" style="background-color:#CCCCCC;">萌</a>
-		<% else %>
 			<a href="javascript:void(0)" id="like_button_a" style="background-color:#FFC0CB;">已萌</a>
 		<% end %>
 	<% else %>
@@ -54,11 +53,12 @@
 	</div>
 </div>
 
+<p class="subtitle">评论</p>
 <div id="comments_block">
-	<p class="subtitle">评论</p>
 	<% if @comment_array %>
+		<% p "comment_array size is >>>>> " + @comment_array.size.to_s %>
 		<% @comment_array.each do |cmt| %>
-			<p class="each_comment wordwrap">&gt;&gt; <%= cmt.comment_text %> - <%= User.find_by_id(cmt.user_id).username %> [<%= cmt.date_time.strftime("%Y-%m-%d %T") %>]</p>
+			<p class="each_comment">&gt;&gt; <%= cmt.comment_text %> - <%= User.find_by_id(cmt.user_id).username %> [<%= cmt.date_time.strftime("%Y-%m-%d %T") %>]</p>
 		<% end %>
 	<% end %>
 
@@ -68,7 +68,7 @@
 <div><span class="error_msg" id="comment_error_msg"></span></div>
 
 <div><span id="comment_result"></span></div>
-
+<button id='add_comment' style='display:none'>添加评论</button>
 <script>
 // flash error/success msg
 (function($) {
@@ -196,10 +196,43 @@ $(document).ready(function(){
 		});
   }); // like_button_a.click
 
-  // Add comment button to all images in wiki content 
+  // Add comment button to all images in wiki content
+  //var images = $('.wiki_img');
+  var images = $('.resize');
+  console.log(images);
+  var addCommentButton = $('#add_comment');
+  var hoveredImage = false;
+  images.mouseenter(function(e) {
+	console.log("show add comment button");
+	hoveredImage = this;
+	var offset = $(this).offset();
+	// console.log(offset.top, offset.left);
+	// var rect = this.getBoundingClientRect();
+	// var top = rect.top + $(document).scrollTop();
+	// var left = rect.left + $(document).scrollLeft();
+	var top = offset.top - $('.user_nav').height();
+	var left = offset.left - $('.left_sidebar').width() - $('.homepage_content').css('marginLeft');
+	addCommentButton.show();
+	// console.log("offset left: " + offset.left);
+	// console.log("left sidebar width: " + $('.left_sidebar').width());
+	// console.log(offset.left - $('.left_sidebar').width());
+	addCommentButton.css({
+    	top: top + 'px',
+    	left: left + 'px'
+    });
+	// var rect = image[0].getBoundingClientRect();
+	// var top = rect.top + $(document).scrollTop() + $(editor).scrollTop();
+	// var left = rect.left + $(document).scrollLeft() + $(editor).scrollLeft();
+	// var deleteButton = $(".delete_button")[0];
+	// deleteButton.style.visibility = 'visible';
+	// deleteButton.style.top = top + "px";
+	// 			deleteButton.style.left = left + "px";
+	// 			hoveredImage = image[0];
+  });
 <% else %>
 	$('.homepage_content').append('<div>[只有注册用户才可以开启评论功能]</div>');
 <% end %>
+
 }); // document.ready
 
 </script>

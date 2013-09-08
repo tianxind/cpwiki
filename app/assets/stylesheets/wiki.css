@@ -81,6 +81,11 @@ img.wiki_img {
 	visibility: hidden;
 }
 
+#add_comment {
+	position: absolute;
+	z-index: 2;
+}
+
 #heart {
 	color: #f98d9e;
 	font-size: 16px;
@@ -134,5 +139,9 @@ div.tag {
 
 #comments_block {
 	clear: right;
+}
+
+div.wiki_contents {
+	position: relative;
 }
 
