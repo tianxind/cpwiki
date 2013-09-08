@@ -50,6 +50,7 @@ Cpwiki::Application.routes.draw do
   resources :photos do
     collection do
       post 'update_profile_image'
+      get 'lookup'
     end
   end
 

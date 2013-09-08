@@ -65,7 +65,15 @@ class PhotosController < ApplicationController
   end
 
   def show
-    @photo = Photo.find_by_id(params[:id])
+    if params[:id]
+      @photo = Photo.find_by_id(params[:id])
+    end
     @tags = @photo.tags
+  end
+
+  def lookup
+    @photo = Photo.find_by_filename(params[:src])
+    if @photo
+    redirect_to :action => :show
   end
 end
