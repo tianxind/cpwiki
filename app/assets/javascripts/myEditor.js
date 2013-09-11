@@ -1,4 +1,14 @@
 var myEditor = (function() {
+	function insertWebImage(src) {
+		// If the image source doesn't start with either http:// or https://, we need to
+		// prepend http. Otherwise, rails will think this is http://our.website.url/XXXXX
+		if (src.indexOf("http://") != 0 && src.indexOf("https://") != 0) {
+			src = "http://" + src;
+		}
+		document.execCommand('insertImage', false, src);
+		return src;
+	}
+
 	function addButtonEventListeners(editor) {
 		// Get the html button and add click event
 		var html_button = $(".makeWYSIWYG_viewHTML")[0];
@@ -26,33 +36,10 @@ var myEditor = (function() {
 					case 'insertImage':
 						var src = prompt('Please specify the link of the image.');
 						if (src) {
-							document.execCommand('insertImage', false, src);
+							src = insertWebImage(src);
+							// document.execCommand('insertImage', false, src);
 						}
-						replaceImageHTML(src);
-						/*var image = $("img[src='" + src + "']");
-						console.log(image);
-						image.mouseenter(function(e) {
-							console.log("show delete button");
-							var rect = image[0].getBoundingClientRect();
-							var top = rect.top + $(document).scrollTop() + $(editor).scrollTop();
-							var left = rect.left + $(document).scrollLeft() + $(editor).scrollLeft();
-							console.log("top: " + top + ", left: " + left);
-							var deleteButton = $(".delete_button")[0];
-							deleteButton.style.visibility = 'visible';
-							deleteButton.style.top = top + "px";
-							deleteButton.style.left = left + "px";
-							hoveredImage = image[0];
-						});
-			
-						image.mouseleave(function(e) {
-							console.log("hide delete button");
-							var deleteButton = $(".delete_button")[0];
-							if (e.relatedTarget == deleteButton) {
-								return;
-							}
-							deleteButton.style.visibility = 'hidden';
-							hoveredImage = false;
-						});*/
+						replaceImageHTML(src, true);
 
 					break;
 			
@@ -115,9 +102,14 @@ var myEditor = (function() {
 		hoveredImage = false;
 	}*/
 	
-	function replaceImageHTML(src) {
+	function replaceImageHTML(src, isLinked) {
 		var originalStr = "<img src=\"" + src + "\">";
-		var replaceStr = "<img class=\"resize wiki_image\" src=\"" + src + "\"></img>";
+		var replaceStr = "";
+		if (isLinked) {
+			replaceStr = "<img class=\"resize wiki_image\" type=\"web\" src=\"" + src + "\"></img>";
+		} else {
+			replaceStr = "<img class=\"resize wiki_image\" src=\"" + src + "\"></img>";
+		}
 		var wikiSource = $(".edit_area")[0].innerHTML;
 		wikiSource = wikiSource.replace(originalStr, replaceStr);
 		$(".edit_area")[0].innerHTML = wikiSource;
@@ -142,49 +134,94 @@ var myEditor = (function() {
 	};
 	
 	function insertDialogForm() {
-		var dialogForm = "<div id=\"dialog-form\" title=\"Insert Image\">" +
-			"<form accept-charset=\"UTF-8\" action=\"/photos\" class=\"new_photo\" data-remote=\"true\"" +
-			" enctype=\"multipart/form-data\" id=\"new_photo\" method=\"post\">" +
-			"<div style=\"margin:0;padding:0;display:inline\">" +
-			"<fieldset>" +
-			"<input type=\"file\" name=\"file\" id=\"file\" value=\"\" class=\"text ui-widget-content ui-corner-all\" />" +
-			"<input name=\"commit\" id=\"commit\" type=\"submit\" value=\"Upload\">" +
-			"</fiedset>" +
-		    "</form>" + 
+		// var dialogForm = "<div id=\"dialog-form\" title=\"插入图片\">" +
+		// 	"<form accept-charset=\"UTF-8\" action=\"/photos\" class=\"new_photo\" data-remote=\"true\"" +
+		// 	" enctype=\"multipart/form-data\" id=\"new_photo\" method=\"post\">" +
+		// 	"<input type=\"file\" name=\"file\" id=\"file\" value=\"\" class=\"text ui-widget-content ui-corner-all\" />" +
+		// 	"<input name=\"commit\" id=\"commit\" type=\"submit\" value=\"上传\">" +
+		//     "</form>" + 
+		// 	"</div>";
+
+		// var dialogForm = "<div id=\"dialog-form\" title=\"插入图片\">" +
+		// 	"<div style='display:inline-block;width:45%;'>" +
+		// 	"<input type='radio' name='source' id='web' value='web' checked>网络图片" +
+		// 	"<input type='radio' name='source' id='upload' value='upload'>本地图片" +
+		// 	"</div>" +
+		// 	"<div style='display:inline-block;width:54%;'>" +
+		// 	"<form id=\"new_web_photo\">" + 
+		// 	"<label for='photo[filename]'>图片地址</label>" +
+		// 	"<input id=\"photo_filename\" name=\"photo[filename]\" size=\"30\" type=\"text\">" +
+		// 	"<input id=\"commit_web\" value=\"确定\" type=\"submit\">" +
+		// 	"</form>" +
+		// 	"<form style='display:none' accept-charset=\"UTF-8\" action=\"/photos\" class=\"new_photo\" data-remote=\"true\"" +
+		// 	" enctype=\"multipart/form-data\" id=\"new_photo\" method=\"post\">" +
+		// 	"<input type=\"file\" name=\"file\" id=\"file\" value=\"\" class=\"text ui-widget-content ui-corner-all\" />" +
+		// 	"<input name=\"commit\" id=\"commit\" type=\"submit\" value=\"上传\">" +
+		//     "</form>" + 
+		// 	"</div>";
+
+		var dialogForm = "<div id=\"dialog-form\" title=\"插入图片\">" +
+			"<div style='display:inline-block;width:45%;'>" +
+			"<input type='radio' name='source' id='web' value='web' checked>网络图片" +
+			"<input type='radio' name='source' id='upload' value='upload'>本地图片" +
+			"</div>" +
+			"<div style='display:inline-block;width:54%;'>" +
+			"<form accept-charset=\"UTF-8\" action=\"/photos/create_web_photo\" class=\"new_web_photo\" data-remote=\"true\" id=\"new_web_photo\" method=\"post\">" +
+			"<label for='photo[filename]'>图片地址</label>" +
+			"<input id=\"photo_filename\" name=\"photo[filename]\" size=\"30\" type=\"text\">" +
+			"<input id=\"commit_web\" value=\"确定\" type=\"submit\">" +
+			"</form>" +
+			// "<form accept-charset=\"UTF-8\" action=\"/photos\" class=\"new_photo\" data-remote=\"true\"" +
+			// " enctype=\"multipart/form-data\" id=\"new_photo\" method=\"post\">" +
+			// "<input type=\"file\" name=\"file\" id=\"file\" value=\"\" class=\"text ui-widget-content ui-corner-all\" />" +
+			// "<input name=\"commit\" id=\"commit\" type=\"submit\" value=\"上传\">" +
+		 //    "</form>" + 
+			"</div>" +
 			"</div>";
-			
-		/*var dialogForm = "<div id=\"dialog-form\" title=\"Insert Image\">" +
-			"<ul>" +
-			"<li><a href=\"#tab-web\">网络图片</a></li>" +
-			"<li><a href=\"#tab-local\">本地上传</a></li>" + 
-			"</ul>" +
-			"<div id=\"tab-web\">" +
-			"<input type=\"text\" name=\"url\" id=\"url\" class=\"text ui-widget-content ui-corner-all\" />" +
-			"</div>" +
-			"<div id=\"tab-local\">" +
-			"<form accept-charset=\"UTF-8\" action=\"/photos\" class=\"new_photo\" data-remote=\"true\"" +
-			" enctype=\"multipart/form-data\" id=\"new_photo\" method=\"post\">" +
-			"<div style=\"margin:0;padding:0;display:inline\">" +
-			"<fieldset>" +
-			"<input type=\"file\" name=\"file\" id=\"file\" value=\"\" class=\"text ui-widget-content ui-corner-all\" />" +
-			"<input name=\"commit\" id=\"commit\" type=\"submit\" value=\"Upload\">" +
-			"</fiedset>" +
-		    "</form>" + 
-			"</div>" +
-			"</div>" +
-			"</div>" +
-			"</div>";*/
 		var lastForm = $('form');
 		lastForm = lastForm[lastForm.length - 1];
 		$(dialogForm).insertAfter(lastForm);
-	
+		
+		// Bind event to save filename 
 		$('#file').change(function() {
 			console.log("inside onchange for file field");
 			// Set filename field to send to server
 			$('#saved_filename').val($('#file').val());
 			console.log($('#saved_filename').val());
 		});
-		
+
+		// Bind event to confirm inserting web photo
+		// $("#new_web_photo").submit(function(e) {
+		// 	var src = $('#photo_filename').val();
+		// 	console.log(src);
+		// 	// $('.edit_area').focus();
+		// 	// var sel = document.selection;
+		// 	// if (sel) {
+		// 	// var textRange = sel.createRange();
+		// 	// document.execCommand('insertImage', false, src);
+		// 	// textRange.collapse(false);
+		// 	// textRange.select();
+		// 	// } else {
+		// 	document.execCommand('insertImage', false, src);
+		// 	// }
+		// 	replaceImageHTML(src, true);
+		// 	$('#photo_filename').val("");
+		// 	$("#dialog-form").dialog("close");
+		// 	return false;
+		// });
+
+		// Bind event to switch form using radio button
+		$('#web').click(function() {
+			console.log("show web form");
+			$('#new_web_photo').show();
+			$('#new_photo').hide();
+		});
+
+		$('#upload').click(function() {
+			console.log("show upload form");
+			$('#new_web_photo').hide();
+			$('#new_photo').show();
+		});
 		// Bind Ajax events
 			// Bind event to show delete button
 			/*var image = $("img[src='" + src + "']");
@@ -218,8 +255,8 @@ var myEditor = (function() {
 	function addUploadDialog() {
 		$("#dialog-form").dialog({
 			autoOpen: false,
-			height: 200,
-			width: 350,
+			height: 150,
+			width: 400,
 			modal: true
 	    });	
 	};
@@ -232,10 +269,7 @@ var myEditor = (function() {
 			
 			// Allows user to edit inside the editor
 			editor.setAttribute("contenteditable", true);
-			/*editor.click(function(){
-				$(this).children('img').attr('contenteditable','false');
-			});*/
-			
+
 			// Add listeners for onclick events
 			addButtonEventListeners(editor);
 			

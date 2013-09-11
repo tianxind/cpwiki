@@ -51,6 +51,7 @@ Cpwiki::Application.routes.draw do
     collection do
       post 'update_profile_image'
       get 'lookup'
+      post 'create_web_photo'
     end
   end
 

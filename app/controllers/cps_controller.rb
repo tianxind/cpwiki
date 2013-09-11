@@ -33,6 +33,8 @@ class CpsController < ApplicationController
     if params[:images] != nil
       Photo.deleteUnusedImages(params[:wiki_content], params[:images])
     end
+
+    # Photo.saveAllWebImages(wiki_content)
     
     if @cp.save
       session[:seme] = nil

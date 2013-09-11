@@ -24,4 +24,8 @@
 			</tr>
 		</table>
 	</div>
+	<%= form_for(@photo, remote: true) do |f| %>
+		<%= f.text_field :filename %>
+		<% f.submit %>
+	<% end %>
 </div>
