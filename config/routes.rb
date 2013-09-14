@@ -55,6 +55,9 @@ Cpwiki::Application.routes.draw do
 
   resources :tags
 
+  resources :draft_characters
+  resources :draft_cps
+
   # Sample resource route with options:
   #   resources :products do
   #     member do

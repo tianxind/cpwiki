@@ -20,7 +20,7 @@
 	<table class="cps_created_by_user_table">
 		<% @cp_entries.each do |entry| %>
 			<tr>
-				<td class="entry_list"><a href="<%= "/cps/" + entry.id.to_s %>"><%= Character.find_by_id(entry.seme_id).name %> ♥ <%= Character.find_by_id(entry.uke_id).name %></a></td><td> [<%= entry.created_at.strftime("%Y-%m-%d %T") %>]</td>
+				<td class="entry_list"><a href="<%= "/cps/" + entry.id.to_s %>"><%= Character.find_by_id(entry.seme_id).name %> × <%= Character.find_by_id(entry.uke_id).name %></a></td><td> [<%= entry.created_at.strftime("%Y-%m-%d %T") %>]</td>
 			</tr>
 		<% end %>
 	</table>
@@ -54,7 +54,7 @@
 	<table class="cps_liked_by_user_table">
 		<% @user_likes.each do |like| %>
 			<tr>
-				<td class="like_list"><a href="<%= "/cps/" + Cp.find_by_id(like.cp_id).id.to_s %>"><%= Character.find_by_id(Cp.find_by_id(like.cp_id).seme_id).name %> ♥ <%= Character.find_by_id(Cp.find_by_id(like.cp_id).uke_id).name %></a></td>
+				<td class="like_list"><a href="<%= "/cps/" + Cp.find_by_id(like.cp_id).id.to_s %>"><%= Character.find_by_id(Cp.find_by_id(like.cp_id).seme_id).name %> × <%= Character.find_by_id(Cp.find_by_id(like.cp_id).uke_id).name %></a></td>
 			</tr>
 		<% end %>
 	</table>
@@ -63,7 +63,22 @@
 <% end %>
 </div>
 
-
+<div class="subtitle">
+角色草稿:
+</div>
+<div class="cps_liked_by_user">
+<% if @draft_characters.size != 0 %>
+	<table class="cps_liked_by_user_table">
+		<% @draft_characters.each do |draft_chara| %>
+			<tr>
+				<td class="like_list"><a href="/draft_characters/<%=draft_chara.id %>/edit"><%= draft_chara.name %></a></td><td> [<%= draft_chara.updated_at.strftime("%Y-%m-%d %T") %>]</td>
+			</tr>
+		<% end %>
+	</table>
+<% else %>
+	<p>没有角色草稿</p>
+<% end %>
+</div>
 
 
 

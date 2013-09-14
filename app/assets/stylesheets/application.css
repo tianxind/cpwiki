@@ -106,6 +106,9 @@ p.title {
 .error_msg {
 	background-color: #FFC0CB;
 	font-size: 15px;
+	-moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
 
 .left_sidebar {
@@ -245,7 +248,16 @@ select:focus {
   float: left;
 }
 
-
+#no_profile_image {
+	border-width: 1px;
+	border-color: #aaaaaa;
+	padding: 2px;
+	border-style: dotted;
+	-moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+}
 
 
 

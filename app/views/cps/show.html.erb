@@ -1,7 +1,7 @@
 <% p "current id is >>>>>>>>>>>>" + @cp.id.to_s %>
 
 <div class="wiki_title">
-	<span id="wiki_name_title"><%= @seme.name %><span id="heart"> ♥ </span><%= @uke.name %></span>
+	<span id="wiki_name_title"><%= @seme.name %><span id="heart"> × </span><%= @uke.name %></span>
 	<%= (@cp.acronym == nil || @cp.acronym == "") ? "" : "(#{@cp.acronym})" %>&nbsp;&nbsp;
 	<% if @already_liked %>
 		<% if @already_liked == 0 %>
@@ -46,7 +46,7 @@
 	<div class="related_cps">
 		<b>相关CP:</b>&nbsp;&nbsp;
 		<% for cp in @related_cps %>
-			<%= link_to "#{cp.seme.name}♥#{cp.uke.name}", cp_path(cp) %>
+			<%= link_to "#{cp.seme.name} × #{cp.uke.name}", cp_path(cp) %>
 			<% if cp != @related_cps.last %>
 				&nbsp;|&nbsp;
 			<% end %>

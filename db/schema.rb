@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130902060149) do
+ActiveRecord::Schema.define(:version => 20130908220110) do
 
   create_table "admin_users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -67,6 +67,39 @@ ActiveRecord::Schema.define(:version => 20130902060149) do
     t.string   "acronym"
     t.text     "summary"
     t.text     "wiki_content"
+  end
+
+  create_table "draft_characters", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "character_id"
+    t.string   "name"
+    t.string   "nickname"
+    t.string   "sex"
+    t.integer  "age_when_first_appear"
+    t.date     "birth_date"
+    t.integer  "horoscope"
+    t.integer  "blood_type"
+    t.string   "hair"
+    t.string   "eye"
+    t.string   "height"
+    t.string   "weight"
+    t.string   "occupation"
+    t.text     "summary"
+    t.string   "work"
+    t.integer  "profile_image"
+    t.datetime "updated_at"
+  end
+
+  create_table "draft_cps", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "cp_id"
+    t.integer  "seme_id",      :null => false
+    t.integer  "uke_id",       :null => false
+    t.integer  "category"
+    t.string   "acronym"
+    t.text     "summary"
+    t.text     "wiki_content"
+    t.datetime "updated_at"
   end
 
   create_table "likes", :force => true do |t|
