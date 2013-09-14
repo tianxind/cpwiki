@@ -40,7 +40,8 @@ function addCommentButtonToImages() {
 			imageSrc = imageSrc.replace("/images/", "");
 		}
 		var link = jQuery('<a/>', {
-    		'href': '/photos/lookup?src=' + encodeURIComponent(imageSrc)
+    		'href': '/photos/lookup?src=' + encodeURIComponent(imageSrc),
+    		'target': '_blank'
 		})
 		link.append($(images[i]).clone());
 		console.log(link);
