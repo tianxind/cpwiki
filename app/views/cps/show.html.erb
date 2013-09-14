@@ -4,6 +4,7 @@
 	<% if @already_liked %>
 		<% if @already_liked == 0 %>
 			<a href="javascript:void(0)" id="like_button_a" style="background-color:#CCCCCC;">萌</a>
+		<% else %>
 			<a href="javascript:void(0)" id="like_button_a" style="background-color:#FFC0CB;">已萌</a>
 		<% end %>
 	<% else %>
