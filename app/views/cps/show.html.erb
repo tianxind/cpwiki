@@ -68,7 +68,7 @@
 <div><span class="error_msg" id="comment_error_msg"></span></div>
 
 <div><span id="comment_result"></span></div>
-<a href='' id='add_comment' style='display:none'>添加评论</a>
+<p id='add_comment' style='background:#FFFFFF;display:none'>单击图片可添加评论</p>
 <script>
 // flash error/success msg
 (function($) {
@@ -81,7 +81,7 @@
     }, options);
     
     return $(this).each(function() {
-      if( $(this).parent().find('.flash_message').get(0) )
+      if($(this).parent().find('.flash_message').get(0) )
         return;
       
       var message = $('<span />', {
@@ -200,40 +200,41 @@ $(document).ready(function(){
 <% end %>
 
 }); // document.ready
+addCommentButtonToImages();
 // Add comment button to all images in wiki content
-var images = $('.wiki_image');
-console.log(images);
-var addCommentButton = $('#add_comment');
-var hoveredImage = false;
-images.mouseenter(function(e) {
-	// console.log("show add comment button");
-	hoveredImage = this;
-	var offset = $(this).offset();
-	var top = offset.top - $('.right_container').offset().top;
-	var left = offset.left - $('.left_sidebar').width() - $('.homepage_content').css('marginLeft');
-	addCommentButton.show();
-	addCommentButton.css({
-		top: top + 'px',
-		left: left + 'px'
-	});
-	console.log(this);
-	var imageSrc = $(this).attr("src");
-	addCommentButton.attr('href', '/photos/lookup?src=' + imageSrc);
-});
-images.mouseleave(function(e) {
-	if (e.relatedTarget === addCommentButton) {
-    	return;
-	}
-	addCommentButton.hide();
-	hoveredImage = false;
-});
-addCommentButton.mouseleave(function(e){
-	if (e.relatedTarget === hoveredImage) {
-    	return;	
-	}
-	addCommentButton.hide();
-	hoveredImage = false;
-});
+// var images = $('.wiki_image');
+// console.log(images);
+// var addCommentButton = $('#add_comment');
+// var hoveredImage = false;
+// images.mouseenter(function(e) {
+// 	// console.log("show add comment button");
+// 	hoveredImage = this;
+// 	var offset = $(this).offset();
+// 	var top = offset.top - $('.right_container').offset().top;
+// 	var left = offset.left - $('.left_sidebar').width() - $('.homepage_content').css('marginLeft');
+// 	addCommentButton.show();
+// 	addCommentButton.css({
+// 		top: top + 'px',
+// 		left: left + 'px'
+// 	});
+// 	console.log(this);
+// 	var imageSrc = $(this).attr("src");
+// 	addCommentButton.attr('href', '/photos/lookup?src=' + imageSrc);
+// });
+// images.mouseleave(function(e) {
+// 	if (e.relatedTarget === addCommentButton) {
+//     	return;
+// 	}
+// 	addCommentButton.hide();
+// 	hoveredImage = false;
+// });
+// addCommentButton.mouseleave(function(e){
+// 	if (e.relatedTarget === hoveredImage) {
+//     	return;	
+// 	}
+// 	addCommentButton.hide();
+// 	hoveredImage = false;
+// });
 </script>
 
 

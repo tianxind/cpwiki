@@ -106,14 +106,22 @@ var myEditor = (function() {
 		var originalStr = "<img src=\"" + src + "\">";
 		var replaceStr = "";
 		if (isLinked) {
-			replaceStr = "<img class=\"resize wiki_image\" type=\"web\" src=\"" + src + "\"></img>";
+			replaceStr = "<img class=\"resize wiki_image\" src=\"" + src + "\" type=\"web\"></img>";
 		} else {
-			replaceStr = "<img class=\"resize wiki_image\" src=\"" + src + "\"></img>";
+			replaceStr = "<img class=\"resize wiki_image\" src=\"" + src + "\" type=\"upload\"></img>";
 		}
 		var wikiSource = $(".edit_area")[0].innerHTML;
 		wikiSource = wikiSource.replace(originalStr, replaceStr);
 		$(".edit_area")[0].innerHTML = wikiSource;
 	};
+	
+	// function replaceImageHTML(src) {
+	// 	var originalStr = "<img src=\"" + src + "\">";
+	// 	var replaceStr = "<img class=\"resize wiki_image\" src=\"" + src + "\"></img>";
+	// 	var wikiSource = $(".edit_area")[0].innerHTML;
+	// 	wikiSource = wikiSource.replace(originalStr, replaceStr);
+	// 	$(".edit_area")[0].innerHTML = wikiSource;
+	// };
 	
 	function insertDeleteButton() {
 		$("body").append("<button class=\"delete_button\">Delete</button>");
@@ -134,13 +142,13 @@ var myEditor = (function() {
 	};
 	
 	function insertDialogForm() {
-		// var dialogForm = "<div id=\"dialog-form\" title=\"插入图片\">" +
-		// 	"<form accept-charset=\"UTF-8\" action=\"/photos\" class=\"new_photo\" data-remote=\"true\"" +
-		// 	" enctype=\"multipart/form-data\" id=\"new_photo\" method=\"post\">" +
-		// 	"<input type=\"file\" name=\"file\" id=\"file\" value=\"\" class=\"text ui-widget-content ui-corner-all\" />" +
-		// 	"<input name=\"commit\" id=\"commit\" type=\"submit\" value=\"上传\">" +
-		//     "</form>" + 
-		// 	"</div>";
+		var dialogForm = "<div id=\"dialog-form\" title=\"插入图片\">" +
+			"<form accept-charset=\"UTF-8\" action=\"/photos\" class=\"new_photo\" data-remote=\"true\"" +
+			" enctype=\"multipart/form-data\" id=\"new_photo\" method=\"post\">" +
+			"<input type=\"file\" name=\"file\" id=\"file\" value=\"\" class=\"text ui-widget-content ui-corner-all\" />" +
+			"<input name=\"commit\" id=\"commit\" type=\"submit\" value=\"上传\">" +
+		    "</form>" + 
+			"</div>";
 
 		// var dialogForm = "<div id=\"dialog-form\" title=\"插入图片\">" +
 		// 	"<div style='display:inline-block;width:45%;'>" +
@@ -160,24 +168,24 @@ var myEditor = (function() {
 		//     "</form>" + 
 		// 	"</div>";
 
-		var dialogForm = "<div id=\"dialog-form\" title=\"插入图片\">" +
-			"<div style='display:inline-block;width:45%;'>" +
-			"<input type='radio' name='source' id='web' value='web' checked>网络图片" +
-			"<input type='radio' name='source' id='upload' value='upload'>本地图片" +
-			"</div>" +
-			"<div style='display:inline-block;width:54%;'>" +
-			"<form accept-charset=\"UTF-8\" action=\"/photos/create_web_photo\" class=\"new_web_photo\" data-remote=\"true\" id=\"new_web_photo\" method=\"post\">" +
-			"<label for='photo[filename]'>图片地址</label>" +
-			"<input id=\"photo_filename\" name=\"photo[filename]\" size=\"30\" type=\"text\">" +
-			"<input id=\"commit_web\" value=\"确定\" type=\"submit\">" +
-			"</form>" +
-			// "<form accept-charset=\"UTF-8\" action=\"/photos\" class=\"new_photo\" data-remote=\"true\"" +
-			// " enctype=\"multipart/form-data\" id=\"new_photo\" method=\"post\">" +
-			// "<input type=\"file\" name=\"file\" id=\"file\" value=\"\" class=\"text ui-widget-content ui-corner-all\" />" +
-			// "<input name=\"commit\" id=\"commit\" type=\"submit\" value=\"上传\">" +
-		 //    "</form>" + 
-			"</div>" +
-			"</div>";
+		// var dialogForm = "<div id=\"dialog-form\" title=\"插入图片\">" +
+		// 	"<div style='display:inline-block;width:45%;'>" +
+		// 	"<input type='radio' name='source' id='web' value='web' checked>网络图片" +
+		// 	"<input type='radio' name='source' id='upload' value='upload'>本地图片" +
+		// 	"</div>" +
+		// 	"<div style='display:inline-block;width:54%;'>" +
+		// 	"<form accept-charset=\"UTF-8\" action=\"/photos/create_web_photo\" class=\"new_web_photo\" data-remote=\"true\" id=\"new_web_photo\" method=\"post\">" +
+		// 	"<label for='photo[filename]'>图片地址</label>" +
+		// 	"<input id=\"photo_filename\" name=\"photo[filename]\" size=\"30\" type=\"text\">" +
+		// 	"<input id=\"commit_web\" value=\"确定\" type=\"submit\">" +
+		// 	"</form>" +
+		// 	// "<form accept-charset=\"UTF-8\" action=\"/photos\" class=\"new_photo\" data-remote=\"true\"" +
+		// 	// " enctype=\"multipart/form-data\" id=\"new_photo\" method=\"post\">" +
+		// 	// "<input type=\"file\" name=\"file\" id=\"file\" value=\"\" class=\"text ui-widget-content ui-corner-all\" />" +
+		// 	// "<input name=\"commit\" id=\"commit\" type=\"submit\" value=\"上传\">" +
+		//  //    "</form>" + 
+		// 	"</div>" +
+		// 	"</div>";
 		var lastForm = $('form');
 		lastForm = lastForm[lastForm.length - 1];
 		$(dialogForm).insertAfter(lastForm);

@@ -1,6 +1,10 @@
 <p class="subtitle">点击图片添加评论&nbsp;&nbsp;<a onclick="showAllTags()">[显示所有评论]</a></p>
 <div id="photo_div">
-	<img id="photo" src='<%= "/images/#{@photo.filename}" %>' class="photo_to_tag"></img>
+	<% if @photo.source == Photo::WEB %>
+		<img id="photo" src='<%= @photo.filename %>' class="photo_to_tag"></img>
+	<% else %>
+		<img id="photo" src='<%= "/images/#{@photo.filename}" %>' class="photo_to_tag"></img>
+	<% end %>
 </div>
 
 <div id="dialog" title="添加评论">

@@ -11,58 +11,106 @@ class Photo < ActiveRecord::Base
     :filename => "文件名"
   }
 
-  def self.deleteUnusedImages(wiki_content, all_images)
-    pos = 0
-    files = Array.new
-    while pos < wiki_content.length do
-      # Get file name of the image
-      match_data = wiki_content.match(/<img(.+)src=\"\/images\/(.+)\">/, pos)
-      if match_data != nil
-        files.push(match_data[2])
-        pos += 4
-      else
-        break
-      end
+  # Enum for source attribute
+  WEB = 0
+  UPLOAD = 1
+
+  # def self.deleteUnusedImages(wiki_content, all_images)
+  #   pos = 0
+  #   files = Array.new
+  #   while pos < wiki_content.length do
+  #     # Get file name of the image
+  #     match_data = wiki_content.match(/<img(.+)src=\"\/images\/(.+)\">/, pos)
+  # match_data = wiki.match(/<img(.+)src=\"\/images\/(.+)\">/, 0)
+  #     if match_data != nil
+  #       files.push(match_data[2])
+  #       pos += 4
+  #     else
+  #       break
+  #     end
+  #   end
+  #   puts "<<<<<<<<<<<<<<<<<<<all images in wikisource<<<<<<<<<<<<<<"
+  #   puts files
+  #   deleted_files = all_images.reject {|i| files.include? i}
+  #   puts "<<<<<<<<<<<<<<<<<<<<Deleted files<<<<<<<<<<<<<<<<<<<<<<<"
+  #   puts deleted_files
+  #   # Delete all entries from database and the files on our server
+  #   deleted_files.each do |f|
+  #     image = Photo.find_by_filename(f)
+  #     image.destroy
+  #     File.delete(Rails.root.join('public', 'images', image.filename))
+  #   end
+  # end
+  # "<img class=\"resize wiki_image\" src=\"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcR4NMgYqPGZ2CZ_czoB4elX5wzuGuapCS16VuNMwTjNN2kNGSwq\" type=\"web\"><div><br></div><div><img class=\"resize wiki_image\" src=\"/images/20130914195828_Makise.Kurisu.full.484550.jpg\"><br></div>"
+
+  def self.processWikiImages(wiki_content, all_images, user_id)
+    if all_images != nil
+      deleteUnusedImages(getUnusedImages(wiki_content, all_images))
     end
-    puts "<<<<<<<<<<<<<<<<<<<all images in wikisource<<<<<<<<<<<<<<"
-    puts files
-    deleted_files = all_images.reject {|i| files.include? i}
-    puts "<<<<<<<<<<<<<<<<<<<<Deleted files<<<<<<<<<<<<<<<<<<<<<<<"
-    puts deleted_files
-    # Delete all entries from database and the files on our server
-    deleted_files.each do |f|
+    saveAllWebImages(getWebImages(wiki_content), user_id)
+  end
+
+  def self.deleteUnusedImages(unused_images)
+    unused_images.each do |f|
       image = Photo.find_by_filename(f)
-      image.destroy
-      File.delete(Rails.root.join('public', 'images', image.filename))
+      if image != nil
+        image.destroy
+        File.delete(Rails.root.join('public', 'images', image.filename))
+      end
     end
   end
 
-  def getAllWebImages(wiki_content)
+  def self.saveAllWebImages(web_images, user_id)
+    for image in web_images
+      if Photo.find_by_filename(image) == nil 
+        @photo = Photo.new
+        @photo.user_id = user_id
+        @photo.filename = image
+        @photo.date_time = DateTime.now
+        @photo.source = WEB
+        @photo.save
+      end
+    end
+  end
+
+  def self.getWebImages(wiki_content)
     pos = 0
-    files = Array.new
+    web_images = Array.new
     while pos < wiki_content.length do
       # Get file name of the image
-      match_data = wiki_content.match(/<img(.+)type=\"(.+)\"(.+)src=\"\/images\/(.+)\">/, pos)
+      match_data = wiki_content.match(/<img class=\"resize wiki_image\" src=\"([^>]+)\" type=\"web\">/, pos)
       if match_data != nil
-        files.push(match_data[4])
-        pos += 4
+        web_images.push(match_data[1])
+        pos += wiki_content.index(match_data[0]) + match_data[0].length
       else
         break
       end
     end
-    puts "<<<<<<<<<<<<<<<<<<All Web Images<<<<<<<<<<<<<"
-    puts files
-    return files 
+ 
+    puts "<<<<<<<<<<<<<<<<<<all web images<<<<<<<<<<<<<<<<<<"
+    puts web_images
+    return web_images
   end
 
-  def self.saveAllWebImages(wiki_content)
-    images = getAllWebImages(wiki_content)
-    for image in images
-      @photo = Photo.new
-      @photo.user_id = current_user.id
-      @photo.filename = image
-      @photo.date_time = DateTime.now
-      @photo.save
+  def self.getUnusedImages(wiki_content, all_images)
+    pos = 0
+    uploaded_images = Array.new
+    while pos < wiki_content.length do
+      # Get file name of the image
+      match_data = wiki_content.match(/<img class=\"resize wiki_image\" src=\"\/images\/([^>]+)\" type=\"upload\">/, pos)
+      if match_data != nil
+        uploaded_images.push(match_data[1])
+        pos += wiki_content.index(match_data[0]) + match_data[0].length
+      else
+        break
+      end
     end
+    puts "<<<<<<<<<<<<<<<<<<<all uploaded images in wikisource<<<<<<<<<<<<<<"
+    puts uploaded_images
+    unused_images = all_images.reject {|i| uploaded_images.include? i}
+    puts "<<<<<<<<<<<<<<<<<<<<Deleted files<<<<<<<<<<<<<<<<<<<<<<<"
+    puts unused_images
+
+    return unused_images
   end
 end

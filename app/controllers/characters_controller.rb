@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 class CharactersController < ApplicationController
-  before_filter :authenticate_user!, :except => [:show, :choose, :search, :redirect_to_character_info_or_new_character]
+  before_filter :authenticate_user!, :except => [:show, :search, :redirect_to_character_info_or_new_character]
 
   def new
     # redirect user to characters/choose if user type in /characters/new
@@ -34,10 +34,7 @@ class CharactersController < ApplicationController
         # input url with /character/new
         session[:new_chara_name] = nil
 
-        # see if there are any images we need to delete
-        if params[:images] != nil
-          Photo.deleteUnusedImages(params[:summary], params[:images])
-        end
+        Photo.processWikiImages(params[:summary], params[:images], current_user.id)
       
         # If both seme and uke are nil, then the user intends to only create character
         if session[:seme] == nil && session[:uke] == nil
@@ -82,6 +79,7 @@ class CharactersController < ApplicationController
     p "in update params are"
     p params
     if @character.update_attributes(params[:character])
+      Photo.processWikiImages(params[:character][:summary], params[:images], current_user.id)
       if params[:fromcp] == nil then
         redirect_to @character
       else

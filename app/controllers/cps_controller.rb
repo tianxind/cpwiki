@@ -29,12 +29,7 @@ class CpsController < ApplicationController
                  :acronym => params[:acronym],
                  :created_at => Time.now)
                  
-    # see if there are any images we need to delete
-    if params[:images] != nil
-      Photo.deleteUnusedImages(params[:wiki_content], params[:images])
-    end
-
-    # Photo.saveAllWebImages(wiki_content)
+    Photo.processWikiImages(params[:wiki_content], params[:images], current_user.id)
     
     if @cp.save
       session[:seme] = nil
@@ -50,7 +45,6 @@ class CpsController < ApplicationController
   
   def show
     @cp = Cp.find_by_id(params[:id])
-
     # Find related cps (seme and uke in our current cp also appear in these cps)
     @related_cps = Cp.find_all_by_seme_id(@cp.seme_id) + Cp.find_all_by_seme_id(@cp.uke_id) +
       Cp.find_all_by_uke_id(@cp.seme_id) + Cp.find_all_by_uke_id(@cp.uke_id)
@@ -73,6 +67,7 @@ class CpsController < ApplicationController
     @cp = Cp.find_by_id(params[:id])
     
     if @cp.update_attributes(params[:cp])
+      Photo.processWikiImages(params[:cp][:wiki_content], params[:images], current_user.id)
       redirect_to @cp
     else
       render 'edit'
