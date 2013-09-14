@@ -1,4 +1,4 @@
-<% @character.errors.full_messages.each do |msg| %>
+<% @draft_character.errors.full_messages.each do |msg| %>
     <div><span class="error_msg"><%= msg %></span></div>
 <% end %>
 <div id="profile-image-form">
@@ -13,7 +13,7 @@
 		<input name="commit" id="commit" type="submit" value="上传头像" class="submit_button">
     </form>
 </div>
-<%= form_for @character, url: character_path(@character.id), method: :put do |form| %>
+<%= form_for @draft_character, url: character_path(@draft_character.character_id), method: :put do |form| %>
 	<table>
 	    <tr>
 	      <td><%= form.label(:name, "姓名:")%></td>
@@ -47,12 +47,12 @@
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:horoscope, "星座:")%></td>
-	      <td><%= form.select(:horoscope, Character::HOROSCOPE, {}, :id => :chara_horoscope) %>
+	      <td><%= form.select(:horoscope, Character::HOROSCOPE) %>
 		  </td>
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:blood_type, "血型:")%></td>
-	      <td><%= form.select(:blood_type, Character::BLOODTYPE, {}, :id => :chara_blood_type) %></td>
+	      <td><%= form.select(:blood_type, Character::BLOODTYPE) %></td>
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:occupation, "职业:")%></td>
@@ -95,8 +95,8 @@
 <script type="text/javascript">
 	var editor = $(".edit_area")[0];
 	var initialText = "";
-	<% if @character.summary != nil && !@character.summary.empty? %>
-		initialText = '<%= formatted(@character.summary) %>';
+	<% if @draft_character.summary != nil && !@draft_character.summary.empty? %>
+		initialText = '<%= formatted(@draft_character.summary) %>';
 	<% end %>
 	myEditor.makeEditor(editor, initialText);
 	// Put html source into hidden text area before submit
@@ -112,17 +112,18 @@
 			$("#character_sex").val($('#normalSex').val());
 		}
 	});
+	/*$("#photo-form").bind("ajax:success", function() {
+		alert($(this).data);
+	})*/
 </script>
 <input type="hidden" id="current_user" value=<%= current_user.id %> />
 <input type="hidden" id="saved_filename" value="" />
- 
-<%= link_to '<<返回', character_path(@character.id), :class => 'edit_back_button' %>
 
 
 <script>
 // select correct sex
 $("select#normalSex").each(function() { 
-	var sex = '<%= @character.sex %>';
+	var sex = '<%= @draft_character.sex %>';
 	console.log("currenct sex is " + sex);
 	console.log("currenct text is " + $("select#normalSex").val());
 	if(sex != '男' && sex != '女' && sex != '不明') {

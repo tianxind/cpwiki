@@ -1,3 +1,4 @@
+<p class="subtitle">创建新角色</p>
 <div class="create_cp_nav_bar">
 <% if !(session[:seme] == nil && session[:uke] == nil) %>
 	<%= render(:partial => "shared/create_navbar", :locals => {:step => 2, :step_names => ["输入角色姓名  ", "填写角色信息  ", "填写CP信息  "]}) %>
@@ -13,15 +14,15 @@
 
 <div class="create_new_chara_notice">
 <% if session[:seme] == "nil" && session[:uke] == "nil" %>
-创建小攻:
+创建攻:
 <% elsif session[:uke] == "nil" && session[:seme] != "nil" %>
-创建小受:
+创建受:
 <% elsif session[:seme] == "nil" && session[:uke] != "nil" %>
-创建小攻:
+创建攻:
 <% else %>
-创建新角色:
 <% end %>
 </div>
+<br/>
 <div id="profile-image-form">
 	<form accept-charset=\"UTF-8\" action="/photos/update_profile_image" class="new_profile_image" data-remote="true" enctype="multipart/form-data" id="new_profile_image" method="post">
 		<label for="profile_image">角色头像:</label>
@@ -31,9 +32,10 @@
 	        <span id="no_profile_image">尚未添加头像</span>
 	    <% end %>
 		<input type="file" name="profile_image" id="profile_image" value="" />
-		<input name="commit" id="commit" type="submit" value="Upload">
+		<input name="commit" id="commit" type="submit" value="上传图像" class="submit_button">
     </form>
 </div>
+<br/>
 <div>
 	<%= form_for(@character, :url => {:action => :create}) do |form| %>
 	  <table class="character">

@@ -113,6 +113,7 @@ img.wiki_img {
 .each_comment {
 	margin: 1px;
 	padding: 1px;
+	font-size: 12px;
 }
 
 .divide_line {
@@ -154,3 +155,29 @@ div.tag {
 .search_result_semeuke {
 	font-size: 12px;
 }
+
+.comment_limit_chars {
+	border: 0px;
+	text-align: right;
+	margin: 0px;
+	padding: 0px;
+	color: #aaaaaa;
+	font-size: 10px;
+}
+
+#new_comment {
+	margin: 1px;
+	padding: 1px;
+	font-size: 12px;
+}
+
+
+
+
+
+
+
+
+
+
+>>>>>>> ac69e7f87f9f29b4635e752db65566eba31354b6

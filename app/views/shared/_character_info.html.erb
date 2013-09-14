@@ -3,7 +3,7 @@
 <% if @profile_image != nil %>
 <img class='resize' src="/images/<%= @profile_image.filename %>" alt="Placeholder"></img>
 <% else %>
-<p>No image</p>
+<p class="no_profile_image">尚未添加头像</p>
 <% end %>
 </div>
 <p class="character_name"><a href="/characters/<%= character.id.to_s %>"><%= character.name %></a></p>

@@ -11,6 +11,7 @@ class UserInfosController < ApplicationController
     @cp_entries = Cp.find_all_by_creator_id(@user.id)
     @user_likes = Like.find_all_by_user_id(@user.id)
     @character_entries = Character.find_all_by_creator_id(current_user.id)
+    @draft_characters = DraftCharacter.find_all_by_user_id(current_user.id)
 
   end
 end
