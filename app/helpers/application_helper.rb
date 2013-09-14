@@ -7,7 +7,7 @@ module ApplicationHelper
   end
 
   def removeTags(text)
-
+    return text
   end
 
   def make_snippet(text)
