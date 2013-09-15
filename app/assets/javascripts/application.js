@@ -14,4 +14,3 @@
 //= require jquery_ujs
 //= require_tree .
 //= require jquery.remotipart
-//= require jquery-ui
