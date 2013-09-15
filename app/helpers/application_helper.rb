@@ -7,7 +7,15 @@ module ApplicationHelper
   end
 
   def removeTags(text)
-    return text
+    # Remove html tags
+    text.gsub("<div>", "")
+    text.gsub("</div>", "")
+    text.gsub("<p>", "")
+    text.gsub("</p>", "")
+    text.gsub("<b>", "")
+    text.gsub("</b>", "")
+    text.gsub("<em>", "")
+    text.gsub("</em>", "")
   end
 
   def make_snippet(text)
