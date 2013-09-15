@@ -71,10 +71,6 @@ img.photo_to_tag {
 	z-index: 1;
 }
 
-img.wiki_img {
-	
-}
-
 .delete_button {
 	position: absolute;
 	z-index: 2;
@@ -127,7 +123,7 @@ div#photo_div {
 div.tag {
 	position: absolute;
 	z-index: 2;
-	background: ;
+	background: #FFFFFF;
 }
 
 .wordwrap { 
@@ -170,14 +166,3 @@ div.tag {
 	padding: 1px;
 	font-size: 12px;
 }
-
-
-
-
-
-
-
-
-
-
->>>>>>> ac69e7f87f9f29b4635e752db65566eba31354b6
