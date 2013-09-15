@@ -260,6 +260,20 @@ select:focus {
   font-size: 12px;
 }
 
+img.mascot_red {
+	height: 300px;
+	width: auto;
+	float: right;
+	margin-top: 80px;
+}
+
+img.mascot_blue {
+	height: 300px;
+	width: auto;
+	float: left;
+	margin-top: 80px;
+}
+
 
 
 
