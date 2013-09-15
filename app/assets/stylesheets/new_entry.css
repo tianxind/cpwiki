@@ -1,32 +1,32 @@
 .current_step {
 	background-color: #ffc1cb;
-	border: 1pt solid #ffc1cb;
-  -moz-border-radius: 5pt;
-  -webkit-border-radius: 5pt;
-  border-radius: 5pt;
+	border: 1px solid #ffc1cb;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
 
 .create_new_chara_notice {
-	font-size: 14pt;
+	font-size: 14px;
 }
 
 .create_cp_nav_bar {
-	font-size: 14pt;
+	font-size: 14px;
 }
 
 .search_result_nav_bar {
-	font-size: 14pt;
+	font-size: 14px;
 }
 
 .create_new_chara_name_notice {
-	font-size: 14pt;
+	font-size: 14px;
 }
 
 .submit_button {
 	background-color: #576069;
 	color: #e7eaef;
 	border: none;
-	padding: 3pt;
+	padding: 3px;
 }
 
 .submit_button:hover {
@@ -34,11 +34,11 @@
 }
 
 .new_chara_label_in_search {
-	font-size: 12pt;
+	font-size: 12px;
 }
 
 .edit_back_button {
 	float: right;
-	margin-right: 30pt;
-	font-size: 12pt;
+	margin-right: 30px;
+	font-size: 12px;
 }
