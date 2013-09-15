@@ -1,33 +1,33 @@
 h1 {
-	border-bottom: solid 1px #0372f7;
+	border-bottom: solid 1pt #0372f7;
 }
 
 .horizontalline {
 	background-color: #aaaaaa;
 	width: 100%;
-	height: 1px;
+	height: 1pt;
 }
 
 .wiki_title {
-	font-size: 16px;
-	border-bottom: solid 1px #f98d9e;
+	font-size: 16pt;
+	border-bottom: solid 1pt #f98d9e;
 }
 
 .character_basic_info {
 	width: 25%;
 	float: right;	
-	margin: 5px;
-	padding: 5px;
+	margin: 5pt;
+	padding: 5pt;
 	background-color: white;
-	border: 1px solid #cccccc;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+	border: 1pt solid #cccccc;
+  -moz-border-radius: 5pt;
+  -webkit-border-radius: 5pt;
+  border-radius: 5pt;
 }
 
 p.character_name {
 	background-color: #ffc1cb;
-	font-size: 16px;
+	font-size: 16pt;
 	text-align: center;
 }
 
@@ -37,32 +37,32 @@ p.character_name {
 
 .index {
 	width: 30%;
-	margin: 5px;
-	margin-left: 0px;
-	padding: 2px;
-	border: 1px solid #cccccc;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+	margin: 5pt;
+	margin-left: 0pt;
+	padding: 2pt;
+	border: 1pt solid #cccccc;
+  -moz-border-radius: 5pt;
+  -webkit-border-radius: 5pt;
+  border-radius: 5pt;
 }
 
 .toc {
-	margin: 0px;
+	margin: 0pt;
 }
 
 .subtitle {
-	font-size: 14px;
-	border-bottom: solid 1px #f98d9e;
+	font-size: 14pt;
+	border-bottom: solid 1pt #f98d9e;
 	overflow: hidden;
 }
 
 .subsubtitle {
-	font-size: 12px;
+	font-size: 12pt;
 	font-weight: bold;
 }
 
 img.resize {
-	width: 250px;
+	width: 250pt;
 	height: auto;
 	z-index: 1;
 }
@@ -84,7 +84,7 @@ img.photo_to_tag {
 
 #heart {
 	color: #f98d9e;
-	font-size: 16px;
+	font-size: 16pt;
 }
 
 #wiki_name_title {
@@ -92,28 +92,28 @@ img.photo_to_tag {
 }
 
 #comment_area {
-	margin-top: 10px;
-	border: 1px solid #cccccc;
-	-moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+	margin-top: 10pt;
+	border: 1pt solid #cccccc;
+	-moz-border-radius: 5pt;
+  -webkit-border-radius: 5pt;
+  border-radius: 5pt;
   color: #576069;
 }
 
 #comment_area:focus {
 	outline: none;
-	box-shadow: 0 0 0px #719ECE;
+	box-shadow: 0 0 0pt #719ECE;
 	border-color: #f98d9e;
 }
 
 .each_comment {
-	margin: 1px;
-	padding: 1px;
-	font-size: 12px;
+	margin: 1pt;
+	padding: 1pt;
+	font-size: 12pt;
 }
 
 .divide_line {
-	border-bottom:1px solid #cccccc;
+	border-bottom:1pt solid #cccccc;
 }
 
 div#photo_div {
@@ -140,29 +140,29 @@ div.tag {
 
 .search_result_snippet {
 	color: #a8b1b9;
-	font-size: 12px;
+	font-size: 12pt;
 }
 
 .search_result_work {
 	color: #a8b1b9;
-	font-size: 12px;
+	font-size: 12pt;
 }
 
 .search_result_semeuke {
-	font-size: 12px;
+	font-size: 12pt;
 }
 
 .comment_limit_chars {
-	border: 0px;
+	border: 0pt;
 	text-align: right;
-	margin: 0px;
-	padding: 0px;
+	margin: 0pt;
+	padding: 0pt;
 	color: #aaaaaa;
-	font-size: 10px;
+	font-size: 10pt;
 }
 
 #new_comment {
-	margin: 1px;
-	padding: 1px;
-	font-size: 12px;
+	margin: 1pt;
+	padding: 1pt;
+	font-size: 12pt;
 }

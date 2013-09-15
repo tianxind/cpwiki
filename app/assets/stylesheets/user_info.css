@@ -1,30 +1,30 @@
 .entry_list {
 /*	border-top-style: solid;
 	border-top-color: #FFC0CB;
-	border-top-width: 1px;*/
+	border-top-width: 1pt;*/
 }
 
 .cps_created_by_user_table {
-	margin-bottom: 10px;
-	font-size: 12px;
-	margin-right: 2px;
+	margin-bottom: 10pt;
+	font-size: 12pt;
+	margin-right: 2pt;
 	font-family: Tahoma;
 }
 
 .characters_created_by_user_table {
-	margin-bottom: 10px;
-	font-size: 12px;
-	margin-right: 2px;
+	margin-bottom: 10pt;
+	font-size: 12pt;
+	margin-right: 2pt;
 	font-family: Tahoma;
 }
 
 .cps_liked_by_user_table {
-	margin-bottom: 10px;
-	font-size: 12px;
-	margin-right: 2px;
+	margin-bottom: 10pt;
+	font-size: 12pt;
+	margin-right: 2pt;
 	font-family: Tahoma;
 }
 
 .user_basic_info {
-	font-size: 12px;
+	font-size: 12pt;
 }

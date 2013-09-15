@@ -1,12 +1,12 @@
 .homepage_content {
-	margin: 5px 15px;
+	margin: 5pt 15pt;
 }
 
 .content_crossbar {
 	background-color: #ffffff;
 	text-align: center;
-	border: 1px solid #cccccc;
-	border-radius:5px;
+	border: 1pt solid #cccccc;
+	border-radius:5pt;
 	display: inline-block;
 	width: 100%;
 }
@@ -14,11 +14,11 @@
 .newest {
 	background-color: #ffffff;
 	text-align: center;
-	border: 1px solid #cccccc;
-	border-radius:5px;
+	border: 1pt solid #cccccc;
+	border-radius:5pt;
 	width: 50%;
-	margin: 5px 0px;
-	height: 250px;
+	margin: 5pt 0pt;
+	height: 250pt;
 	display: inline-block;
 	float: left;
 }
@@ -26,11 +26,11 @@
 .hottest {
 	background-color: #ffffff;
 	text-align: center;
-	border: 1px solid #cccccc;
-	border-radius:5px;
+	border: 1pt solid #cccccc;
+	border-radius:5pt;
 	width: 49%;
-	margin: 5px 0px;
-	height: 250px;
+	margin: 5pt 0pt;
+	height: 250pt;
 	display: inline-block;
 	float: right;
 }
@@ -43,32 +43,32 @@
 }
 
 #bottomtable td {
-	font-size: 12px;
+	font-size: 12pt;
 	color: #e7eaef;
 	background-color: #576069;
-	border: 1px solid #576069;
-	border-radius:5px;
-	width: 80px;
-	height: 40px;
+	border: 1pt solid #576069;
+	border-radius:5pt;
+	width: 80pt;
+	height: 40pt;
 }
 
 #bottomtable {
 	border-collapse:separate;
-	border-spacing: 10px;
+	border-spacing: 10pt;
 	margin-left:auto; 
   margin-right:auto;
-  margin-top: 100px;
+  margin-top: 100pt;
 }
 
 .title {
-	font-size: 12px;
+	font-size: 12pt;
 	color: #576069;
 	text-align: center;
 }
 
 label {
 	color: #576069;
-	font-size: 12px;
+	font-size: 12pt;
 }
 
 .content_hottest_newest {

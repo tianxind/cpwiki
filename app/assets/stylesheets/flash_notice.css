@@ -1,22 +1,22 @@
 .flash_message_success {
-	font-size: 12px;
-	padding: 5px;
+	font-size: 12pt;
+	padding: 5pt;
 	color: #576069;
 	background-color: #b1f7b1;
-	border: 1px solid #b1f7b1;
-	-moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  padding: 3px;
+	border: 1pt solid #b1f7b1;
+	-moz-border-radius: 5pt;
+  -webkit-border-radius: 5pt;
+  border-radius: 5pt;
+  padding: 3pt;
 }
 
 .flash_message_fail {
-	font-size: 12px;
-	padding: 5px;
+	font-size: 12pt;
+	padding: 5pt;
 	color: #576069;
 	background-color: #FFC0CB;
-	border: 1px solid #FFC0CB;
-	-moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+	border: 1pt solid #FFC0CB;
+	-moz-border-radius: 5pt;
+  -webkit-border-radius: 5pt;
+  border-radius: 5pt;
 }
