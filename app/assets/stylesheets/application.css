@@ -10,6 +10,11 @@
  *
  *= require_self
  *= require_tree .
+ *= require flash_notice.css
+ *= require homepage.css
+ *= require new_entry.css
+ *= require user_info.css
+ *= require wiki.css
  */
 body {
 	font-family: Tahoma, Helvetica, Arial, sans-serif;
