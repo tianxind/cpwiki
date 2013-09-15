@@ -3,7 +3,8 @@ class HomeController < ApplicationController
   	session[:seme] = nil
   	session[:uke] = nil
   	session[:new_chara_name] = nil
-    @photo = Photo.new
+
+    @newest = Cp.
   end
 
   def search
