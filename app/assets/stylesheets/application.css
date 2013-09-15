@@ -36,7 +36,6 @@ body {
 .user_nav {
 	font-size: 10px;
 	color: #576069;
-	text-align: right;
 	width: 100%;
 }
 
@@ -279,8 +278,32 @@ img.mascot_blue {
 	margin-top: 80px;
 }
 
+.devise_flash {
+	border-width: 1px;
+	border-color: #FFC0CB;
+	background-color: #FFC0CB;
+	-moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  font-size: 10px;
+  padding: 2px;
+  text-align: center;
+}
 
+.nav_bar_flash_center {
+	display: inline-block;
+  width: 80%;
+  text-align: center;
+  margin-left: 100px;
+  margin-right: -100px;
+}
 
+.nav_bar_hint_right {
+	display: inline-block;
+	width: 19%;
+	float:right;
+	text-align: right;
+}
 
 
 
