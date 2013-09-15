@@ -36,7 +36,6 @@ $('#dialog').dialog({
 			data: "comment=" + comment + "&xpos=" + xpos + "&ypos="
 				+ ypos + "&photo_id=" + '<%= @photo.id %>',
 			success: function(){
-				alert("success");
 				$('#dialog').dialog("close");
 				// Insert tag at correct position
 				var newTag = "<div class='tag' style='left:" + xpos + "px;top:" + ypos + "px;'>" 
