@@ -1,4 +1,4 @@
-<h2>用户登录</h2>
+<p class="subtitle">用户登录</p>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
   
@@ -15,7 +15,7 @@
     <div><%= f.check_box :remember_me %> <%= label_tag '记住我' %></div>
   <% end -%>
 
-  <div><%= f.submit "登录" %></div>
+  <div><%= f.submit "登录" , :class => 'submit_button'%></div>
 <% end %>
-
+<br/>
 <%= render "devise/shared/links" %>

@@ -1,4 +1,4 @@
-<h2>忘记密码?</h2>
+<p class="subtitle">忘记密码?</p>
 
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
   <%= devise_error_messages! %>
@@ -6,7 +6,7 @@
   <div><%= label_tag '电子邮箱' %><br />
   <%= f.email_field :email, :autofocus => true %></div>
 
-  <div><%= f.submit "发送" %></div>
+  <div><%= f.submit "发送", :class => 'submit_button' %></div>
 <% end %>
-
+<br/>
 <%= render "devise/shared/links" %>

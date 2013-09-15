@@ -1,4 +1,4 @@
-<h2>用户注册</h2>
+<p class="subtitle">注册用户</p>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
@@ -15,7 +15,7 @@
   <div><%= label_tag '确认密码' %><br />
   <%= f.password_field :password_confirmation %></div>
 
-  <div><%= f.submit "注册" %></div>
+  <div><%= f.submit "注册", :class => 'submit_button' %></div>
 <% end %>
-
+<br/>
 <%= render "devise/shared/links" %>
