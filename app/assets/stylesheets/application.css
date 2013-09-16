@@ -36,9 +36,13 @@
 }*/
 body {
 	font-family: Tahoma, Helvetica, Arial, sans-serif;
-	font-size: 1em;
+	font-size: 12px;
 	background-color: #ffffff;
 	color: #576069;
+}
+
+td {
+	font-size: 12px;
 }
 
 #language {
@@ -119,6 +123,7 @@ p.title {
 	-moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
+  font-size: 12px;
 }
 
 .edit_area:focus {
