@@ -16,9 +16,27 @@
  *= require user_info.css
  *= require wiki.css
  */
+
+/*html { font-size: 62.5%; }
+
+@media (max-width: 300px) {
+    html { font-size: 50%; }
+}
+
+@media (min-width: 500px) {
+    html { font-size: 60%; }
+}
+
+@media (min-width: 700px) {
+    html { font-size: 100%; }
+}
+
+@media (min-width: 1200px) {
+    html { font-size: 160%; }
+}*/
 body {
 	font-family: Tahoma, Helvetica, Arial, sans-serif;
-	font-size: 14px;
+	font-size: 1em;
 	background-color: #ffffff;
 	color: #576069;
 }
