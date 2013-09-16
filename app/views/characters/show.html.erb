@@ -11,3 +11,13 @@
 addCommentButtonToImages();
 </script>
 
+<p class="subtitle">相关CP</p>
+<div class="related_cps">
+	<% for cp in @related_cps %>
+		<%= link_to "#{cp.seme.name} × #{cp.uke.name}", cp_path(cp) %>
+		<% if cp != @related_cps.last %>
+			&nbsp;|&nbsp;
+		<% end %>
+	<% end %> 
+</div>
+
