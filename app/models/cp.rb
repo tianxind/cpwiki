@@ -34,4 +34,9 @@ class Cp < ActiveRecord::Base
     end
     return results
   end
+
+  # Need to optimize this method when database grows large
+  def self.get_newest
+    Cp.order("id desc", :limit => 10)
+  end
 end

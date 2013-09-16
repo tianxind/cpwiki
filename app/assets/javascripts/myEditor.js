@@ -37,7 +37,6 @@ var myEditor = (function() {
 						var src = prompt('Please specify the link of the image.');
 						if (src) {
 							src = insertWebImage(src);
-							// document.execCommand('insertImage', false, src);
 						}
 						replaceImageHTML(src, true);
 

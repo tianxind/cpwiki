@@ -26,6 +26,11 @@ class Character < ActiveRecord::Base
   def self.human_attribute_name(attr, options={})
     HUMANIZED_ATTRIBUTES[attr.to_sym] || super
   end
+
+  # Need to optimize this method when database grows large
+  def self.get_newest
+    Character.order("id desc", :limit => 10)
+  end
 end
 
 

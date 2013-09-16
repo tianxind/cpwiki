@@ -1,6 +1,6 @@
 module ApplicationHelper
   # Defines how long a snippet should be
-  MAX_SNIPPET_LENGTH = 30
+  MAX_SNIPPET_LENGTH = 50
 
   def formatted(text)
     return text == nil ? "" : text.html_safe
@@ -16,6 +16,11 @@ module ApplicationHelper
     text.gsub("</b>", "")
     text.gsub("<em>", "")
     text.gsub("</em>", "")
+    text.gsub("<h1>", "")
+    text.gsub("</h1>", "")
+    text.gsub("<h2>", "")
+    text.gsub("</h2>", "")
+    return text
   end
 
   def make_snippet(text)
