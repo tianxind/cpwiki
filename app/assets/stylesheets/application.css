@@ -16,11 +16,33 @@
  *= require user_info.css
  *= require wiki.css
  */
+
+/*html { font-size: 62.5%; }
+
+@media (max-width: 300px) {
+    html { font-size: 50%; }
+}
+
+@media (min-width: 500px) {
+    html { font-size: 60%; }
+}
+
+@media (min-width: 700px) {
+    html { font-size: 100%; }
+}
+
+@media (min-width: 1200px) {
+    html { font-size: 160%; }
+}*/
 body {
 	font-family: Tahoma, Helvetica, Arial, sans-serif;
-	font-size: 14px;
+	font-size: 12px;
 	background-color: #ffffff;
 	color: #576069;
+}
+
+td {
+	font-size: 12px;
 }
 
 #language {
@@ -40,7 +62,7 @@ body {
 }
 
 a:active {
-	color: #576069;
+	color: #fe5671;
 }
 
 a:visited {
@@ -50,6 +72,7 @@ a:visited {
 a:hover {
 	color: #f98d9e;
 	text-decoration:underline;
+	cursor: pointer;
 }
 
 .left_sidebar {
@@ -89,7 +112,7 @@ p.title {
 
 .edit_area {
 	width: 95%;
-	height: 200px;
+	height: 300px;
 	overflow-y: scroll;
 	border: solid 1px #CCCCCC;
 	padding: 5px 10px 5px 10px;
@@ -100,6 +123,7 @@ p.title {
 	-moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
+  font-size: 12px;
 }
 
 .edit_area:focus {
@@ -145,7 +169,7 @@ a {
 }
 
 .left_sidebar a:active {
-	color: #576069;
+	color: #fe5671;
 }
 
 .left_sidebar a:visited {

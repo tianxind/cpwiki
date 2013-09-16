@@ -1,3 +1,4 @@
+<p class="subtitle">编辑角色</p>
 <% @character.errors.full_messages.each do |msg| %>
     <div><span class="error_msg"><%= msg %></span></div>
 <% end %>
@@ -89,7 +90,7 @@
   	<%= hidden_field_tag :fromcp, params[:fromcp] %>
   <% end %> 
   <%= submit_tag "更新", :class => "submit_button" %>
-  <button type="button" id="save_draft">保存</button>
+<!--   <button type="button" id="save_draft">保存</button> -->
 <% end %>
 
 <script type="text/javascript">

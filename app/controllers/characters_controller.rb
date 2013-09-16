@@ -65,6 +65,8 @@ class CharactersController < ApplicationController
 
   def show
     @character = Character.find_by_id(params[:id])
+    @related_cps = Cp.find_all_by_seme_id(@character.id) + Cp.find_all_by_uke_id(@character.id)
+    @related_cps.uniq!
   end
   
   def edit
