@@ -1,2 +1,2 @@
-<%= link_to Character.find_by_id(cp.seme_id).name + " × " + Character.find_by_id(cp.uke_id).name, cp_path(cp) %>
+<%= link_to seme + " × " + uke, cp_path(cp) %>
 <p class="search_result_snippet">&nbsp;&nbsp;&nbsp;&nbsp;<%= make_snippet(cp.summary) %></p>

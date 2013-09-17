@@ -8,12 +8,10 @@
 	<div class="newest">
 		<div class="title_bar">
 			<p class="title">最新条目</p>
-			<% if @newest.length == 1 %>
-				<%= render(:partial => "cps/snippet", :locals => {:cp => @newest}) %>
-			<% else %>
-				<% for entry in @newest %>
-					<%= render(:partial => "cps/snippet", :locals => {:cp => entry}) %>
-				<% end %>
+			<% num_entries = @newest.length %>
+			<% for i in 0..num_entries - 1 %>
+				<%= render(:partial => "cps/snippet", :locals => {:cp => @newest[i], :seme => @seme[i], :uke => @uke[i]}) %>
+				<!-- <p><%= @seme[i] %> x <%= @uke[i] %></p> -->
 			<% end %>
 		</div>
 	</div>
