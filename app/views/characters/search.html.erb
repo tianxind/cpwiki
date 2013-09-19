@@ -1,3 +1,4 @@
+<% @title = "创建新角色 - CP百科" %>
 <p class="subtitle">创建新角色</p>
 <%= form_tag("/characters/redirect_to_character_info_or_new_character", :method => "get") %>
 <%= render(:partial => "results", :locals => {:chara => @chara}) %>

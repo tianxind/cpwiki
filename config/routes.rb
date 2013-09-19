@@ -26,6 +26,10 @@ Cpwiki::Application.routes.draw do
     collection do 
       get 'search'
       get 'search_by_seme_uke'
+      get 'contact_us'
+      get 'follow_us'
+      get 'join_us'
+      get 'donate_us'
     end
   end
 
@@ -56,7 +60,8 @@ Cpwiki::Application.routes.draw do
   end
 
   resources :tags
-
+  resources :categories
+  resources :helps
   resources :draft_characters
   resources :draft_cps
 

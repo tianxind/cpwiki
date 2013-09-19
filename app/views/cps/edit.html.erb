@@ -1,4 +1,5 @@
-<p class="subtitle">编辑CP</p>
+<% @title = "编辑CP - CP百科" %>
+<p class="subtitle">编辑CP: <%=Character.find_by_id(@cp.seme_id).name + " × " + Character.find_by_id(@cp.uke_id).name %></p>
 <div>
 <%= form_for @cp, url: cp_path(@cp.id), method: :put do |form| %>
 	<% @cp.errors.full_messages.each do |msg| %>

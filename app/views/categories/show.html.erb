@@ -1,0 +1,15 @@
+<% @title = Cp::CATEGORY[params[:id].to_i][0] + "分类词条 - CP百科" %>
+<p class="subtitle">分类: <%=Cp::CATEGORY[params[:id].to_i][0] %></p>
+<div class="cps_liked_by_user">
+<% if @cps.size != 0 %>
+	<table class="cps_liked_by_user_table">
+		<% @cps.each do |cp| %>
+			<tr>
+				<td class="like_list"><a href="<%= "/cps/" + Cp.find_by_id(cp.id).id.to_s %>"><%= Character.find_by_id(cp.seme_id).name %> × <%= Character.find_by_id(cp.uke_id).name %></a></td>
+			</tr>
+		<% end %>
+	</table>
+<% else %>
+	<p>还没有所选分类的CP</p>
+<% end %>
+</div>
