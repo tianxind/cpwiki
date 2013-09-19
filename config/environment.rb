@@ -10,8 +10,8 @@ ActionMailer::Base.smtp_settings = {
   :address   => 'smtp.gmail.com',
   :domain    => 'cp-wiki.com',
   :port      => 587,
-  :user_name => 'daitianxin',
-  :password  => 'haiyan900822',
+  :user_name => 'cpwikiproject',
+  :password  => 'cpwiki2013',
   :authentication => :plain
 }
 

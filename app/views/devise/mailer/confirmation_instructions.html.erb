@@ -2,6 +2,7 @@
 
 <p>欢迎注册CP百科！请单击以下链接确认邮箱:</p>
 
-<p><%= link_to '确认我的邮箱账号', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
+<!-- <p><%= link_to '确认我的邮箱账号', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p> -->
+<p><%= link_to '确认我的邮箱账号', "http://cpwiki-env-h4asjxuiwr.elasticbeanstalk.com/users/confirmation?confirmation_token=#{@resource.confirmation_token}" %></p>
 
 <p>CP百科工作组</p>

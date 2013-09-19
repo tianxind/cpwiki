@@ -12,6 +12,12 @@ class PhotosController < ApplicationController
     @photo.date_time = DateTime.now
     @photo.filename = gen_image_filename(uploaded_io.original_filename)
     @photo.source = Photo::UPLOAD
+    directory = Rails.root.join('public', 'images')
+    if File.directory?(directory) then
+      puts "<<<<<<<<<<<<<<<<<<<<Directory #{directory} exists<<<<<<<<<<<<<"
+    else
+      puts "<<<<<<<<<<<<<<<<<<NO DIRECTORY #{directory}<<<<<<<<<<<<<<<<<<"
+    end
     respond_to do |format|
       if @photo.save
         File.open(Rails.root.join('public', 'images', @photo.filename), 'wb') do |file|
