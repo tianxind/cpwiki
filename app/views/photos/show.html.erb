@@ -1,9 +1,14 @@
-<p class="subtitle">点击图片添加评论&nbsp;&nbsp;[<a onclick="showAllTags()">显示所有评论</a>]</p>
+<p class="subtitle">点击图片添加评论&nbsp;&nbsp;[<a id="tagswitch">显示所有评论</a>]</p>
 <div id="photo_div">
 	<% if @photo.source == Photo::WEB %>
 		<img id="photo" src='<%= @photo.filename %>' class="photo_to_tag"></img>
 	<% else %>
 		<img id="photo" src='<%= "/images/#{@photo.filename}" %>' class="photo_to_tag"></img>
+	<% end %>
+	<% for tag in @tags %>
+		<div class='tag' style="<%= "left:#{tag.pos_x}px;top:#{tag.pos_y}px;display:none" %>">
+			<%= tag.comment %>
+		</div>
 	<% end %>
 </div>
 
@@ -61,12 +66,25 @@ $('#photo').click(function(e) {
 	$('#ypos').val(e.pageY - photoDiv.offset().top);
 });
 
-function showAllTags() {
-	<% for tag in @tags %>
-		var newTag = "<div class='tag' style='left:" + <%= tag.pos_x %> + "px;top:" + <%= tag.pos_y %>
-			+ "px;'>" + '<%= tag.comment %>' + "</div>";
-		// console.log(newTag);
-		$("#photo_div").append(newTag);
-	<% end %>
+// function addTags() {
+// 	<% for tag in @tags %>
+// 		var newTag = "<div class='tag' style='left:" + <%= tag.pos_x %> + "px;top:" + <%= tag.pos_y %>
+// 			+ "px;'>" + '<%= tag.comment %>' + "</div>";
+// 		// console.log(newTag);
+// 		$("#photo_div").append(newTag);
+// 	<% end %>
+// }
+$("#tagswitch").click(showTags);
+
+function showTags() {
+	$('.tag').show();
+	$("#tagswitch").click(hideTags);
+	$('#tagswitch').html('隐藏所有评论');
+}
+
+function hideTags() {
+	$('.tag').hide();
+	$('#tagswitch').click(showTags);
+	$('#tagswitch').html('显示所有评论');
 }
 </script>
