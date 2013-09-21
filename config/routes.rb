@@ -62,6 +62,7 @@ Cpwiki::Application.routes.draw do
   resources :tags
   resources :categories
   resources :helps
+  resources :bug_reports
   resources :draft_characters
   resources :draft_cps
 

@@ -88,3 +88,7 @@ label {
 	margin-bottom: 6px;
 }
 
+.underline_divide {
+	border-bottom: 1px solid #cccccc;
+}
+

@@ -221,6 +221,10 @@ div.tag {
   border-radius: 5px;
 }
 
+.comment_create_time {
+	font-size: 10px;
+	color: #aaaaaa;
+}
 
 
 
