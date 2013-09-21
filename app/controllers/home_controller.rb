@@ -4,6 +4,13 @@ class HomeController < ApplicationController
   	session[:uke] = nil
   	session[:new_chara_name] = nil
     @newest = Cp.get_newest
+    @seme = Array.new
+    @uke = Array.new
+    for cp in @newest
+      puts "<<<<<<<<<<<<<<<<<<" + cp.id.to_s
+      @seme.push(cp.seme.name)
+      @uke.push(cp.uke.name)
+    end
   end
 
   def search

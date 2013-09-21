@@ -2,6 +2,6 @@
 <p class="subtitle">CP</p>
 <div class="search_results">
 	<% for cp in @cps %>
-		<%= render(:partial => "cps/snippet", :locals => {:cp => cp}) %>
+		<%= render(:partial => "cps/snippet", :locals => {:cp => cp, :seme => cp.seme.name, :uke => cp.uke.name}) %>
 	<% end %>
 </div>
