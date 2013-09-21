@@ -1,3 +1,4 @@
+<% @title = "创建新角色 - CP百科" %>
 <p class="subtitle">创建新角色</p>
 <div class="create_cp_nav_bar">
 <% if !(session[:seme] == nil && session[:uke] == nil) %>
@@ -61,7 +62,7 @@
 	    </tr>
 	    <tr>
 	    	<td><%= form.label(:birth_date, "生日:")%></td>
-	      <td><%= form.text_field(:birth_date, :class => 'input_text_field') %></td>
+	      <td><%= form.text_field(:birth_date, :class => 'input_text_field', :placeholder => "yyyy-mm-dd") %></td>
 	    </tr>
 	    <tr>
 	      <td><%= form.label(:sex, "性别:")%></td>

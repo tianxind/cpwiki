@@ -1,4 +1,4 @@
-<%= link_to character.name, character_path(character) %>
+<span class="search_result_link"><%= link_to character.name, character_path(character) %></span>
 <span class="search_result_work">&nbsp;&nbsp;出自作品
 <% if character.work then %><em><%= character.work %></em><% end %>
 </span>

@@ -124,6 +124,7 @@ p.title {
   -webkit-border-radius: 5px;
   border-radius: 5px;
   font-size: 12px;
+  padding-left: 5px;
 }
 
 .edit_area:focus {
@@ -164,8 +165,20 @@ h4 {
 }
 
 a {
-	text-decoration:none;
+	text-decoration: underline;
 	color: #576069;
+}
+
+.user_nav a {
+	text-decoration: none;
+}
+
+.user_nav a:hover {
+	text-decoration: underline;
+}
+
+.left_sidebar a {
+	text-decoration: none;
 }
 
 .left_sidebar a:active {
@@ -178,6 +191,7 @@ a {
 
 .left_sidebar a:hover {
 	color: #f98d9e;
+	text-decoration: underline;
 }
 
 p {
@@ -211,6 +225,28 @@ input:focus {
 	color: #f98d9e;
 }
 
+#cpmode {
+	background-color: #576069;
+	color: #e7eaef;
+	border: none;
+	padding: 3px;
+}
+
+#cpmode:hover {
+	color: #f98d9e;
+}
+
+#charamode {
+	background-color: #576069;
+	color: #e7eaef;
+	border: none;
+	padding: 3px;
+}
+
+#charamode:hover {
+	color: #f98d9e;
+}
+
 button {
 	background-color: #576069;
 	-moz-border-radius: 5px;
@@ -235,8 +271,8 @@ button:hover {
 .edit {
 	float: right;
 	font-size: 12px;
-	line-height: 30px; 
-	vertical-align: bottom;
+	line-height: 25px; 
+	/*vertical-align: bottom;*/
 }
 
 .input_text_field {
@@ -329,7 +365,32 @@ img.mascot_blue {
 	text-align: right;
 }
 
+.contact {
+	color: #e7eaef;
+	text-decoration: none;
+}
 
+a.contact:active {
+	color: #fe5671;
+}
+
+a.contact:visited {
+	color: #e7eaef;
+}
+
+a.contact:hover {
+	color: #f98d9e;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.devise_links a {
+	text-decoration: none;
+}
+
+.devise_links a:hover {
+	text-decoration: underline;
+}
 
 
 

@@ -1,3 +1,4 @@
+<% @title = "用户信息 - CP百科" %>
 <div class="subtitle">
 用户基本信息:
 </div>
@@ -20,7 +21,8 @@
 	<table class="cps_created_by_user_table">
 		<% @cp_entries.each do |entry| %>
 			<tr>
-				<td class="entry_list"><a href="<%= "/cps/" + entry.id.to_s %>"><%= Character.find_by_id(entry.seme_id).name %> × <%= Character.find_by_id(entry.uke_id).name %></a></td><td> [<%= entry.created_at.strftime("%Y-%m-%d %T") %>]</td>
+				<td class="entry_list"><a href="<%= "/cps/" + entry.id.to_s %>"><%= Character.find_by_id(entry.seme_id).name %> × <%= Character.find_by_id(entry.uke_id).name %></a></td>
+				<td class="created_at"> [<%= entry.created_at.strftime("%Y-%m-%d %T") %>]</td>
 			</tr>
 		<% end %>
 	</table>
@@ -37,7 +39,8 @@
 	<table class="characters_created_by_user_table">
 		<% @character_entries.each do |entry| %>
 			<tr>
-				<td class="entry_list"><a href="<%= "/characters/" + entry.id.to_s %>"><%= entry.name %></a></td><td> [<%= entry.created_at.strftime("%Y-%m-%d %T") %>]</td>
+				<td class="entry_list"><a href="<%= "/characters/" + entry.id.to_s %>"><%= entry.name %></a></td>
+				<td class="created_at"> [<%= entry.created_at.strftime("%Y-%m-%d %T") %>]</td>
 			</tr>
 		<% end %>
 	</table>
@@ -63,7 +66,7 @@
 <% end %>
 </div>
 
-<div class="subtitle">
+<!-- <div class="subtitle">
 角色草稿:
 </div>
 <div class="cps_liked_by_user">
@@ -78,7 +81,7 @@
 <% else %>
 	<p>没有角色草稿</p>
 <% end %>
-</div>
+</div> -->
 
 
 

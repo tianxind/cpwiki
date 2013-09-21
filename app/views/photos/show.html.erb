@@ -1,4 +1,5 @@
-<p class="subtitle">点击图片添加评论&nbsp;&nbsp;[<a id="tagswitch">显示所有评论</a>]</p>
+<% @title = "添加图片评论 - CP百科" %>
+<p class="subtitle show_comments">点击图片添加评论&nbsp;&nbsp;[<a onclick="showAllTags()">显示所有评论</a>]</p>
 <div id="photo_div">
 	<% if @photo.source == Photo::WEB %>
 		<img id="photo" src='<%= @photo.filename %>' class="photo_to_tag"></img>
@@ -27,7 +28,7 @@ $('#dialog').dialog({
 	height: 200,
 	modal: true,
 	buttons: {
-	Cancel: function() {
+	"取消": function() {
 		$(this).dialog( "close" );
 	},
 	"提交": function() {

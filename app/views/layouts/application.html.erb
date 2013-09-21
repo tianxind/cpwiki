@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Cpwiki</title>
+  <title><%= @title %></title>
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
@@ -30,16 +30,19 @@
 	<div class="left_sidebar">
 		<a href="/"><img class="logo" src="/cpwiki_logo.png"></img></a>
 		<h4><a href="/">主页</a></h4>
-		<h4><a href="#">帮助</a></h4>
 		<h4><a href="/cps/choose">创建新CP</a></h4>
 		<h4><a href="/characters/choose">创建新角色</a></h4>
-		<h4><a href="#">分类</a></h4>
+		<h4>分类</h4>
 			<div class="submenu" id="category_submenu">
-				<ul><a href="#">动漫</a></ul>
-				<ul><a href="#">电影</a></ul>
-				<ul><a href="#">游戏</a></ul>
-				<ul><a href="#">小说</a></ul>
+				<ul><a href="/categories/0">动漫</a></ul>
+				<ul><a href="/categories/1">影视</a></ul>
+				<ul><a href="/categories/2">游戏</a></ul>
+				<ul><a href="/categories/3">小说</a></ul>
+				<ul><a href="/categories/4">其他</a></ul>
 			</div>
+		<div>&nbsp;</div>
+		<h4><a href="/helps">帮助</a></h4>
+		<h4><a href="/bug_reports">报错</a></h4>
 	</div>
 	<div class="right_container">
 		<div class="navbar_container">
@@ -64,7 +67,7 @@
 					<table class="navbar_container_table"><tr>
 						<td><input id="query" class="input_text_field" name="query" type="text" placeholder="角色名称/CP简称"></input></td>
 						<td><input type="submit" id="search" value="搜索"></input></td>
-					  <td><button id="cpmode">切换到攻受模式</button></td>
+					  <td><input type="button" id="cpmode" value="切换到攻受模式"></input></td>
 				  </tr></table>
 				</form>
 				<form id="cp-form" action="/home/search_by_seme_uke" method="get" style="display:none">
@@ -74,7 +77,7 @@
 						<td><label for="uke">受:</label></td>
 						<td><input id="uke" name="uke" class="input_text_field"></input></td>
 						<td><input type="submit" id="search" class="button" value="搜索"></input></td>
-					  <td><button id="charamode">切换到角色/简称模式</button></td>
+					  <td><input type="button" id="charamode" value="切换到角色/简称模式"></input></td>
 				  </tr></table>
 				</form>
 			</span>

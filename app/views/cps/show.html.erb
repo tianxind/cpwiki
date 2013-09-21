@@ -1,3 +1,4 @@
+<% @title = @seme.name + "×" + @uke.name + " - CP百科" %>
 <div class="wiki_title">
 	<span id="wiki_name_title"><%= @seme.name %><span id="heart"> × </span><%= @uke.name %></span>
 	<%= (@cp.acronym == nil || @cp.acronym == "") ? "" : "(#{@cp.acronym})" %>&nbsp;&nbsp;
@@ -54,11 +55,12 @@
 
 <div id="comments_block">
 	<p class="subtitle">评论</p>
-	<% if @comment_array %>
-		<% p "comment_array size is >>>>> " + @comment_array.size.to_s %>
+	<% if @comment_array.size != 0 %>
 		<% @comment_array.each do |cmt| %>
-			<div class="each_comment wordwrap">&gt;&gt; <%= cmt.comment_text %> - <%= User.find_by_id(cmt.user_id).username %> [<%= cmt.date_time.strftime("%Y-%m-%d %T") %>]</div>
+			<div class="each_comment wordwrap">&gt;&gt; <%= cmt.comment_text %> - <%= User.find_by_id(cmt.user_id).username %> <span class="comment_create_time">[<%= cmt.date_time.strftime("%Y-%m-%d %T") %>]</span></div>
 		<% end %>
+	<% else %>
+		<p>还没有评论，快来抢沙发！</p>
 	<% end %>
 
 	<div id="new_comment"></div>
@@ -125,7 +127,7 @@ $(document).ready(function(){
 	    	var username = '<%= current_user.username %>';
 	    	var index = <%= params[:id] %>;
 	    	var currentdate = new Date(); 
-			var create_time = currentdate.getFullYear() + "-"
+				var create_time = currentdate.getFullYear() + "-"
 	                + ("0" + (currentdate.getMonth() + 1)).slice(-2) + "-" 
 	                + ("0" + currentdate.getDate()).slice(-2) + " "  
 	                + currentdate.getHours() + ":"  
@@ -142,7 +144,7 @@ $(document).ready(function(){
 		    dataType: "html",
 		    data: "comment_text=" + cmt + "&id=" + index + "&create_time=" + create_time,
 		    success: function(){
-		      $('#new_comment').append('&gt;&gt; ' + cmt + ' - ' + username + ' [' + create_time + ']' + '</br>');
+		      $('#new_comment').append('&gt;&gt; ' + cmt + ' - ' + username + ' <span class=\"comment_create_time\">[' + create_time + ']</span>' + '</br>');
 		      // resume chars limit to 255
 		      $('input#limit_chars_countdown').val('255');
 		      // show success msg
