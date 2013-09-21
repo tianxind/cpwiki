@@ -12,7 +12,9 @@
 	<% if @cps.length == 0 then %>
 		<p>暂无CP搜索结果</p>
 	<% else %>
-		<% for cp in @cps %>
+		<% @cps.each do |cp| %>
+		<% p "each cp is >>>>>>" %>
+		<% p cp %>
 			<%= render(:partial => "cps/snippet", :locals => {:cp => cp}) %>
 		<% end %>
 	<% end %>

@@ -24,6 +24,15 @@ class Cp < ActiveRecord::Base
     find(:all, :conditions => ['acronym like ?', "%#{q}%"])
   end
 
+  def self.search_cps_by_chara(name)
+    @character = Character.search(name)
+    results = []
+    @character.each do |chara|
+      results = results + Cp.find_all_by_seme_id(chara.id) + Cp.find_all_by_uke_id(chara.id)
+    end
+    return results
+  end
+
   def self.search_by_seme_uke(seme, uke)
     cps = Cp.joins(:seme).where('characters.name like ?', "%#{seme}%")
     results = []
