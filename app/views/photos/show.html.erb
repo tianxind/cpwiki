@@ -66,14 +66,6 @@ $('#photo').click(function(e) {
 	$('#ypos').val(e.pageY - photoDiv.offset().top);
 });
 
-// function addTags() {
-// 	<% for tag in @tags %>
-// 		var newTag = "<div class='tag' style='left:" + <%= tag.pos_x %> + "px;top:" + <%= tag.pos_y %>
-// 			+ "px;'>" + '<%= tag.comment %>' + "</div>";
-// 		// console.log(newTag);
-// 		$("#photo_div").append(newTag);
-// 	<% end %>
-// }
 $("#tagswitch").click(showTags);
 
 function showTags() {
