@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   
   has_many :cps
   has_many :comments
+  has_many :bug_reports
   has_many :tags
   has_many :draft_characters
   has_many :draft_cps
@@ -32,8 +33,8 @@ class User < ActiveRecord::Base
 ### end 
 
 	validates :username,
-  :uniqueness => {
-    :case_sensitive => false
-  } #,
+  :uniqueness => { :case_sensitive => true },
+  :presence => true
+
   # :format => { ... } # etc.
 end

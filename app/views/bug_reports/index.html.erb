@@ -1,0 +1,131 @@
+<p class="subtitle">报错</p>
+<% @title = "报错 - CP百科" %>
+<p>如果您遇到任何问题或者发现任何错误，请不要犹豫的在此留言报错！感谢您的支持：）</p>
+<br/>
+
+<div id="bug_reports_block">
+	<% if @bug_reports.size != 0 %>
+		<% @bug_reports.each do |bug| %>
+			<div class="each_comment wordwrap">&gt;&gt; <%= bug.bug_report_text %> - <%= User.find_by_id(bug.user_id).username %> <span class="comment_create_time">[<%= bug.date_time.strftime("%Y-%m-%d %T") %>]</span></div>
+		<% end %>
+	<% else %>
+		<p>还未有报错。</p>
+	<% end %>
+
+	<div id="new_comment"></div>
+</div>
+
+<div><span class="error_msg" id="comment_error_msg"></span></div>
+<div><span id="comment_result"></span></div>
+<script>
+// flash error/success msg
+(function($) {
+  $.fn.flash_message = function(options) {   
+    options = $.extend({
+      text: 'Done',
+      time: 1000,
+      how: 'before',
+      class_name: ''
+    }, options);
+    
+    return $(this).each(function() {
+      if($(this).parent().find('.flash_message').get(0) )
+        return;
+      
+      var message = $('<span />', {
+        'class': 'flash_message ' + options.class_name,
+        text: options.text
+      }).hide().fadeIn('fast');
+      
+      $(this)[options.how](message);
+      
+      message.delay(options.time).fadeOut('normal', function() {
+        $(this).remove();
+      });
+      
+    });
+  };
+})(jQuery);
+
+// function insertCommentBox() {
+// 	$('.homepage_content').append("<textarea rows=\"4\" cols=\"50\" id=\"comment_area\" placeholder=\"在此添加评论\">"
+// 	    + "</textarea>"
+// 		+ "<br/><button type=\"button\" id=\"submit_new_comment\">提交</button>");
+// }
+
+function insertCommentBox() {
+	$('.homepage_content').append("<form name=\"comment_box_form\"><textarea rows=\"4\" cols=\"50\" id=\"comment_area\" placeholder=\"在此添加报错内容\" name=\"limitedtextarea\" onKeyDown=\"limitText(this.form.limitedtextarea,this.form.countdown,200);\" onKeyUp=\"limitText(this.form.limitedtextarea,this.form.countdown,200);\"></textarea>"
+		+ "<br/><button type=\"button\" id=\"submit_new_comment\">提交</button>&nbsp<input readonly class=\"comment_limit_chars\" id=\"limit_chars_countdown\" type=\"text\" name=\"countdown\" size=\"1\" value=\"255\"><input readonly class=\"comment_limit_chars\" type=\"text\" size=\"2\" value=\"/255\"></form>");
+}
+
+// add new comment
+$(document).ready(function(){
+  <% if user_signed_in? %>
+    insertCommentBox();
+  	$("button#submit_new_comment").click(function(){
+  		var cmt = $('textarea#comment_area').val();
+  		// check whether the comment is empty
+  		if(cmt == "") {
+  			$("#comment_error_msg").text("报错不能为空！");
+  		} else {
+  			$("#comment_error_msg").text("");
+	    	console.log("start ajax");
+
+	    	var username = '<%= current_user.username %>';
+	    	var currentdate = new Date(); 
+				var create_time = currentdate.getFullYear() + "-"
+	                + ("0" + (currentdate.getMonth() + 1)).slice(-2) + "-" 
+	                + ("0" + currentdate.getDate()).slice(-2) + " "  
+	                + currentdate.getHours() + ":"  
+	                + currentdate.getMinutes() + ":" 
+	                + currentdate.getSeconds();
+
+	    console.log("user id in js is " + username);
+	    console.log("create time is " + create_time);
+
+	    $.ajax({
+		    type: "POST",
+		    url: "/bug_reports",
+		    dataType: "html",
+		    data: "comment_text=" + cmt + "&create_time=" + create_time,
+		    success: function(){
+		      $('#new_comment').append('&gt;&gt; ' + cmt + ' - ' + username + ' <span class=\"comment_create_time\">[' + create_time + ']</span>' + '</br>');
+		      // resume chars limit to 255
+		      $('input#limit_chars_countdown').val('255');
+		      // show success msg
+				  $('#comment_result').flash_message({
+				    text: '报错成功!',
+				    how: 'append',
+			        class_name: 'flash_message_success'
+				  });
+				  // clear the text area after successful submit
+				  $('textarea#comment_area').val('');
+		     },
+		     error: function(){
+		     	// show fail msg
+		     	 $('#comment_result').flash_message({
+				    text: '报错失败!',
+				    how: 'append',
+			        class_name: 'flash_message_fail'
+				   });
+				 $('textarea#comment_area').val(cmt);
+		     }
+			});
+	  }
+  });
+
+<% else %>
+	$('.homepage_content').append('<div>[只有注册用户才可以开启报错功能]</div>');
+<% end %>
+
+}); // document.ready
+
+// limit number of characters in comment box
+function limitText(limitField, limitCount, limitNum) {
+	if (limitField.value.length > limitNum) {
+		limitField.value = limitField.value.substring(0, limitNum);
+	} else {
+		limitCount.value = limitNum - limitField.value.length;
+	}
+}
+</script>

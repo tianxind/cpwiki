@@ -149,7 +149,7 @@ img.photo_to_tag {
 
 #comment_area:focus {
 	outline: none;
-	box-shadow: 0 0 0px #719ECE;
+	box-shadow: 0 0 0px #f98d9e;
 	border-color: #f98d9e;
 }
 
@@ -228,6 +228,10 @@ div.tag {
   border-radius: 5px;
 }
 
+.comment_create_time {
+	font-size: 10px;
+	color: #aaaaaa;
+}
 
 
 

@@ -4,7 +4,7 @@
 		<p class="title">网站公告</p>
 		<p class="announce"><span class="emph">刚刚建站，庆祝撒花 (*&gt;ω&lt;)/‧:*‧°★,。‧:*:‧°☆</span></p>
     	<p class="announce">欢迎各位<span class="emph">腐宅双修</span>的同好们踊跃注册，完善百科~（&lt;ゝω・）☆</p>
-    	<p class="announce">第一次使用本站的您可以先浏览<a href="/helps">帮助</a>菜单</p>
+    	<p class="announce">第一次使用本站的您可以先浏览<a href="/helps">帮助</a>菜单，如有任何疑问，请在<a href="/bug_reports">报错</a>菜单留言。</p>
 	</div>
 	<div class="content_hottest_newest">
 	<div class="newest">
@@ -12,14 +12,17 @@
 			<p class="title">最新条目</p>
 			<% num_entries = @newest.length %>
 			<% for i in 0..num_entries - 1 %>
-				<%= render(:partial => "cps/snippet", :locals => {:cp => @newest[i], :seme => @seme[i], :uke => @uke[i]}) %>
-				<!-- <p><%= @seme[i] %> x <%= @uke[i] %></p> -->
+				<p class="ranking"><%= link_to @newest_seme[i] + " × " + @newest_uke[i], cp_path(@newest[i]) %></p>
 			<% end %>
 		</div>
 	</div>
 	<div class="hottest">
 		<div class="title_bar">
 			<p class="title">分类排名</p>
+		    <% num_entries = @hottest.length %>
+			<% for i in 0..num_entries - 1 %>
+				<p class="ranking"><%= link_to @hottest_seme[i] + " × " + @hottest_uke[i], cp_path(@hottest[i]) %></p>
+			<% end %>
 		</div>
 	</div>
 </div>
