@@ -46,11 +46,11 @@ class Cp < ActiveRecord::Base
 
   # Need to optimize this method when database grows large
   def self.get_newest
-    Cp.order("id desc", :limit => 10)
+    Cp.limit(10).order("id desc")
   end
 
   def self.get_hottest
-    results = Like.select("cp_id, count(*) as cnt").group("cp_id").order("cnt desc", :limit => 10)
+    results = Like.select("cp_id, count(*) as cnt").group("cp_id").order("cnt desc").limit(10)
     hottest = Array.new
     for like in results
       hottest.push(Cp.find_by_id(like.cp_id))

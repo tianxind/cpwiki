@@ -12,7 +12,7 @@
 			<p class="title">最新条目</p>
 			<% num_entries = @newest.length %>
 			<% for i in 0..num_entries - 1 %>
-				<%= render(:partial => "cps/snippet", :locals => {:cp => @newest[i], :seme => @newest_seme[i], :uke => @newest_uke[i]}) %>
+				<p class="ranking"><%= link_to @newest_seme[i] + " × " + @newest_uke[i], cp_path(@newest[i]) %></p>
 			<% end %>
 		</div>
 	</div>
@@ -21,7 +21,7 @@
 			<p class="title">分类排名</p>
 		    <% num_entries = @hottest.length %>
 			<% for i in 0..num_entries - 1 %>
-				<%= render(:partial => "cps/snippet", :locals => {:cp => @hottest[i], :seme => @hottest_seme[i], :uke => @hottest_uke[i]}) %>
+				<p class="ranking"><%= link_to @hottest_seme[i] + " × " + @hottest_uke[i], cp_path(@hottest[i]) %></p>
 			<% end %>
 		</div>
 	</div>
