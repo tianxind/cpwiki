@@ -39,4 +39,15 @@ class Cp < ActiveRecord::Base
   def self.get_newest
     Cp.order("id desc", :limit => 10)
   end
+
+  def self.get_hottest
+    results = Like.select("cp_id, count(*) as cnt").group("cp_id").order("cnt desc", :limit => 10)
+    hottest = Array.new
+    for like in results
+      hottest.push(Cp.find_by_id(like.cp_id))
+    end
+    puts "<<<<<<<<<<<<<<<<<<<<<<<"
+    puts hottest
+    return hottest
+  end
 end

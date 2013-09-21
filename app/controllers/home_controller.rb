@@ -4,12 +4,18 @@ class HomeController < ApplicationController
   	session[:uke] = nil
   	session[:new_chara_name] = nil
     @newest = Cp.get_newest
-    @seme = Array.new
-    @uke = Array.new
+    @hottest = Cp.get_hottest
+    @newest_seme = Array.new
+    @newest_uke = Array.new
+    @hottest_seme = Array.new
+    @hottest_uke = Array.new
     for cp in @newest
-      puts "<<<<<<<<<<<<<<<<<<" + cp.id.to_s
-      @seme.push(cp.seme.name)
-      @uke.push(cp.uke.name)
+      @newest_seme.push(cp.seme.name)
+      @newest_uke.push(cp.uke.name)
+    end
+    for cp in @hottest
+      @hottest_seme.push(cp.seme.name)
+      @hottest_uke.push(cp.uke.name)
     end
   end
 
