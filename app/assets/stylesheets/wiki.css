@@ -102,7 +102,14 @@ p.character_name {
 }
 
 img.resize {
-	width: 250px;
+	width: 30%;
+	height: auto;
+	z-index: 1;
+	overflow:hidden;
+}
+
+img.resize_profile_img {
+	width: 90%;
 	height: auto;
 	z-index: 1;
 }
