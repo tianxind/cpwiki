@@ -33,8 +33,8 @@ class User < ActiveRecord::Base
 ### end 
 
 	validates :username,
-  :uniqueness => {
-    :case_sensitive => false
-  } #,
+  :uniqueness => { :case_sensitive => true },
+  :presence => true
+
   # :format => { ... } # etc.
 end
