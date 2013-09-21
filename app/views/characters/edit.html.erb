@@ -1,4 +1,5 @@
-<p class="subtitle">编辑角色</p>
+<% @title = "编辑角色 - CP百科" %>
+<p class="subtitle">编辑角色: <%=@character.name %></p>
 <% @character.errors.full_messages.each do |msg| %>
     <div><span class="error_msg"><%= msg %></span></div>
 <% end %>
@@ -117,8 +118,11 @@
 <input type="hidden" id="current_user" value=<%= current_user.id %> />
 <input type="hidden" id="saved_filename" value="" />
  
-<%= link_to '<<返回', character_path(@character.id), :class => 'edit_back_button' %>
-
+<% if params[:fromcp] == nil %>
+	<%= link_to '<<返回', character_path(@character.id), :class => 'edit_back_button' %>
+<% else %>
+	<%= link_to '<<返回', cp_path(params[:fromcp]), :class => 'edit_back_button' %>
+<% end %>
 
 <script>
 // select correct sex

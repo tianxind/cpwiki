@@ -21,7 +21,7 @@ class HomeController < ApplicationController
 
   def search
   	@characters = Character.search(params[:query])
-  	@cps = Cp.search_by_acronym(params[:query]) 
+  	@cps = Cp.search_by_acronym(params[:query]) + Cp.search_cps_by_chara(params[:query])
   end
 
   def search_by_seme_uke

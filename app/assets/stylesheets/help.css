@@ -1,0 +1,22 @@
+.help {
+	font-size: 14px;
+	font-style: bold;
+  border-bottom: solid 1px #cccccc;
+}
+
+.help_category {
+	font-size: 14px;
+	border: 1px solid #FFC0CB;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #FFC0CB;
+  padding-left: 3px;
+}
+
+.tutorial {
+	border: 1px solid #cccccc;
+	-moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}

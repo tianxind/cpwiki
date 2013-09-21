@@ -145,7 +145,7 @@ var myEditor = (function() {
 			"<form accept-charset=\"UTF-8\" action=\"/photos\" class=\"new_photo\" data-remote=\"true\"" +
 			" enctype=\"multipart/form-data\" id=\"new_photo\" method=\"post\">" +
 			"<input type=\"file\" name=\"file\" id=\"file\" value=\"\" class=\"text ui-widget-content ui-corner-all\" />" +
-			"<input name=\"commit\" id=\"commit\" type=\"submit\" value=\"上传\">" +
+			"<input name=\"commit\" id=\"commit\" type=\"submit\" value=\"上传\" class=\"submit_button\">" +
 		    "</form>" + 
 			"</div>";
 

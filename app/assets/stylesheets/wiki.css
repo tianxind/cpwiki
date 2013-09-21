@@ -13,6 +13,38 @@ h1 {
 	border-bottom: solid 1px #f98d9e;
 }
 
+.wiki_title a {
+	text-decoration: none;
+}
+
+.character_name a {
+	text-decoration: none;
+}
+
+.related_cps a {
+	text-decoration: none;
+}
+
+.show_comments a {
+	text-decoration: none;
+}
+
+.wiki_title a:hover {
+	text-decoration: underline;
+}
+
+.character_name a:hover {
+	text-decoration: underline;
+}
+
+.related_cps a:hover {
+	text-decoration: underline;
+}
+
+.show_comments a:hover {
+	text-decoration: underline;
+}
+
 .character_basic_info {
 	width: 25%;
 	float: right;	
@@ -54,6 +86,14 @@ p.character_name {
 	font-size: 14px;
 	border-bottom: solid 1px #f98d9e;
 	overflow: hidden;
+}
+
+.subtitle a {
+	text-decoration: none;
+}
+
+.subtitle a:hover {
+	text-decoration: underline;
 }
 
 .subsubtitle {
@@ -147,7 +187,7 @@ div.tag {
 
 .search_result_snippet {
 	color: #a8b1b9;
-	font-size: 12px;
+	font-size: 10px;
 }
 
 .search_result_work {
@@ -180,3 +220,11 @@ div.tag {
   -webkit-border-radius: 5px;
   border-radius: 5px;
 }
+
+.comment_create_time {
+	font-size: 10px;
+	color: #aaaaaa;
+}
+
+
+

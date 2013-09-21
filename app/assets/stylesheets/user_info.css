@@ -25,6 +25,41 @@
 	font-family: Tahoma;
 }
 
+.cps_created_by_user_table a {
+	text-decoration: none;
+}
+
+.characters_created_by_user_table a {
+	text-decoration: none;
+}
+
+.cps_liked_by_user_table a {
+	text-decoration: none;
+}
+
+.cps_created_by_user_table a:hover {
+	text-decoration: underline;
+}
+
+.characters_created_by_user_table a:hover {
+	text-decoration: underline;
+}
+
+.cps_liked_by_user_table a:hover {
+	text-decoration: underline;
+}
+
 .user_basic_info {
 	font-size: 12px;
 }
+
+.created_at {
+	color: #aaaaaa;
+	font-size: 10px;
+}
+
+
+
+
+
+
