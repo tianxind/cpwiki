@@ -15,34 +15,42 @@ h1 {
 
 .wiki_title a {
 	text-decoration: none;
+	color: #576069;
 }
 
 .character_name a {
 	text-decoration: none;
+	color: #576069;
 }
 
 .related_cps a {
 	text-decoration: none;
+	color: #576069;
 }
 
 .show_comments a {
 	text-decoration: none;
+	color: #576069;
 }
 
 .wiki_title a:hover {
 	text-decoration: underline;
+	color: #f98d9e;
 }
 
 .character_name a:hover {
 	text-decoration: underline;
+	color: #f98d9e;
 }
 
 .related_cps a:hover {
 	text-decoration: underline;
+	color: #f98d9e;
 }
 
 .show_comments a:hover {
 	text-decoration: underline;
+	color: #f98d9e;
 }
 
 .character_basic_info {
@@ -104,10 +112,12 @@ p.character_name {
 
 .subtitle a {
 	text-decoration: none;
+	color: #576069;
 }
 
 .subtitle a:hover {
 	text-decoration: underline;
+	color: #f98d9e;
 }
 
 .subsubtitle {

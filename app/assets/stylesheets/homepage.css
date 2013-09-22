@@ -77,15 +77,27 @@ label {
 
 .search_results a {
 	text-decoration: none;
+	color: #576069;
 }
 
 .search_results a:hover {
 	text-decoration: underline;
+	color: #f98d9e;
 }
 
 .announce {
 	margin-top: 0px;
 	margin-bottom: 6px;
+}
+
+.announce a {
+	text-decoration: none;
+	color: #4287cc;
+}
+
+.announce a:hover {
+	text-decoration: underline;
+	color: #f98d9e;
 }
 
 .underline_divide {
@@ -99,8 +111,11 @@ label {
 
 .ranking a {
 	text-decoration: none;
+	color: #576069;
 }
 
 .ranking a:hover {
 	text-decoration: underline;
+	color: #f98d9e;
 }
+

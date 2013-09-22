@@ -27,26 +27,32 @@
 
 .cps_created_by_user_table a {
 	text-decoration: none;
+	color: #576069;
 }
 
 .characters_created_by_user_table a {
 	text-decoration: none;
+	color: #576069;
 }
 
 .cps_liked_by_user_table a {
 	text-decoration: none;
+	color: #576069;
 }
 
 .cps_created_by_user_table a:hover {
 	text-decoration: underline;
+	color: #f98d9e;
 }
 
 .characters_created_by_user_table a:hover {
 	text-decoration: underline;
+	color: #f98d9e;
 }
 
 .cps_liked_by_user_table a:hover {
 	text-decoration: underline;
+	color: #f98d9e;
 }
 
 .user_basic_info {
