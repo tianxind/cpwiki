@@ -28,17 +28,17 @@
 		<ol class="toc">
 	    	<li>角色介绍
 				<ol>
-					<li><%= @seme.name %></li>
-					<li><%= @uke.name %></li>
+					<li><a href='#seme'><%= @seme.name %></a></li>
+					<li><a href='#uke'><%= @uke.name %></a></li>
 				</ol>
 			</li>
 			<li>JQ档案</li>
 		</ol>
 	</div>
 	<p class="subtitle">角色介绍</p>
-	<p class="subsubtitle"><%= @seme.name %></p>
+	<p name="seme" class="subsubtitle"><%= @seme.name %></p>
 	<p><%= formatted(@seme.summary) %></p>
-	<p class="subsubtitle"><%= formatted(@uke.name) %></p>
+	<p name="uke" class="subsubtitle"><%= formatted(@uke.name) %></p>
 	<p><%= formatted(@uke.summary) %></p>
 	<p class="subtitle">JQ档案</p>
 	<p><%= formatted(@cp.wiki_content) %></p>
