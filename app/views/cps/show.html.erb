@@ -26,21 +26,21 @@
 	<div class="index">
 		<h4 style="text-align: center">目录</h4>
 		<ol class="toc">
-	    	<li>角色介绍
+	    	<li class="index_link"><a href="/cps/<%=params[:id] %>#chara_section">角色介绍</a>
 				<ol>
-					<li><a href='#seme'><%= @seme.name %></a></li>
-					<li><a href='#uke'><%= @uke.name %></a></li>
+					<li class="index_link"><a href="/cps/<%=params[:id] %>#seme_section"><%= @seme.name %></a></li>
+					<li class="index_link"><a href="/cps/<%=params[:id] %>#uke_section"><%= @uke.name %></a></li>
 				</ol>
 			</li>
-			<li>JQ档案</li>
+			<li class="index_link"><a href="/cps/<%=params[:id] %>#jq_section">JQ档案</a></li>
 		</ol>
 	</div>
-	<p class="subtitle">角色介绍</p>
-	<p name="seme" class="subsubtitle"><%= @seme.name %></p>
+	<p class="subtitle" id="chara_section">角色介绍</p>
+	<p class="subsubtitle" id="seme_section"><%= @seme.name %></p>
 	<p><%= formatted(@seme.summary) %></p>
-	<p name="uke" class="subsubtitle"><%= formatted(@uke.name) %></p>
+	<p class="subsubtitle" id="uke_section"><%= formatted(@uke.name) %></p>
 	<p><%= formatted(@uke.summary) %></p>
-	<p class="subtitle">JQ档案</p>
+	<p class="subtitle" id="jq_section">JQ档案</p>
 	<p><%= formatted(@cp.wiki_content) %></p>
 	<div class="related_cps">
 		<b>相关CP:</b>&nbsp;&nbsp;

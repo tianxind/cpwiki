@@ -78,6 +78,20 @@ p.character_name {
   border-radius: 5px;
 }
 
+.index_link {
+	color: #4287cc;
+}
+
+.toc a {
+  color: #4287cc;
+	text-decoration: none;
+}
+
+.toc a:hover {
+	text-decoration: underline;
+	color: #f98d9e;
+}
+
 .toc {
 	margin: 0px;
 }
@@ -226,6 +240,7 @@ div.tag {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
+  color: #576069;
 }
 
 .comment_create_time {
