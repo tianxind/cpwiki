@@ -165,8 +165,8 @@ h4 {
 }
 
 a {
-	text-decoration: underline;
-	color: #576069;
+	text-decoration: none;
+	color: #4287cc;
 }
 
 .user_nav a {
