@@ -155,7 +155,7 @@ $(document).ready(function(){
 				  });
 				  // clear the text area after successful submit
 				  $('textarea#comment_area').val('');
-				  <% if @comment_array.size != 1 %>
+				  <% if @comment_array.size == 0 %>
 				  	$('#no_comment_hint').text('')
 				  <% end %>
 		     },
