@@ -9,7 +9,7 @@
 			<div class="each_comment wordwrap">&gt;&gt; <%= bug.bug_report_text %> - <%= User.find_by_id(bug.user_id).username %> <span class="comment_create_time">[<%= bug.date_time.strftime("%Y-%m-%d %T") %>]</span></div>
 		<% end %>
 	<% else %>
-		<p>还未有报错。</p>
+		<p id="no_comment_hint">还未有报错。</p>
 	<% end %>
 
 	<div id="new_comment"></div>
@@ -100,6 +100,9 @@ $(document).ready(function(){
 				  });
 				  // clear the text area after successful submit
 				  $('textarea#comment_area').val('');
+				  <% if @bug_reports.size == 0 %>
+				  	$('#no_comment_hint').text('')
+				  <% end %>
 		     },
 		     error: function(){
 		     	// show fail msg
