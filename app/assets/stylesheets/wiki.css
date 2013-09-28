@@ -258,5 +258,16 @@ div.tag {
 	color: #aaaaaa;
 }
 
+ol.toc {
+	counter-reset: item;
+}
 
+li.index_link {
+	display: block;
+}
+
+li.index_link:before {
+	content: counters(item, ".") " ";
+	counter-increment: item;
+}
 

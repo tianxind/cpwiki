@@ -148,6 +148,10 @@ p.title {
 	font-weight: 100;
 }
 
+.left_sidebar a {
+	color: #576069;
+}
+
 h4 {
 	font-weight: 100;
 	padding: 0px;
@@ -395,6 +399,38 @@ a.contact:hover {
 	text-decoration: underline;
 	color: #f98d9e;
 }
+
+#td_contact_us:hover {
+	color: #f98d9e;
+	cursor: pointer;
+}
+
+#td_follow_us:hover {
+	color: #f98d9e;
+	cursor: pointer;
+}
+
+#td_join_us:hover {
+	color: #f98d9e;
+	cursor: pointer;
+}
+
+#td_donate_us:hover {
+	color: #f98d9e;
+	cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

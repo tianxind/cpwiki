@@ -26,13 +26,13 @@
 	<div class="index">
 		<h4 style="text-align: center">目录</h4>
 		<ol class="toc">
-	    	<li class="index_link"><a href="/cps/<%=params[:id] %>#chara_section">角色介绍</a>
-				<ol>
-					<li class="index_link"><a href="/cps/<%=params[:id] %>#seme_section"><%= @seme.name %></a></li>
-					<li class="index_link"><a href="/cps/<%=params[:id] %>#uke_section"><%= @uke.name %></a></li>
+	    	<li class="index_link"><a href="/cps/<%=params[:id] %>#chara_section">&nbsp;角色介绍</a>
+				<ol class="toc">
+					<li class="index_link"><a href="/cps/<%=params[:id] %>#seme_section">&nbsp;<%= @seme.name %></a></li>
+					<li class="index_link"><a href="/cps/<%=params[:id] %>#uke_section">&nbsp;<%= @uke.name %></a></li>
 				</ol>
 			</li>
-			<li class="index_link"><a href="/cps/<%=params[:id] %>#jq_section">JQ档案</a></li>
+			<li class="index_link"><a href="/cps/<%=params[:id] %>#jq_section">&nbsp;JQ档案</a></li>
 		</ol>
 	</div>
 	<p class="subtitle" id="chara_section">角色介绍</p>
