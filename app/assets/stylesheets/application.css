@@ -171,10 +171,12 @@ a {
 
 .user_nav a {
 	text-decoration: none;
+	color: #576069;
 }
 
 .user_nav a:hover {
 	text-decoration: underline;
+	color: #f98d9e;
 }
 
 .left_sidebar a {
@@ -386,10 +388,12 @@ a.contact:hover {
 
 .devise_links a {
 	text-decoration: none;
+	color: #576069;
 }
 
 .devise_links a:hover {
 	text-decoration: underline;
+	color: #f98d9e;
 }
 
 

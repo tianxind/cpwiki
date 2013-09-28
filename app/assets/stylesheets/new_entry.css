@@ -39,10 +39,12 @@
 
 .search_result_link a {
 	text-decoration: none;
+	color: #576069;
 }
 
 .search_result_link a:hover {
 	text-decoration: underline;
+	color: #f98d9e;
 }
 
 .edit_back_button {

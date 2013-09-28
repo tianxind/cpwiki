@@ -60,7 +60,7 @@
 			<div class="each_comment wordwrap">&gt;&gt; <%= cmt.comment_text %> - <%= User.find_by_id(cmt.user_id).username %> <span class="comment_create_time">[<%= cmt.date_time.strftime("%Y-%m-%d %T") %>]</span></div>
 		<% end %>
 	<% else %>
-		<p>还没有评论，快来抢沙发！</p>
+		<p id="no_comment_hint">还没有评论，快来抢沙发！</p>
 	<% end %>
 
 	<div id="new_comment"></div>
@@ -155,6 +155,9 @@ $(document).ready(function(){
 				  });
 				  // clear the text area after successful submit
 				  $('textarea#comment_area').val('');
+				  <% if @comment_array.size == 0 %>
+				  	$('#no_comment_hint').text('')
+				  <% end %>
 		     },
 		     error: function(){
 		     	// show fail msg
