@@ -420,7 +420,9 @@ a.contact:hover {
 	cursor: pointer;
 }
 
-
+.left_bar_item a:link {
+	color: #576069;
+}
 
 
 

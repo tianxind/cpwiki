@@ -20,3 +20,19 @@
   -webkit-border-radius: 5px;
   border-radius: 5px;
 }
+
+a#sample_cp_link:link {
+  color: #4287cc;
+  text-decoration: underline;
+}
+
+a#sample_cp_link:visited {
+  color: #4287cc;
+}
+
+a#sample_cp_link:hover {
+  color: #f98d9e;
+  text-decoration: underline;
+}
+
+

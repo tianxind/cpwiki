@@ -18,7 +18,7 @@
 	</div>
 	<div class="hottest">
 		<div class="title_bar">
-			<p class="title">分类排名</p>
+			<p class="title">热门排名</p>
 		    <% num_entries = @hottest.length %>
 			<% for i in 0..num_entries - 1 %>
 				<p class="ranking"><%= link_to @hottest_seme[i] + " × " + @hottest_uke[i], cp_path(@hottest[i]) %></p>
