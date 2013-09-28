@@ -23,7 +23,6 @@
 
 a#sample_cp_link:link {
   color: #4287cc;
-  text-decoration: underline;
 }
 
 a#sample_cp_link:visited {
@@ -32,7 +31,6 @@ a#sample_cp_link:visited {
 
 a#sample_cp_link:hover {
   color: #f98d9e;
-  text-decoration: underline;
 }
 
 
