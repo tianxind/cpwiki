@@ -1,26 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>The page you were looking for doesn't exist (404)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>404：找不到对象</title>
   <style type="text/css">
-    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-    div.dialog {
-      width: 25em;
-      padding: 0 4em;
-      margin: 4em auto 0 auto;
-      border: 1px solid #ccc;
-      border-right-color: #999;
-      border-bottom-color: #999;
+    body { 
+      color: #576069;
+      text-align: center; 
+      font-family: arial, sans-serif;
     }
-    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
+    .title_404 {
+      font-size: 20px;
+      border: 1px solid #FFC0CB;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+      background-color: #FFC0CB;
+      padding-left: 3px;
+    }
+    a:link {
+      color: #4287cc;
+      text-decoration: none;
+    }
+    a:visited {
+      color: #4287cc;
+    }
+    a:hover {
+      color: #f98d9e;
+    }
+    .return {
+      margin-top: 50px;
+      font-size: 18px;
+    }
   </style>
 </head>
 
 <body>
   <!-- This file lives in public/404.html -->
   <div class="dialog">
-    <h1>The page you were looking for doesn't exist.</h1>
-    <p>You may have mistyped the address or the page may have moved.</p>
-  </div>
+    <p class="title_404">CP百科 - 错误代码：404 - 找不到对象</p>
+    <p>服务器似乎找不到您要求查看的内容。如果此问题频繁出现，请在<a href="/bug_reports">报错</a>页面给我们留言，我们会尽快修复问题。谢谢您的支持！</p>
+    <p class="return"><a href="/">&lt;&lt;返回主页</a></p>
 </body>
 </html>
