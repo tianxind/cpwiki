@@ -258,5 +258,17 @@ div.tag {
 	color: #aaaaaa;
 }
 
+#add_comment {
+	background:#FFFACD;
+	display:none;
+	z-index: 2;
+	font-size: 12px;
+	opacity: 0.8;
+	border: 1px solid #CCCCCC;
+	-moz-border-radius: 5px;
+    -webkit-border-radius: 3px;
+    border-radius: 5px;
+    padding: 1px;
+}
 
 
