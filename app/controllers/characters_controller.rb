@@ -2,6 +2,8 @@
 # encoding: utf-8
 
 class CharactersController < ApplicationController
+  include Sanitize
+
   before_filter :authenticate_user!, :except => [:show, :search, :redirect_to_character_info_or_new_character]
 
   def new
@@ -23,6 +25,8 @@ class CharactersController < ApplicationController
     @character.creator_id = current_user.id
     @character.created_at = Time.now
     @character.summary = params[:summary]
+
+    sanitize(@character.summary)
 
     # check chara name validation
     if !@character.valid? then
@@ -80,7 +84,9 @@ class CharactersController < ApplicationController
     @character = Character.find_by_id(params[:id])
     p "in update params are"
     p params
-    if @character.update_attributes(params[:character])
+    @character.assign_attributes(params[:character])
+    sanitize(@character.summary)
+    if @character.save
       Photo.processWikiImages(params[:character][:summary], params[:images], current_user.id)
       if params[:fromcp] == nil then
         redirect_to @character

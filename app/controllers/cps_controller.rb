@@ -1,6 +1,8 @@
 #!/bin/env ruby
 # encoding: utf-8
 class CpsController < ApplicationController
+  include Sanitize
+
   before_filter :authenticate_user!, :except => [:search, :show, :redirect_to_cp_or_character]
 
   def index
@@ -28,7 +30,9 @@ class CpsController < ApplicationController
                  :creator_id => current_user.id,
                  :acronym => params[:acronym],
                  :created_at => Time.now)
-                 
+    
+    sanitize(@cp.wiki_content)
+
     Photo.processWikiImages(params[:wiki_content], params[:images], current_user.id)
     
     if @cp.save
@@ -66,7 +70,9 @@ class CpsController < ApplicationController
   def update
     @cp = Cp.find_by_id(params[:id])
     
-    if @cp.update_attributes(params[:cp])
+    @cp.assign_attributes(params[:cp])
+    sanitize(@cp.wiki_content)
+    if @cp.save
       Photo.processWikiImages(params[:cp][:wiki_content], params[:images], current_user.id)
       redirect_to @cp
     else
